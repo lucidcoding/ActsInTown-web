@@ -40,20 +40,20 @@ import {
   async
 } from '@angular/core/testing';
 
+import { ActivatedRoute } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 //import { async } from '@angular/core/testing';
 //import { ActivatedRoute } from '@angular/router';
 import { VerifyUserComponent } from '../../../components/user/verify/verifyUserComponent';
 //import { UserService } from '../../../services/user/user.service';
-import { TestService } from '../../../services/testService';
 import { UserService } from '../../../services/user/user.service';
 import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
 import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
 
-/*var mockActivatedRoute = {
+class MockActivatedRoute {
     
-};*/
+};
 
 class MockUserService {
 	register(request: RegisterUserRequest): Observable<any> {
@@ -69,12 +69,6 @@ class MockUserService {
     }
 };
 
-class MockTestService {
-    doThing = function() {
-        console.log('mock');
-    };
-};
-
 export function main() {
     describe('verifyUserComponent', () => {
         beforeEach(() => {
@@ -83,9 +77,8 @@ export function main() {
             TestBed.configureTestingModule({
                 declarations: [VerifyUserComponent],
                 providers: [
-                    //{ provide: ActivatedRoute, useClass: mockActivatedRoute },
-                    { provide: UserService, useClass: MockUserService },
-                    { provide: TestService, useClass: MockTestService }
+                    { provide: ActivatedRoute, useClass: MockActivatedRoute },
+                    { provide: UserService, useClass: MockUserService }
                     //UserService
                 ]
             });

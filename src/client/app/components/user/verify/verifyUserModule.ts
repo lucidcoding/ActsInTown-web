@@ -4,15 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { VerifyUserComponent } from './verifyUserComponent';
 import { UserService } from '../../../services/user/user.service';
-import { TestService } from '../../../services/testService';
 
 @NgModule({
     imports: [CommonModule, FormsModule, RouterModule],
     declarations: [VerifyUserComponent],
     exports: [VerifyUserComponent],
     providers: [
-        UserService,
-        TestService
+        UserService
     ]
 })
 
