@@ -1,0 +1,15 @@
+$img-url: "../img"; // Example of how to use -- background: url("#{$img-url}/background-image.png") repeat top left;
+//@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_bootstrap"; 
+@import "globals/_vars";
+@import "globals/_colors";
+@import "globals/_container";
+@import "globals/_defaults";
+@import "globals/_buttons";
+@import "globals/_fonts";
+@import "globals/_standard-page";
+//@import "../app/components/shared/navbar/_navbar";
+
+
+
+
+

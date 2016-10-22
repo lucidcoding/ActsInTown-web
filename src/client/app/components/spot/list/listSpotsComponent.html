@@ -1,0 +1,37 @@
+<div class="container top-spacer">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Scheduled for
+                </th>
+                <th>
+                    Duration
+                </th>
+                <th>
+                    Town
+                </th>
+                <th>
+                    Venue
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let spot of viewModel.spots">
+                <td>
+                    {{spot.scheduledFor}}
+                </td>
+                <td>
+                    {{spot.duration}}
+                </td>
+                <td>
+                    {{spot.townName}}
+                </td>
+                <td>
+                    {{spot.venueName}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a routerLink="/spot/add" routerLinkActive="active" class="btn btn-primary">+</a>
+</div>

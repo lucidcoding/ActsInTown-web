@@ -1,0 +1,23 @@
+.input-group { 
+    width: 100%; 
+    
+    select { 
+        width: auto; 
+        
+        &.date-selector-day {
+            width: 25%;
+        }
+        
+        &.date-selector-month {
+            width: 45%;
+        }
+        
+        &.date-selector-year {
+            width: 30%;
+        }
+    }
+    
+    select:not(:first-of-type) { 
+        border-left: 0; 
+    }
+}

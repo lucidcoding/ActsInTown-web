@@ -1,0 +1,29 @@
+//fonts
+$font-primary: 'Lato', sans-serif;
+$font-secondary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+//sizes
+$font-size-tiny: 8px;
+$font-size-small: 12px;
+$font-size-base: 14px; // Use rem-calc to define font sizes
+$font-size-large: 18px;
+$font-size-xlarge: 24px;
+$font-size-xxlarge: 52px;
+
+//weights
+$font-weight-bold: 700;
+$font-weight-regular: 400;
+$font-weight-light: 300;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base: 1.428571429 !default; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed: floor(($font-size-base * $line-height-base)) !default; // ~20px
+
+$container-width-lg: 940px;//1170px;
+$container-width-md: 940px;
+$container-width-sm: 750px;
+
+$box-border-radius: 0;
+$standard-spacing: 15px;
+$avatar-size: 48px;

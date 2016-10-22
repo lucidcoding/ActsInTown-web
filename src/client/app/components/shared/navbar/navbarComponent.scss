@@ -1,0 +1,117 @@
+@import "../../../../css/globals/_colors";
+@import "../../../../css/globals/_vars";
+
+.navbar-default {
+    background-color: $theme-primary;
+    border: none;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+
+    .navbar-header {
+        .navbar-brand {
+            color: $white;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: $font-size-large;
+        }
+    
+        .navbar-brand:hover,
+        .navbar-brand:focus {
+            color: $theme-focus;
+        }
+    
+        .navbar-toggle {
+            font-weight: 700;
+            font-size: 12px;
+            color: $gray-darker;
+            text-transform: uppercase;
+        }
+    
+        a img {
+            display: inline;
+            height: 40px;
+            margin-top: -30px;
+            margin-bottom: -25px;
+            margin-right: 10px;
+            fill: $theme-primary;
+        }
+    }
+    
+    .nav > li > a,
+    .nav > li > a:focus {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 13px;
+        color: $white;
+    }
+    
+    .nav > li > a:hover,
+    .nav > li > a:focus:hover {
+        color: $white;
+    }
+    
+    .nav > li.active > a,
+    .nav > li.active > a:focus {
+        color: $white !important;
+        background-color: transparent;
+    }
+    
+    .nav > li.active > a:hover,
+    .nav > li.active > a:focus:hover {
+        background-color: transparent;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-default {
+        background-color: $theme-primary;
+        border-color: $gray-light;
+  
+        .navbar-header .navbar-brand {
+            color: $white;
+        }
+        
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: $theme-focus;
+        }
+        
+        .nav > li > a,
+        .nav > li > a:focus {
+            color: $white;
+        }
+        
+        .nav > li > a:hover,
+        .nav > li > a:focus:hover {
+            color: $theme-focus;
+        }
+        
+        &.affix {
+            background-color: $white;
+            border-color: $gray-darker;
+        }
+        
+        &.affix .navbar-header .navbar-brand {
+            color: $white;
+            font-size: 14px;
+        }
+        
+        &.affix .navbar-header .navbar-brand:hover,
+        &.affix .navbar-header .navbar-brand:focus {
+            color: $theme-focus;
+        }
+        
+        &.affix .nav > li > a,
+        &.affix .nav > li > a:focus {
+            color: $gray-darker;
+        }
+        
+        &.affix .nav > li > a:hover,
+        &.affix .nav > li > a:focus:hover {
+            color: $white;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@media (min-width: 768px) {
+    .container {
+        width: $container-width-sm;
+    }
+}
+   
+@media (min-width: 992px) {
+    .container {
+        width: $container-width-md;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: $container-width-lg;
+    }
+}

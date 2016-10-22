@@ -1,0 +1,109 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+    background-color: $gray-lighter;
+}   
+
+hr {
+    border-color: $theme-primary;
+    border-width: 3px;
+    max-width: 50px;
+}
+
+hr.light {
+    border-color: $white;
+}
+
+a {
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+    color: $theme-primary;
+}
+
+a:hover,
+a:focus {
+    color: $theme-focus;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1
+{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+::-moz-selection {
+  color: $white;
+  text-shadow: none;
+  background: $gray-darker;
+}
+::selection {
+  color: $white;
+  text-shadow: none;
+  background: $gray-darker;
+}
+img::selection {
+  color: $white;
+  background: transparent;
+}
+img::-moz-selection {
+  color: $white;
+  background: transparent;
+}
+body {
+  webkit-tap-highlight-color: $gray-darker;
+}
+
+.checkbox.checkbox-aligned input[type=checkbox] {
+  margin-left: 0px;
+}
+
+
+
+
+.clearfix:after {
+    content: " "; 
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+div.loading {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 7px;
+    left: 32px;
+}

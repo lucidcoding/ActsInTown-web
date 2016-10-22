@@ -1,0 +1,59 @@
+<div class="standard-page">
+    <div class="container row-separated">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Search</h1>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit(searchAvailableSpotsForm)" #searchAvailableSpotsForm="ngForm" class="form-horizontal" role="form"
+            novalidate>
+            <div class="form-group" [class.has-error]="searchAvailableSpotsForm.submitted && !startDate.valid">
+                <label class="control-label col-sm-4">Start date:</label>
+                <div class="col-sm-4">
+                    <sd-date-selector [(value)]="viewModel.startDate"></sd-date-selector>
+                    <input type="hidden" [(ngModel)]="viewModel.startDate" #startDate="ngModel" name="startDate" futureDate />
+                    <div *ngIf="searchAvailableSpotsForm.submitted">
+                        <div class="help-block" *ngIf="startDate.errors && startDate.errors.futureDate">
+                            Date/time must be in the future.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="searchAvailableSpotsForm.submitted && !endDate.valid">
+                <label class="control-label col-sm-4">End date:</label>
+                <div class="col-sm-4">
+                    <sd-date-selector [(value)]="viewModel.endDate"></sd-date-selector>
+                    <input type="hidden" [(ngModel)]="viewModel.endDate" #endDate="ngModel" name="endDate" futureDate />
+                    <div *ngIf="searchAvailableSpotsForm.submitted">
+                        <div class="help-block" *ngIf="endDate.errors && endDate.errors.futureDate">
+                            Date/time must be in the future.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="searchAvailableSpotsForm.submitted && !townId.valid">
+                <label class="control-label col-sm-4">Town:</label>
+                <div class="col-sm-4">
+                    <select [(ngModel)]="viewModel.townId" #townId="ngModel" name="townId" required class="form-control loading" [disabled]="!viewModel.townOptionsLoaded">
+                        <option *ngFor="let townOption of viewModel.townOptions" [value]="townOption.value" [selected]="townOption.selected">
+                            {{townOption.text}}
+                        </option>
+                    </select>
+                    <div class="loading" *ngIf="!viewModel.townOptionsLoaded">Loading...</div>
+                    <div *ngIf="searchAvailableSpotsForm.submitted">
+                        <div class="help-block" *ngIf="townId.errors && townId.errors.required">
+                            Town field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <!--<button type="submit" [disabled]="!searchAvailableSpotsForm.form.valid" class="btn btn-success">Save</button>-->
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
