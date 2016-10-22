@@ -25,8 +25,8 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
         this.testService.doThing();
     }
 
-    someStuff() {
-        console.log('From method');
+    getSomeStuff() {
+        return 'From method';
     }
 
     ngOnInit() {

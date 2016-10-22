@@ -97,9 +97,16 @@ export function main() {
                 TestBed
                     .compileComponents()
                     .then(() => {
-                        console.log('step 1');
                         let fixture = TestBed.createComponent(VerifyUserComponent);
                         //fixture.someStuff();
+                        fixture.detectChanges();
+                        var component = fixture.debugElement.componentInstance;
+                        //let homeInstance = fixture.debugElement.children[0].componentInstance;
+                        //let homeDOMEl = fixture.debugElement.children[0].nativeElement;
+                        var a = component.getSomeStuff();
+                        console.log('step 1');
+                        console.log(a);
+                        console.log(JSON.stringify(component));
                         console.log('step 2');
                         fixture.detectChanges();
                         console.log('step 3');
