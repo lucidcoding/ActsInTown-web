@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 //import { ActivatedRoute } from '@angular/router';
-//import { UserService } from '../../../services/user/user.service';
+import { UserService } from '../../../services/user/user.service';
 import { TestService } from '../../../services/testService';
 
 @Component({
@@ -19,12 +19,16 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
 
     constructor(
         //private route: ActivatedRoute,
-        //private userService: UserService) {
+        private userService: UserService,
         private testService: TestService) {
             
         this.testService.doThing();
     }
-    
+
+    someStuff() {
+        console.log('From method');
+    }
+
     ngOnInit() {
         /*this.sub = this.route.params.subscribe(params => {
             this.userService.verify(params['verificationToken'])

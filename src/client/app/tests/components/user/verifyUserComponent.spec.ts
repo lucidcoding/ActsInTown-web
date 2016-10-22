@@ -36,35 +36,38 @@ export function main() {
         ));
     });
 }*/
+import {
+  async
+} from '@angular/core/testing';
 
 import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs/Observable';
 //import { async } from '@angular/core/testing';
 //import { ActivatedRoute } from '@angular/router';
 import { VerifyUserComponent } from '../../../components/user/verify/verifyUserComponent';
 //import { UserService } from '../../../services/user/user.service';
 import { TestService } from '../../../services/testService';
+import { UserService } from '../../../services/user/user.service';
+import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
+import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
 
 /*var mockActivatedRoute = {
     
 };*/
 
-//var mockUserService = {
-//};
-/*	register(request: RegisterUserRequest): Observable<any> {
-		return this.http.post(this.configService.getApiBaseUrl() + 'user/register', request, null);
+class MockUserService {
+	register(request: RegisterUserRequest): Observable<any> {
+		return null;
 	}
 	
 	login(request: LoginUserRequest): Observable<any> {
-        var url = this.configService.getApiBaseUrl() + 'token?username=' + 
-            encodeURIComponent(request.username) + '&password=' + encodeURIComponent(request.password);
-            
-		return this.http.get(url);
+        return null;
 	}
     
 	verify(verificationToken: string): Observable<any> {
-		return this.http.get(this.configService.getApiBaseUrl() + 'user/verify?verificationToken=' + verificationToken);
+        return null;
     }
-};*/
+};
 
 class MockTestService {
     doThing = function() {
@@ -81,53 +84,27 @@ export function main() {
                 declarations: [VerifyUserComponent],
                 providers: [
                     //{ provide: ActivatedRoute, useClass: mockActivatedRoute },
-                    //{ provide: UserService, useClass: mockUserService }
+                    { provide: UserService, useClass: MockUserService },
                     { provide: TestService, useClass: MockTestService }
                     //UserService
                 ]
             });
-
         });
 
-        it('should have name property set', function() {
-            console.log('step 1');
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    console.log('step 1');
-                    let fixture = TestBed.createComponent(VerifyUserComponent);
-                    console.log('step 2');
-                    fixture.detectChanges();
-                    console.log('step 3');
-                    //expect(true).toBe(true);
-                });
-        });
-        /*it('should work',
+        it('should have name property set', 
             async(() => {
+                console.log('step 1');
                 TestBed
                     .compileComponents()
                     .then(() => {
                         console.log('step 1');
-                        //let fixture = TestBed.createComponent(VerifyUserComponent);
-                        //console.log('step 2');
-                        //fixture.detectChanges();
-                        //console.log('step 3');
-
-                        let homeInstance = fixture.debugElement.children[0].componentInstance;
-                        let homeDOMEl = fixture.debugElement.children[0].nativeElement;
-
-                        expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
-                        expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
-
-                        homeInstance.newName = 'Minko';
-                        homeInstance.addName();
-
+                        let fixture = TestBed.createComponent(VerifyUserComponent);
+                        //fixture.someStuff();
+                        console.log('step 2');
                         fixture.detectChanges();
-
-                        expect(homeDOMEl.querySelectorAll('li').length).toEqual(1);
-                        expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
+                        console.log('step 3');
+                        expect(true).toBe(true);
                     });
-            }));*/
+        }));
     });
-
 }
