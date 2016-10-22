@@ -1,60 +1,26 @@
-//import { Component } from '@angular/core';
-//import { TestBed } from '@angular/core/testing';
-//import { FormsModule } from '@angular/forms';
-/*import { ActivatedRoute } from '@angular/router';
-
 import {
-//beforeEach,
-addProviders ,
-describe,
-//expect,
-//fail,
-it,
-injectAsync,
-TestComponentBuilder
-} from '@angular/core/testing';
-
-//import {provide} from 'angular2/core'; 
-import { VerifyUserComponent } from '../../../components/user/verify/verifyUserComponent';
-
-class MockActivatedRoute {
-    
-}
-
-export function main() {
-    describe('verifyUserComponent', () => {
-        addProviders ([
-            { provide: ActivatedRoute, useClass: MockActivatedRoute }
-        ]);
-
-        it('should get quote', injectAsync(
-            [TestComponentBuilder], (tcb) => {
-                return tcb.createAsync(VerifyUserComponent).then((fixture) => {
-                    console.log();
-                });
-            }
-        ));
-    });
-}*/
-import {
-  async
+    async
+    //beforeEach,
+    //describe,
+    //expect,
+    //it
 } from '@angular/core/testing';
 
 import { ActivatedRoute } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-//import { async } from '@angular/core/testing';
-//import { ActivatedRoute } from '@angular/router';
+//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { VerifyUserComponent } from '../../../components/user/verify/verifyUserComponent';
-//import { UserService } from '../../../services/user/user.service';
 import { UserService } from '../../../services/user/user.service';
-import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
-import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
+//import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
+//import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
 
-class MockActivatedRoute {
+/*class MockActivatedRoute {
     
-};
+};*/
 
+
+/*
 class MockUserService {
 	register(request: RegisterUserRequest): Observable<any> {
 		return null;
@@ -64,10 +30,44 @@ class MockUserService {
         return null;
 	}
     
-	verify(verificationToken: string): Observable<any> {
-        return null;
+	verify(verificationToken: string): jasmine.createSpy('verify');
+};*/
+
+/*
+var mockActivatedRoute = {
+    params: jasmine.createSpy('params').and.returnValue(Observable.from([{ 
+        'verificationToken': 'abcd' 
+    }]))
+};*/
+
+var mockActivatedRoute = {
+    params: Observable.from([{ 
+        verificationToken: 'abcd' 
+    }])
+};
+
+var mockUserService = {
+    register: jasmine.createSpy('register'),
+    login: jasmine.createSpy('login'),
+    /*verify: jasmine.createSpy('verify').and.returnValue(
+        Observable.from([{ 
+            verificationToken: 'abcd' 
+        }])
+    )*/
+    verify: (x: string): Observable<any> => {
+        console.log('x:' + x);
+        /*return Observable.create(observer => {
+            observer.onNext('resp1');
+            observer.onError('x');
+            observer.onCompleted();
+            
+            // Any cleanup logic might go here
+            return () => console.log('disposed');
+        });*/
+        return  Observable.from(['efgh']);
     }
 };
+
 
 export function main() {
     describe('verifyUserComponent', () => {
@@ -77,9 +77,9 @@ export function main() {
             TestBed.configureTestingModule({
                 declarations: [VerifyUserComponent],
                 providers: [
-                    { provide: ActivatedRoute, useClass: MockActivatedRoute },
-                    { provide: UserService, useClass: MockUserService }
-                    //UserService
+                    { provide: ActivatedRoute, useValue: mockActivatedRoute },
+                    //{ provide: ActivatedRoute, useClass: MockActivatedRoute },
+                    { provide: UserService, useValue: mockUserService }
                 ]
             });
         });
@@ -91,18 +91,13 @@ export function main() {
                     .compileComponents()
                     .then(() => {
                         let fixture = TestBed.createComponent(VerifyUserComponent);
-                        //fixture.someStuff();
                         fixture.detectChanges();
                         var component = fixture.debugElement.componentInstance;
                         //let homeInstance = fixture.debugElement.children[0].componentInstance;
                         //let homeDOMEl = fixture.debugElement.children[0].nativeElement;
                         var a = component.getSomeStuff();
-                        console.log('step 1');
-                        console.log(a);
-                        console.log(JSON.stringify(component));
-                        console.log('step 2');
+                        console.log('vt:' + a);
                         fixture.detectChanges();
-                        console.log('step 3');
                         expect(true).toBe(true);
                     });
         }));

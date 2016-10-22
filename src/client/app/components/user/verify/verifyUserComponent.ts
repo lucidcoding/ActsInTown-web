@@ -9,12 +9,12 @@ import { UserService } from '../../../services/user/user.service';
     styleUrls: ['verifyUserComponent.css']
 })
 export class VerifyUserComponent implements OnInit, OnDestroy {
-    //private sub: any;
+    private sub: any;
 
     constructor(
         private route: ActivatedRoute,
         private userService: UserService) {
-        //To do.
+        //
     }
 
     getSomeStuff() {
@@ -22,23 +22,23 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        /*this.sub = this.route.params.subscribe(params => {
+        this.sub = this.route.params.subscribe(params => {
             this.userService.verify(params['verificationToken'])
                 .subscribe(
                 response => {
-                    console.log();
+                    console.log('OK ' + response);
                 },
                 error => {
                     console.error('Error: ' + error);
                 },
                 () => {
-                    console.log('Completed!');
+                    //Do nothing.
                 });
-        });*/
+        });
     }
 
     ngOnDestroy() {
-        //this.sub.unsubscribe();
+        this.sub.unsubscribe();
     }
 }
 
