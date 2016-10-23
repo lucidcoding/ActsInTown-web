@@ -1,4 +1,5 @@
 <div class="container top-spacer">
 	<h1>Account Verified</h1>
-	<p>Your account has been verified. </p>
+	<p *ngIf="verificationSuccessful">Your account has been verified.</p>
+	<p *ngIf="verificationSuccessful === false">There was a problem verifiying your account.</p>
 </div>

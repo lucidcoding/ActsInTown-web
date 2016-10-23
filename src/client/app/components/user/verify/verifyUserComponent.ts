@@ -9,12 +9,13 @@ import { UserService } from '../../../services/user/user.service';
     styleUrls: ['verifyUserComponent.css']
 })
 export class VerifyUserComponent implements OnInit, OnDestroy {
+    public verificationSuccessful: boolean;
     private sub: any;
-
+     
     constructor(
         private route: ActivatedRoute,
         private userService: UserService) {
-        //
+        //Do nothing.
     }
 
     getSomeStuff() {
@@ -22,14 +23,15 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.verificationSuccessful = null;
+
         this.sub = this.route.params.subscribe(params => {
-            this.userService.verify(params['verificationToken'])
-                .subscribe(
+            this.userService.verify(params['verificationToken']).subscribe(
                 response => {
-                    console.log('OK ' + response);
+                    this.verificationSuccessful = true;
                 },
                 error => {
-                    console.error('Error: ' + error);
+                    this.verificationSuccessful = false;
                 },
                 () => {
                     //Do nothing.
