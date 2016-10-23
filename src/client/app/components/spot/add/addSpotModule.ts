@@ -1,10 +1,10 @@
-import { provide, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddSpotComponent } from './addSpotComponent';
-import { SpotService, SpotServiceToken } from '../../../services/spot/spot.service';
-import { TownService, TownServiceToken } from '../../../services/town/town.service';
+import { SpotService } from '../../../services/spot/spot.service';
+import { TownService } from '../../../services/town/town.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateTimeSelectorModule } from '../../shared/dateTimeSelector/dateTimeSelectorModule';
 import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
@@ -14,8 +14,8 @@ import { FutureDateValidatorModule } from '../../../directives/futureDateValidat
     declarations: [AddSpotComponent],
     exports: [AddSpotComponent],
     providers: [
-        provide(SpotServiceToken, { useClass: SpotService }),
-        provide(TownServiceToken, { useClass: TownService }),
+        SpotService,
+        TownService,
         CustomHttpService]
 })
 

@@ -21,15 +21,11 @@ export class RegisterUserComponent implements OnInit {
     viewModel: RegisterUserViewModel;
     active: boolean;
 
-    constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router,
-        private userService: UserService,
-        private userTypeService: UserTypeService) {
-        //Do nothing.
-    }
-
-    ngOnInit() {
+    constructor(private authenticationService: AuthenticationService,
+                private router: Router,
+                private userService: UserService,
+                private userTypeService: UserTypeService) {
+        
         this.viewModel = {
             userTypes: null,
             userTypeSelected: false,
@@ -41,7 +37,9 @@ export class RegisterUserComponent implements OnInit {
             lastName: null,
             stageName: null
         };
+    }
 
+    ngOnInit() {
         this.userTypeService.get()
             .subscribe(
             response => {

@@ -1,11 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AddSpotViewModel } from './addSpotViewModel';
 import { AddSpotRequest } from '../../../services/spot/requests/add.spot.request';
-import { ISpotService } from '../../../services/spot/ispot.service';
-import { SpotServiceToken } from '../../../services/spot/spot.service';
-import { ITownService } from '../../../services/town/itown.service';
-import { TownServiceToken } from '../../../services/town/town.service';
+import { SpotService } from '../../../services/spot/spot.service';
+import { TownService } from '../../../services/town/town.service';
 import { Option } from '../../../common/option.common';
 
 @Component({
@@ -14,13 +12,12 @@ import { Option } from '../../../common/option.common';
     templateUrl: 'addSpotComponent.html',
     styleUrls: ['addSpotComponent.css']
 })
-export class AddSpotComponent {
+export class AddSpotComponent implements OnInit {
     public viewModel: AddSpotViewModel;
 
-    constructor(
-        @Inject(SpotServiceToken) private spotService: ISpotService,
-        @Inject(TownServiceToken) private townService: ITownService,
-        private router: Router) {
+    constructor(private spotService: SpotService,
+                private townService: TownService,
+                private router: Router) {
         this.viewModel = {
             scheduledFor: new Date(),
             durationMinutes: null,
@@ -30,7 +27,9 @@ export class AddSpotComponent {
             townOptionsLoaded: false,
             venueName: null
         };
+    }
 
+    public ngOnInit() {         
         for (var durationMinutes: number = 5; durationMinutes <= 60; durationMinutes += 5) {
             this.viewModel.durationMinutesOptions.push(new Option(durationMinutes.toString(), durationMinutes.toString(), false));
         }

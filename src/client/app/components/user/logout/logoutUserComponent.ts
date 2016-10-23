@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IAuthenticationService } from '../../../services/authentication/iauthentication.service';
-import { AuthenticationServiceToken } from '../../../services/authentication/authentication.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
     moduleId: module.id,
@@ -9,10 +8,13 @@ import { AuthenticationServiceToken } from '../../../services/authentication/aut
     templateUrl: 'logoutUserComponent.html',
     styleUrls: ['logoutUserComponent.css']
 })
-export class LogoutUserComponent {
-    constructor(
-            @Inject(AuthenticationServiceToken) private authenticationService: IAuthenticationService,
-            private router: Router)  {
+export class LogoutUserComponent implements OnInit {
+    constructor(private authenticationService: AuthenticationService,
+                private router: Router)  {
+        //Do nothing.
+    }
+    
+    ngOnInit() {
         this.authenticationService.clearToken();
     }
 }

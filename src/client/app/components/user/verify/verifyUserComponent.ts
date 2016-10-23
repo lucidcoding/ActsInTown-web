@@ -12,15 +12,12 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
     public verificationSuccessful: boolean;
     private sub: any;
      
-    constructor(
-        private route: ActivatedRoute,
-        private userService: UserService) {
-        //Do nothing.
+    constructor(private route: ActivatedRoute,
+                private userService: UserService) {
+        this.verificationSuccessful = null;
     }
 
     ngOnInit() {
-        this.verificationSuccessful = null;
-
         this.sub = this.route.params.subscribe(params => {
             this.userService.verify(params['verificationToken']).subscribe(
                 response => {

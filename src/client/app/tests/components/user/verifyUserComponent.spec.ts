@@ -8,7 +8,7 @@ export function main() {
     var mockActivatedRoute: any;
     var mockUserService: any;
 
-    describe('Calling verifyUserComponent.ngOnInit', () => {
+    describe('For verifyUserComponent', () => {
         beforeEach(() => {
 
             mockActivatedRoute = {
@@ -30,29 +30,31 @@ export function main() {
             });
         });
 
-        it('should set verificationSuccessful to true if api call is successful.', async(() => {
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    let fixture = TestBed.createComponent(VerifyUserComponent);
-                    fixture.detectChanges();
-                    let component = fixture.debugElement.componentInstance;
-                    expect(mockUserService.verify).toHaveBeenCalledWith('my-verification-token');
-                    expect(component.verificationSuccessful).toBe(true);
-                });
-        }));
+        describe('Calling ngOnInit()', () => {
+            it('should set verificationSuccessful to true if api call is successful.', async(() => {
+                TestBed
+                    .compileComponents()
+                    .then(() => {
+                        let fixture = TestBed.createComponent(VerifyUserComponent);
+                        fixture.detectChanges();
+                        let component = fixture.debugElement.componentInstance;
+                        expect(mockUserService.verify).toHaveBeenCalledWith('my-verification-token');
+                        expect(component.verificationSuccessful).toBe(true);
+                    });
+            }));
 
-        it('should set verificationSuccessful to false if api call is unsuccessful.', async(() => {
-            mockUserService.verify = jasmine.createSpy('verify').and.returnValue(Observable.throw('an error'));
+            it('should set verificationSuccessful to false if api call is unsuccessful.', async(() => {
+                mockUserService.verify = jasmine.createSpy('verify').and.returnValue(Observable.throw('an error'));
 
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    let fixture = TestBed.createComponent(VerifyUserComponent);
-                    fixture.detectChanges();
-                    let component = fixture.debugElement.componentInstance;
-                    expect(component.verificationSuccessful).toBe(false);
-                });
-        }));
+                TestBed
+                    .compileComponents()
+                    .then(() => {
+                        let fixture = TestBed.createComponent(VerifyUserComponent);
+                        fixture.detectChanges();
+                        let component = fixture.debugElement.componentInstance;
+                        expect(component.verificationSuccessful).toBe(false);
+                    });
+            }));
+        });
     });
 }

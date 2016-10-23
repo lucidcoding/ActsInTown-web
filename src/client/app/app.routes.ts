@@ -16,6 +16,7 @@ import { AboutRoutes } from './+about/index';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'spot/add', component: AddSpotComponent, canActivate: [LoggedInGuard] },
+  //{ path: 'spot/add', component: AddSpotComponent },
   { path: 'spot/list', component: ListSpotsComponent, canActivate: [LoggedInGuard] },
   { path: 'user/login', component: LoginUserComponent },
   { path: 'user/logout', component: LogoutUserComponent },

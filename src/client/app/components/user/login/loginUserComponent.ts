@@ -1,9 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginUserViewModel } from './loginUserViewModel';
 import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
-import { IAuthenticationService } from '../../../services/authentication/iauthentication.service';
-import { AuthenticationServiceToken } from '../../../services/authentication/authentication.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService } from '../../../services/user/user.service';
 
 @Component({
@@ -12,20 +11,23 @@ import { UserService } from '../../../services/user/user.service';
     templateUrl: 'loginUserComponent.html',
     styleUrls: ['loginUserComponent.css']
 })
-export class LoginUserComponent {
+export class LoginUserComponent implements OnInit {
     viewModel: LoginUserViewModel;
     active: boolean;
 
-    constructor(
-            @Inject(AuthenticationServiceToken) private authenticationService: IAuthenticationService,
-            private userService: UserService,
-            private router: Router)  {
+    constructor(private authenticationService: AuthenticationService,
+                private userService: UserService,
+                private router: Router)  {
         this.viewModel = {
             email: null,
             password: null,
             rememberMe: null,
             failedLogin: false
-        };
+        };  
+    }
+
+    ngOnInit() {    
+        //Do nothing.
     }
 
     clearFailedLogin() {
@@ -40,7 +42,6 @@ export class LoginUserComponent {
         }
 
         var request: LoginUserRequest = {
-            //username: this.viewModel.email.replace('+', '%20'),
             username: this.viewModel.email,
             password: this.viewModel.password,
             rememberMe: this.viewModel.rememberMe
@@ -58,7 +59,7 @@ export class LoginUserComponent {
                 }
             },
             () => {
-                console.log('Completed!');
+                //Do nothing.
             });
     }
 }
