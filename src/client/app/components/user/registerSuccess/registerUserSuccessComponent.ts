@@ -7,8 +7,7 @@ import { Component } from '@angular/core';
     styleUrls: ['registerUserSuccessComponent.css']
 })
 export class RegisterUserSuccessComponent {
-
     constructor() {
-        console.log('');
+        //Do nothing.
     }
 }

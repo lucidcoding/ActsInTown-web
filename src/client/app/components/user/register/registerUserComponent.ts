@@ -1,12 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterUserViewModel } from './registerUserViewModel';
 import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
-import { IUserTypeService } from '../../../services/userType/iuserType.service';
-import { IAuthenticationService } from '../../../services/authentication/iauthentication.service';
+import { UserTypeService } from '../../../services/userType/userType.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
-import { UserTypeServiceToken } from '../../../services/userType/userType.service';
-import { AuthenticationServiceToken } from '../../../services/authentication/authentication.service';
 import { CompareValidatorDirective } from '../../../directives/compare.directive';
 import { MustBeTrueValidatorDirective } from '../../../directives/must-be-true.directive';
 import { RequiredIfValidatorDirective } from '../../../directives/required-if.directive';
@@ -19,16 +17,19 @@ import { Option } from '../../../common/option.common';
     styleUrls: ['registerUserComponent.css'],
     directives: [CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective]
 })
-export class RegisterUserComponent {
+export class RegisterUserComponent implements OnInit {
     viewModel: RegisterUserViewModel;
     active: boolean;
 
     constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router,
         private userService: UserService,
-        @Inject(UserTypeServiceToken) private userTypeService: IUserTypeService,
-        @Inject(AuthenticationServiceToken) private authenticationService: IAuthenticationService,
-        private router: Router) {
+        private userTypeService: UserTypeService) {
+        //Do nothing.
+    }
 
+    ngOnInit() {
         this.viewModel = {
             userTypes: null,
             userTypeSelected: false,
@@ -44,13 +45,16 @@ export class RegisterUserComponent {
         this.userTypeService.get()
             .subscribe(
             response => {
-                console.log();
                 this.viewModel.userTypes = response.map(userType => {
                     return new Option(userType.description, userType.id, false);
                 });
             },
-            error => console.error('Error: ' + error),
-            () => console.log('Completed!'));
+            error => {
+                //
+            },
+            () => {
+                //
+            });
 
         this.active = true;
     }
@@ -89,7 +93,7 @@ export class RegisterUserComponent {
                 }
             },
             () => {   
-                console.log('');
+                //Do nothing.
             });
     }
 }

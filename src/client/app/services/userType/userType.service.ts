@@ -1,13 +1,12 @@
-import { Inject, Injectable, OpaqueToken } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IConfigService } from '../config/iconfig.service';
 import { ConfigServiceToken } from '../config/config.service';
-import { IUserTypeService } from './iuserType.service';
 import { UserType } from './responses/userType.response';
 
 @Injectable()
-export class UserTypeService implements IUserTypeService {
+export class UserTypeService {
 	constructor( 
 			@Inject(Http) private http: Http,
 			@Inject(ConfigServiceToken) private configService: IConfigService) {
@@ -18,5 +17,3 @@ export class UserTypeService implements IUserTypeService {
         	.map(response => response.json());
 	}
 }
-
-export let UserTypeServiceToken = new OpaqueToken('UserTypeServiceToken');

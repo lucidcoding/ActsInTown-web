@@ -26,8 +26,6 @@ import { LoggedInGuard } from './loggedInGuard';
 import { AuthenticationService } from './services/authentication/authentication.service';
 
 import { NavbarModule } from './components/shared/navbar/navbarModule';
-//import { CommonModule } from '@angular/common';
-//import { FormsModule } from '@angular/forms';
  
 @NgModule({
   imports: [
@@ -42,7 +40,6 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     LogoutUserModule,
     RegisterUserModule,
     VerifyUserModule,
-    //
     SearchAvailableSpotsModule,
     //DateSelectorModule,
     //SharedModule.forRoot(),

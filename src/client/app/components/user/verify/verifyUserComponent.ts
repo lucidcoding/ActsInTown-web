@@ -18,10 +18,6 @@ export class VerifyUserComponent implements OnInit, OnDestroy {
         //Do nothing.
     }
 
-    getSomeStuff() {
-        return 'From method';
-    }
-
     ngOnInit() {
         this.verificationSuccessful = null;
 

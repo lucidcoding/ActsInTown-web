@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RegisterUserComponent } from './registerUserComponent';
 import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
-import { UserTypeService, UserTypeServiceToken } from '../../../services/userType/userType.service';
+import { UserTypeService } from '../../../services/userType/userType.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, RouterModule],
@@ -14,7 +14,7 @@ import { UserTypeService, UserTypeServiceToken } from '../../../services/userTyp
     providers: [
         provide(ConfigServiceToken, { useClass: ConfigService }),
         UserService,
-        provide(UserTypeServiceToken, { useClass: UserTypeService })
+        UserTypeService
     ]
 })
 

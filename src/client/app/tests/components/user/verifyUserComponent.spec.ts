@@ -25,7 +25,6 @@ export function main() {
                 declarations: [VerifyUserComponent],
                 providers: [
                     { provide: ActivatedRoute, useValue: mockActivatedRoute },
-                    //{ provide: ActivatedRoute, useClass: MockActivatedRoute },
                     { provide: UserService, useValue: mockUserService }
                 ]
             });
@@ -38,8 +37,6 @@ export function main() {
                     let fixture = TestBed.createComponent(VerifyUserComponent);
                     fixture.detectChanges();
                     let component = fixture.debugElement.componentInstance;
-                    //let homeInstance = fixture.debugElement.children[0].componentInstance;
-                    //let homeDOMEl = fixture.debugElement.children[0].nativeElement;
                     expect(mockUserService.verify).toHaveBeenCalledWith('my-verification-token');
                     expect(component.verificationSuccessful).toBe(true);
                 });
