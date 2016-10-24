@@ -46,8 +46,12 @@ export class AddSpotComponent implements OnInit {
                 this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
                 this.viewModel.townOptionsLoaded = true;
             },
-            error => console.error('Error: ' + error),
-            () => console.log('Completed!'));
+            error => {
+                console.error('Error: ' + error);
+            },
+            () => {
+                //
+            });
     }
 
     onNotify(ev:any) {
@@ -80,10 +84,10 @@ export class AddSpotComponent implements OnInit {
                 this.router.navigate(['spot/list']);
             },
             error => {
-                console.log('Error!');
+                console.log('Error:' + error);
             },
             () => {
-                console.log('Completed!');
+                //
             });
     }
 }

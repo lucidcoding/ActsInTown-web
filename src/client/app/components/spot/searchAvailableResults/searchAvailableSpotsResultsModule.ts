@@ -1,9 +1,9 @@
-import { provide, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SearchAvailableSpotsResultsComponent } from './searchAvailableSpotsResultsComponent';
-import { SpotService, SpotServiceToken } from '../../../services/spot/spot.service';
+import { SpotService } from '../../../services/spot/spot.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateSelectorModule } from '../../shared/dateSelector/dateSelectorModule';
 import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
@@ -13,7 +13,7 @@ import { FutureDateValidatorModule } from '../../../directives/futureDateValidat
     declarations: [SearchAvailableSpotsResultsComponent],
     exports: [SearchAvailableSpotsResultsComponent],
     providers: [
-        provide(SpotServiceToken, { useClass: SpotService }),
+        SpotService,
         CustomHttpService]
 })
 

@@ -48,7 +48,7 @@ export class RegisterUserComponent implements OnInit {
                 });
             },
             error => {
-                //
+                console.log('Error:' + error);
             },
             () => {
                 //
@@ -88,6 +88,8 @@ export class RegisterUserComponent implements OnInit {
             error => {
                 if (error.status === 409) {
                     this.viewModel.alreadyRegistered = true;
+                } else {
+                    console.log('Error:' + error);
                 }
             },
             () => {   

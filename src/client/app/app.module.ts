@@ -15,6 +15,7 @@ import { LogoutUserModule } from './components/user/logout/logoutUserModule';
 import { RegisterUserModule } from './components/user/register/registerUserModule';
 import { VerifyUserModule } from './components/user/verify/verifyUserModule';
 import { SearchAvailableSpotsModule } from './components/spot/searchAvailable/searchAvailableSpotsModule';
+import { SearchAvailableSpotsResultsModule } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsModule';
 
 
 //import { CompareValidator } from './directives/compare.directive';
@@ -41,6 +42,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     RegisterUserModule,
     VerifyUserModule,
     SearchAvailableSpotsModule,
+    SearchAvailableSpotsResultsModule,
     //DateSelectorModule,
     //SharedModule.forRoot(),
     NavbarModule

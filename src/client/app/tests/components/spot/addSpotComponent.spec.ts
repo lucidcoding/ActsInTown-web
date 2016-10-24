@@ -60,65 +60,55 @@ export function main() {
                     });
             }));
         });
-        
-        /*describe('Calling onSubmit() with valid form', () => {
-            it('should submit registration request.', async(() => {
+
+        describe('Calling onSubmit() with valid form', () => {
+            it('should submit request.', async(() => {
                 TestBed
                     .compileComponents()
                     .then(() => {
-                        let fixture = TestBed.createComponent(RegisterUserComponent);
+                        let fixture = TestBed.createComponent(AddSpotComponent);
                         let component = fixture.debugElement.componentInstance;
 
-                        registerUserRequest = null;
+                        addSpotRequest = null;
 
                         component.viewModel = {
-                            email: 'richard.red@redcompany.com',
-                            password: 'Red12345!',
-                            confirmPassword: 'Red12345!',
-                            firstName: 'Richard',
-                            lastName: 'Red',
-                            stageName: 'Redman',
-                            userTypes: [
-                                { value: 'UT_001', text: 'User Type 01', selected: false },
-                                { value: 'UT_002', text: 'User Type 02', selected: true },
-                                { value: 'UT_003', text: 'User Type 03', selected: false },
-                                { value: 'UT_004', text: 'User Type 04', selected: true }
-                            ],
+                            scheduledFor: new Date(2020, 10, 5, 20, 30, 0, 0),
+                            durationMinutes: 20,
+                            durationMinutesOptions: [],
+                            townId: 'T_001',
+                            townOptions: [],
+                            townOptionsLoaded: true,
+                            venueName: 'Test Venue 01'
                         };
-                
-                        let registerUserForm = {
+
+                        let addSpotForm = {
                             valid: true,
                         };
 
-                        component.onSubmit(registerUserForm);
-                        expect(mockAuthenticationService.clearToken).toHaveBeenCalled();
-                        expect(mockUserService.register).toHaveBeenCalled();
-                        expect(registerUserRequest).not.toBeNull();
-                        expect(registerUserRequest.username).toEqual('richard.red@redcompany.com');
-                        expect(registerUserRequest.password).toEqual('Red12345!');
-                        expect(registerUserRequest.confirmPassword).toEqual('Red12345!');
-                        expect(registerUserRequest.firstName).toEqual('Richard');
-                        expect(registerUserRequest.lastName).toEqual('Red');
-                        expect(registerUserRequest.stageName).toEqual('Redman');
-                        expect(registerUserRequest.userTypeIds).toEqual(['UT_002', 'UT_004']);
-                        expect(mockRouter.navigate).toHaveBeenCalledWith(['user/register-success']);
+                        component.onSubmit(addSpotForm);
+                        expect(mockSpotService.add).toHaveBeenCalled();
+                        expect(addSpotRequest).not.toBeNull();
+                        expect(addSpotRequest.scheduledFor).toEqual(new Date(2020, 10, 5, 20, 30, 0, 0));
+                        expect(addSpotRequest.durationMinutes).toEqual(20);
+                        expect(addSpotRequest.townId).toEqual('T_001');
+                        expect(addSpotRequest.venueName).toEqual('Test Venue 01');
+                        expect(mockRouter.navigate).toHaveBeenCalledWith(['spot/list']);
                     });
             }));
         });
-        
+
         describe('Calling onSubmit() with invalid form', () => {
-            it('should not submit registration request.', async(() => {
+            it('should not submit request.', async(() => {
                 TestBed
                     .compileComponents()
                     .then(() => {
-                        let fixture = TestBed.createComponent(RegisterUserComponent);
+                        let fixture = TestBed.createComponent(AddSpotComponent);
                         let component = fixture.debugElement.componentInstance;
                         component.onSubmit({ valid: false });
-                        expect(mockAuthenticationService.clearToken).not.toHaveBeenCalled();
-                        expect(mockUserService.register).not.toHaveBeenCalled();
+                        expect(mockSpotService.add).not.toHaveBeenCalled();
                         expect(mockRouter.navigate).not.toHaveBeenCalled();
                     });
             }));
-        });*/
+        });
     });
 }

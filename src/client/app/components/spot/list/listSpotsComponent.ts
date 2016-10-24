@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListViewModel } from './viewModels/listSpotViewModel';
-import { ISpotService } from '../../../services/spot/ispot.service';
-import { SpotServiceToken } from '../../../services/spot/spot.service';
+import { SpotService } from '../../../services/spot/spot.service';
 
 @Component({
     moduleId: module.id,
@@ -9,16 +8,17 @@ import { SpotServiceToken } from '../../../services/spot/spot.service';
     templateUrl: 'listSpotsComponent.html',
     styleUrls: ['listSpotsComponent.css']
 })
-export class ListSpotsComponent {
-    viewModel: ListViewModel;
+export class ListSpotsComponent implements OnInit {
+    public viewModel: ListViewModel;
 
-    constructor(
-        @Inject(SpotServiceToken) private spotService: ISpotService) {
+    constructor(private spotService: SpotService) {
         this.viewModel = {
             spots: [],
             spotsLoaded: false
         };
+    }
 
+    public ngOnInit() {
         this.spotService.getForCurrentUser()
             .subscribe(
             response => {
@@ -34,7 +34,11 @@ export class ListSpotsComponent {
 
                 this.viewModel.spotsLoaded = true;
             },
-            error => console.error('Error: ' + error),
-            () => console.log('Completed!'));
+            error => {
+                console.error('Error: ' + error);
+            },
+            () => {
+                //
+            });
     }
 }
