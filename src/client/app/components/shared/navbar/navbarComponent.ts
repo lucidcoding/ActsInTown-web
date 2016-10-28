@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 /**
  * This class represents the navigation bar component.
@@ -12,6 +13,10 @@ import { Router } from '@angular/router';
 })
 
 export class NavbarComponent {
-    constructor(private router: Router) {
+    public authenticated: boolean;
+
+    constructor(private router: Router,
+                private authenticationService: AuthenticationService) {
+        this.authenticated = this.authenticationService.isLoggedIn();
     }
 }

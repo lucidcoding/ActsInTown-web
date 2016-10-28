@@ -187,3 +187,10 @@ header {
   padding-right: 0;
   padding-left: 0;
 }
+
+.btn {
+    &.btn-primary {
+        background-color: transparent;
+        border: 2px solid $white;
+    }
+}

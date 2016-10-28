@@ -7,12 +7,18 @@
     display: flex;
     min-height: 100%;
     
+    background: url('../../../assets/img/mic-lo.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
     .container {
         padding-right: $standard-spacing;
         padding-left: $standard-spacing;
         text-align: left;
         height: auto;
-        background-color: white;
+        background-color: $white;
         width: 100%;
         
         h1 {

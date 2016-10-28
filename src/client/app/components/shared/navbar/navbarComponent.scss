@@ -63,6 +63,21 @@
     .nav > li.active > a:focus:hover {
         background-color: transparent;
     }
+    
+    &.navbar-unauthenticated {
+        background-color: $white;
+        
+        .navbar-header {
+            .navbar-brand {
+                color: $theme-primary;
+            }
+        }
+        
+        .nav > li > a,
+        .nav > li > a:focus {
+            color: $theme-primary;
+        }
+    }
 }
 
 @media (min-width: 768px) {
