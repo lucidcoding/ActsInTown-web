@@ -10,7 +10,7 @@
                 <label class="control-label col-sm-3">Date and time of spot:</label>
                 <div class="col-sm-6">
                     <sd-date-time-selector [(value)]="viewModel.scheduledFor"></sd-date-time-selector>
-                    <input type="text" [(ngModel)]="viewModel.scheduledFor" #scheduledFor="ngModel" name="scheduledFor" futureDate />
+                    <input type="hidden" [(ngModel)]="viewModel.scheduledFor" #scheduledFor="ngModel" name="scheduledFor" futureDate />
                     <div *ngIf="addSpotForm.submitted">
                         <div class="help-block" *ngIf="scheduledFor.errors && scheduledFor.errors.futureDate">
                             Date/time must be in the future.

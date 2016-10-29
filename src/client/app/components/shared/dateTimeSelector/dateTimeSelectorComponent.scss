@@ -1,3 +1,29 @@
-.input-group { width: 100%; }
-.input-group select { width: auto !important; }
-.input-group select:not(:first-of-type) { border-left: 0; }
+@import "../../../../css/globals/_vars";
+
+.input-group { 
+    width: 100%; 
+    
+    select { 
+        width: auto; 
+        
+        /*&.date-selector-day {
+            width: 25%;
+        }
+        
+        &.date-selector-month {
+            width: 45%;
+        }
+        
+        &.date-selector-year {
+            width: 30%;
+        }*/
+    }
+    
+    select:not(:first-of-type) { 
+        border-left: 0; 
+    }
+    
+    + .input-group {
+        margin-top: $standard-spacing;
+    }
+}

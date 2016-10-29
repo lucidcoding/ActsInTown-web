@@ -16,10 +16,13 @@ export class SearchAvailableSpotsComponent implements OnInit {
     viewModel: SearchAvailableSpotsViewModel;
 
     constructor(private townService: TownService,
-        private router: Router) {
+                private router: Router) {
+        var date = new Date();
+        date = date.roundUpTime();
+        
         this.viewModel = {
-            startDate: null,
-            endDate: null,
+            startDate: date,
+            endDate: date,
             townId: null,
             townOptions: [],
             townOptionsLoaded: false
