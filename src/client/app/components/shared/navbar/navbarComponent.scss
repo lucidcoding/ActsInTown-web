@@ -64,19 +64,11 @@
         background-color: transparent;
     }
     
-    &.navbar-unauthenticated {
-        background-color: $white;
-        
-        .navbar-header {
-            .navbar-brand {
-                color: $theme-primary;
-            }
-        }
-        
-        .nav > li > a,
-        .nav > li > a:focus {
-            color: $theme-primary;
-        }
+    .nav > li > ul > li > a {
+        text-transform: uppercase;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-base;
+        color: $white;
     }
     
     .navbar-toggle {
@@ -110,6 +102,10 @@
             color: $theme-focus;
         }
         
+        .nav > li > ul > li > a {
+            color: $theme-primary;
+        }
+    
         &.affix {
             background-color: $white;
             border-color: $gray-darker;

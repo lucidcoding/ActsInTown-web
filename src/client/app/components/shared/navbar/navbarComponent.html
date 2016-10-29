@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top affix-top" role="navigation"  *ngIf="authenticated">
+<nav class="navbar navbar-default navbar-fixed-top affix-top" role="navigation" *ngIf="authenticated">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar">
@@ -8,14 +8,23 @@
                 <span class="icon-bar"></span>
             </button>
             <a routerLink="/" routerLinkActive="active" class="navbar-brand">
-                <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo"/>
-                Acts In Town
+                <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo" /> Acts In Town
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="" routerLink="/spot/add" routerLinkActive="active">Add Spot</a></li>
-                <li><a href="" routerLink="/user/logout" routerLinkActive="active">Sign Out</a></li>
+                <li class="menu-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Spots<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="menu-item dropdown dropdown-submenu"><a href="" routerLink="/spot/add" routerLinkActive="active">Add spot</a></li>
+                        <li class="menu-item dropdown dropdown-submenu"><a href="" routerLink="/spot/list" routerLinkActive="active">My spots</a></li>
+                        <li class="menu-item dropdown dropdown-submenu"><a href="" routerLink="/spot/search-available" routerLinkActive="active">Search available</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="menu-item dropdown dropdown-submenu"><a href="" routerLink="/user/logout" routerLinkActive="active">Sign out</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -31,8 +40,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a routerLink="/" routerLinkActive="active" class="navbar-brand">
-                <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo"/>
-                Acts In Town
+                <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo" /> Acts In Town
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

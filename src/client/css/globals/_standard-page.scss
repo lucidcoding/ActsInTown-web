@@ -26,6 +26,11 @@
             margin: 0;
             font-size: $font-size-large;
             font-weight: $font-weight-bold;
+            
+            &.has-buttons {
+                float: left;
+                padding: 6px 0;
+            }
         }
         
         .col-sm-12 {

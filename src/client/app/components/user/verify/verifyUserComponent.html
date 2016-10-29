@@ -1,5 +1,16 @@
-<div class="container top-spacer">
-	<h1>Account Verified</h1>
-	<p *ngIf="verificationSuccessful">Your account has been verified.</p>
-	<p *ngIf="verificationSuccessful === false">There was a problem verifiying your account.</p>
+<div class="standard-page">
+    <div class="container row-separated">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Account Verification</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p *ngIf="verificationSuccessful">Your account has been verified.</p>
+                <a *ngIf="verificationSuccessful" href="" routerLink="/user/login" routerLinkActive="active" class="btn btn-default">Sign in</a>
+                <p *ngIf="verificationSuccessful === false">There was a problem verifiying your account.</p>
+            </div>
+        </div>
+    </div>
 </div>

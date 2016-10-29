@@ -2,7 +2,10 @@
     <div class="container row-separated">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Your Spots</h1>
+                <div class="clearfix">
+                    <h1 class="has-buttons">Your Spots</h1>
+                    <a href="" routerLink="/spot/add" routerLinkActive="active" class="btn btn-default pull-right">Add</a>
+                </div>
             </div>
         </div>
         <div class="row" *ngIf="viewModel.spots.length === 0">
