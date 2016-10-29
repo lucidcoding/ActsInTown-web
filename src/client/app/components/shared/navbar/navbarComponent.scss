@@ -78,6 +78,12 @@
             color: $theme-primary;
         }
     }
+    
+    .navbar-toggle {
+         .icon-bar {
+             background-color: $white;
+         }
+    }
 }
 
 @media (min-width: 768px) {

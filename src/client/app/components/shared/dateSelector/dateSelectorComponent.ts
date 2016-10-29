@@ -18,11 +18,10 @@ export class DateSelectorComponent implements OnInit, OnChanges {
     years: Option[];
 
     ngOnInit() {
-        this.value = new Date();
+        //this.value = new Date();
         this.days = [];
         this.months = [];
         this.years = [];
-        this.roundUpTime();
         this.day = this.value.getDate();
         this.month = this.value.getMonth();
         this.year = this.value.getFullYear();
@@ -43,15 +42,6 @@ export class DateSelectorComponent implements OnInit, OnChanges {
         }
 
         this.setDays();
-    }
-
-    roundUpTime() {
-        var date = this.value;
-        var extraMinutes = date.getMinutes() % 5;
-
-        if(extraMinutes > 0) {
-            this.value =new Date(date.getTime() + (5 - extraMinutes) * 60000); 
-        }
     }
 
     ngOnChanges(changes: any) {

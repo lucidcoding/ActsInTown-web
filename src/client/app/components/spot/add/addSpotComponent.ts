@@ -5,6 +5,7 @@ import { AddSpotRequest } from '../../../services/spot/requests/add.spot.request
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { Option } from '../../../common/option.common';
+import '../../../common/dateExtensions';
 
 @Component({
     moduleId: module.id,
@@ -18,8 +19,11 @@ export class AddSpotComponent implements OnInit {
     constructor(private spotService: SpotService,
                 private townService: TownService,
                 private router: Router) {
+        var date = new Date();
+        date = date.roundUpTime();
+        
         this.viewModel = {
-            scheduledFor: new Date(),
+            scheduledFor: date,
             durationMinutes: null,
             durationMinutesOptions: [],
             townId: null,

@@ -33,7 +33,7 @@
             padding-bottom: $standard-spacing;
         }
     
-        &.row-separated > .row > .col-sm-12:after {
+        &.row-separated > .row:not(:last-child) > .col-sm-12:after {
             content: '';
             background: $theme-primary; 
             position: absolute; 
@@ -122,7 +122,7 @@
             margin-top: $standard-spacing;
             margin-bottom: $standard-spacing;
             
-            &.row-separated > .row > .col-sm-12:after {
+            &.row-separated > .row:not(:last-child) > .col-sm-12:after {
                 left: $standard-spacing;
                 right: $standard-spacing;
             }

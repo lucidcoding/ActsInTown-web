@@ -1,25 +1,27 @@
 <div class="input-group">
-    <select [ngModel]="day" class="form-control" (change)="dayChanged($event.target.value)">
+    <select [ngModel]="day" class="form-control date-selector-day" (change)="dayChanged($event.target.value)">
         <option *ngFor="let dayOption of days" [value]="dayOption.value" [selected]="dayOption.selected">
             {{dayOption.text}}
         </option>
     </select>
-    <select [ngModel]="month" class="form-control" (change)="monthChanged($event.target.value)">
+    <select [ngModel]="month" class="form-control date-selector-month" (change)="monthChanged($event.target.value)">
         <option *ngFor="let monthOption of months" [value]="monthOption.value" [selected]="monthOption.selected">
             {{monthOption.text}}
         </option>
     </select>
-    <select [ngModel]="year" class="form-control" (change)="yearChanged($event.target.value)">
+    <select [ngModel]="year" class="form-control date-selector-year" (change)="yearChanged($event.target.value)">
         <option *ngFor="let yearOption of years" [value]="yearOption.value" [selected]="yearOption.selected">
             {{yearOption.text}}
         </option>
     </select>
-    <select [ngModel]="hour" class="form-control" (change)="hourChanged($event.target.value)">
+</div>
+<div class="input-group">
+    <select [ngModel]="hour" class="form-control date-selector-hour" (change)="hourChanged($event.target.value)">
         <option *ngFor="let hourOption of hours" [value]="hourOption.value" [selected]="hourOption.selected">
             {{hourOption.text}}
         </option>
     </select>
-    <select [ngModel]="minute" class="form-control" (change)="minuteChanged($event.target.value)">
+    <select [ngModel]="minute" class="form-control date-selector-minute" (change)="minuteChanged($event.target.value)">
         <option *ngFor="let minuteOption of minutes" [value]="minuteOption.value" [selected]="minuteOption.selected">
             {{minuteOption.text}}
         </option>

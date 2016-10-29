@@ -22,13 +22,12 @@ export class DateTimeSelectorComponent implements OnInit, OnChanges {
     minutes: Option[];
 
     ngOnInit() {
-        this.value = new Date();
+        //this.value = new Date();
         this.days = [];
         this.months = [];
         this.years = [];
         this.hours = [];
         this.minutes = [];
-        this.roundUpTime();
 
         this.day = this.value.getDate();
         this.month = this.value.getMonth();
@@ -62,15 +61,6 @@ export class DateTimeSelectorComponent implements OnInit, OnChanges {
         }
 
         this.setDays();
-    }
-
-    roundUpTime() {
-        var date = this.value;
-        var extraMinutes = date.getMinutes() % 5;
-        
-        if(extraMinutes > 0) {
-            this.value =new Date(date.getTime() + (5 - extraMinutes) * 60000); 
-        }
     }
 
     ngOnChanges(changes: any) {

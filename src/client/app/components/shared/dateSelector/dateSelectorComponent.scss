@@ -4,7 +4,7 @@
     select { 
         width: auto; 
         
-        &.date-selector-day {
+        /*&.date-selector-day {
             width: 25%;
         }
         
@@ -14,7 +14,7 @@
         
         &.date-selector-year {
             width: 30%;
-        }
+        }*/
     }
     
     select:not(:first-of-type) { 
