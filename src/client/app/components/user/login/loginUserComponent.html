@@ -10,10 +10,10 @@
 
                 <div class="container-fluid">
                     <h2>Use Facebook - Coming Soon!</h2>
-                    <p>You can connect to Acts in Town using your Facebook account</p>
+                    <p>You can connect to Acts in Town using your Facebook account.</p>
 
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
+                        <span class="input-group-addon btn-addon"><i class="fa fa-facebook"></i></span>
                         <button class="btn btn-default  btn-block form-control">
                             Login with Facebook
                         </button>
@@ -22,86 +22,55 @@
             </div>
             <div class="login-option-box">
                 <div class="container-fluid">
-                    <h2>Acts in Town</h2>
-                    <form (ngSubmit)="onSubmit(loginUserForm)" #loginUserForm="ngForm">
+                    <h2>Create Acts in Town account</h2>
+                    <form (ngSubmit)="onSubmit(loginUserForm)" #loginUserForm="ngForm" role="form" novalidate>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="email" class="form-control" placeholder="Email" />
+                                <!--<input type="email" class="form-control" placeholder="Email" />-->
+                                <input type="email" [(ngModel)]="viewModel.email" #email="ngModel" name="email" required class="form-control" maxlength="50"
+                                (ngModelChange)="clearFailedLogin()" placeholder="Email" />
+                                <div *ngIf="loginUserForm.submitted">
+                                    <div class="help-block" *ngIf="viewModel.failedLogin">
+                                        Email/password combination not recognised.
+                                    </div>
+                                    <div class="help-block" *ngIf="email.errors && email.errors.required">
+                                        Email field is required.
+                                    </div>
+                                    <div class="help-block" *ngIf="email.errors && email.errors.email">
+                                        Email field is not valid.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password" class="form-control" placeholder="Password" />
+                                <input type="password" [(ngModel)]="viewModel.password" #password="ngModel" name="password" required class="form-control"
+                                placeholder="Password" />
+                                <div *ngIf="loginUserForm.submitted">
+                                    <div class="help-block" *ngIf="password.errors && password.errors.required">
+                                        Password field is required.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <a class="btn btn-default btn-block">Login</a>
+                            <button type="submit" class="btn btn-default btn-block">Login</button>
                         </div>
                     </form>
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="#" class="">Lost your password?</a>
+                            <a href="" routerLink="/user/reset-password" routerLinkActive="active">Lost your password?</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="#">Register</a>
+                            <a href="" routerLink="/user/register" routerLinkActive="active">Register</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-    <!--<div class="container row-separated">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>Login</h1>
-            </div>
-        </div>
-        <form (ngSubmit)="onSubmit(loginUserForm)" #loginUserForm="ngForm" class="form-horizontal" role="form" novalidate>
-            <div class="form-group" [class.has-error]="loginUserForm.submitted && (!email.valid || viewModel.failedLogin)">
-                <label class="control-label col-sm-3">Email</label>
-                <div class="col-sm-6">
-                    <input type="email" [(ngModel)]="viewModel.email" #email="ngModel" name="email" required class="form-control" maxlength="50"
-                    (ngModelChange)="clearFailedLogin()" />
-                    <div *ngIf="loginUserForm.submitted">
-                        <div class="help-block" *ngIf="viewModel.failedLogin">
-                            Email/password combination not recognised.
-                        </div>
-                        <div class="help-block" *ngIf="email.errors && email.errors.required">
-                            Email field is required.
-                        </div>
-                        <div class="help-block" *ngIf="email.errors && email.errors.email">
-                            Email field is not valid.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group" [class.has-error]="loginUserForm.submitted && !password.valid">
-                <label class="control-label col-sm-3">Password</label>
-                <div class="col-sm-6">
-                    <input type="password" [(ngModel)]="viewModel.password" #password="ngModel" name="password" required class="form-control"
-                    />
-                    <div *ngIf="loginUserForm.submitted">
-                        <div class="help-block" *ngIf="password.errors && password.errors.required">
-                            Password field is required.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-primary">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>-->
 </div>
