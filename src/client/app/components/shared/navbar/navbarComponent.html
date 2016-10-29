@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top affix-top" role="navigation" *ngIf="authenticated">
     <div class="container">
         <div class="navbar-header">
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar">
+            <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
+            <!--<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar">-->
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -11,7 +12,8 @@
                 <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo" /> Acts In Town
             </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse" [class.collapse]="isCollapsed">
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-right">
                 <li class="menu-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Spots<b class="caret"></b></a>
                     <ul class="dropdown-menu">
