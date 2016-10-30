@@ -29,7 +29,8 @@ export class AddSpotComponent implements OnInit {
             townId: null,
             townOptions: [],
             townOptionsLoaded: false,
-            venueName: null
+            venueName: null,
+            description: null
         };
     }
 
@@ -79,7 +80,8 @@ export class AddSpotComponent implements OnInit {
             scheduledFor: this.viewModel.scheduledFor,
             durationMinutes: this.viewModel.durationMinutes,
             townId: this.viewModel.townId,
-            venueName: this.viewModel.venueName
+            venueName: this.viewModel.venueName,
+            description: this.viewModel.description
         };
 
         this.spotService.add(request)

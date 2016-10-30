@@ -8,4 +8,5 @@ export class AddSpotViewModel {
     townOptions: Option[];
     townOptionsLoaded: boolean;
     venueName: string;
+    description: string;
 }

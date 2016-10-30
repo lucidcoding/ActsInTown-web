@@ -3,4 +3,5 @@ export class AddSpotRequest {
     durationMinutes: number;
     townId: string;
     venueName: string;
+    description: string;
 }

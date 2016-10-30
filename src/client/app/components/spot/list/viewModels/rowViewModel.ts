@@ -4,4 +4,5 @@ export class RowViewModel {
     durationMinutes: number;
     townName: string;
     venueName: string;
+    description: string;
 }

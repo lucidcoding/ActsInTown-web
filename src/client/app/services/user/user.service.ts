@@ -6,6 +6,7 @@ import { IConfigService } from '../config/iconfig.service';
 import { ConfigServiceToken } from '../config/config.service';
 import { LoginUserRequest } from './requests/login.user.request';
 import { RegisterUserRequest } from './requests/register.user.request';
+import { EditUserRequest } from './requests/editUserRequest';
 
 //https://angular.io/docs/ts/latest/guide/server-communication.html
 //https://auth0.com/blog/angular-2-series-part-3-using-http/
@@ -32,6 +33,10 @@ export class UserService {
 	verify(verificationToken: string): Observable<any> {
 		return this.http.get(this.configService.getApiBaseUrl() + 'user/verify?verificationToken=' + verificationToken);
     }
+    
+    edit(id: string, request: EditUserRequest): Observable<any> {
+		return this.http.put(this.configService.getApiBaseUrl() + 'user/edit/' + id, request, null);
+	}
 }
 
 //export let UserServiceToken = new OpaqueToken('UserServiceToken');

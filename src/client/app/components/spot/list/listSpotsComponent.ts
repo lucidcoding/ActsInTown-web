@@ -28,7 +28,8 @@ export class ListSpotsComponent implements OnInit {
                         scheduledFor: spot.scheduledFor,
                         durationMinutes: spot.durationMinutes,
                         townName: spot.town.name,
-                        venueName: spot.venueName
+                        venueName: spot.venueName,
+                        description: spot.description
                     };
                 });
 

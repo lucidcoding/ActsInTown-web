@@ -18,7 +18,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !durationMinutes.valid">
                 <label class="control-label col-sm-3">Duration of spot:</label>
                 <div class="col-sm-6">
@@ -35,8 +34,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !townId.valid">
                 <label class="control-label col-sm-3">Town:</label>
                 <div class="col-sm-6">
@@ -53,9 +50,6 @@
                     </div>
                 </div>
             </div>
-
-
-
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !venueName.valid">
                 <label class="control-label col-sm-3">Venue:</label>
                 <div class="col-sm-6">
@@ -68,8 +62,19 @@
                     </div>
                 </div>
             </div>
-
-
+            <div class="form-group" [class.has-error]="addSpotForm.submitted && !description.valid">
+                <label class="control-label col-sm-3">Description:</label>
+                <div class="col-sm-6">
+                    <textarea [(ngModel)]="viewModel.description" #description="ngModel" name="description" class="form-control"
+                    maxlength="250" rows="5" placeholder="Brief description of the slot - who it would be suitable for, what kind of crowd etc.">
+                    </textarea>
+                    <div *ngIf="addSpotForm.submitted">
+                        <div class="help-block" *ngIf="description.errors && description.errors.maxlength">
+                            Description cannot be more than 250 characters.
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <button type="submit" class="btn btn-success">Add</button>

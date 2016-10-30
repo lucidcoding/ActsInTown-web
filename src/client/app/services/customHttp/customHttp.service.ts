@@ -33,6 +33,18 @@ export class CustomHttpService implements ICustomHttpService {
         let newOptions = new RequestOptions({ headers: headers });
         return this.http.post(url, bodyJson, newOptions);
     }
+
+    put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+        let bodyJson = JSON.stringify(body);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+
+        if (localStorage.getItem('token')) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        }
+
+        let newOptions = new RequestOptions({ headers: headers });
+        return this.http.put(url, bodyJson, newOptions);
+    }
 }
 
 export let UserServiceToken = new OpaqueToken('UserServiceToken');
