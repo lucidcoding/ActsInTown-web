@@ -4,6 +4,7 @@ import { LoggedInGuard } from './loggedInGuard';
 import { HomeComponent } from './components/home/homeComponent';
 import { AddSpotComponent } from './components/spot/add/addSpotComponent';
 import { ListSpotsComponent } from './components/spot/list/listSpotsComponent';
+import { EditUserComponent } from './components/user/edit/editUserComponent';
 import { LoginUserComponent } from './components/user/login/loginUserComponent';
 import { LogoutUserComponent } from './components/user/logout/logoutUserComponent';
 import { RegisterUserComponent } from './components/user/register/registerUserComponent';
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'spot/add', component: AddSpotComponent, canActivate: [LoggedInGuard] },
   //{ path: 'spot/add', component: AddSpotComponent },
   { path: 'spot/list', component: ListSpotsComponent, canActivate: [LoggedInGuard] },
+  { path: 'user/edit', component: EditUserComponent, canActivate: [LoggedInGuard] },
   { path: 'user/login', component: LoginUserComponent },
   { path: 'user/logout', component: LogoutUserComponent },
   { path: 'user/register', component: RegisterUserComponent },

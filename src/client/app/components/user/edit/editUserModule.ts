@@ -2,7 +2,7 @@ import { provide, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { RegisterUserComponent } from './registerUserComponent';
+import { EditUserComponent } from './editUserComponent';
 import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
@@ -12,8 +12,8 @@ import { RequiredIfValidatorDirective } from '../../../directives/required-if.di
 
 @NgModule({
     imports: [CommonModule, FormsModule, RouterModule],
-    declarations: [RegisterUserComponent, CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective],
-    exports: [RegisterUserComponent],
+    declarations: [EditUserComponent, CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective],
+    exports: [EditUserComponent],
     providers: [
         provide(ConfigServiceToken, { useClass: ConfigService }),
         UserService,
@@ -21,4 +21,4 @@ import { RequiredIfValidatorDirective } from '../../../directives/required-if.di
     ]
 })
 
-export class RegisterUserModule { }
+export class EditUserModule { }

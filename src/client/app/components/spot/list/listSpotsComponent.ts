@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListViewModel } from './viewModels/listSpotViewModel';
 import { SpotService } from '../../../services/spot/spot.service';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,7 @@ export class ListSpotsComponent implements OnInit {
     constructor(private spotService: SpotService) {
         this.viewModel = {
             spots: [],
-            spotsLoaded: false
+            spotsState: ElementState.Loading
         };
     }
 
@@ -33,9 +34,10 @@ export class ListSpotsComponent implements OnInit {
                     };
                 });
 
-                this.viewModel.spotsLoaded = true;
+                this.viewModel.spotsState = ElementState.Ready;
             },
             error => {
+                this.viewModel.spotsState = ElementState.Error;
                 console.error('Error: ' + error);
             },
             () => {

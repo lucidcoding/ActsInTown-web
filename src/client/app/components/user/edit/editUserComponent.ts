@@ -1,23 +1,24 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterUserViewModel } from './registerUserViewModel';
-import { RegisterUserRequest } from '../../../services/user/requests/register.user.request';
+import { EditUserViewModel } from './editUserViewModel';
+import { EditUserRequest } from '../../../services/user/requests/editUserRequest';
 import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
+//import { MustBeTrueValidatorDirective } from '../../../directives/must-be-true.directive';
+//import { RequiredIfValidatorDirective } from '../../../directives/required-if.directive';
 import { Option } from '../../../common/option.common';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-register-user',
-    templateUrl: 'registerUserComponent.html',
-    styleUrls: ['registerUserComponent.css']
+    selector: 'sd-edit-user',
+    templateUrl: 'editUserComponent.html',
+    styleUrls: ['editUserComponent.css']
     //,
-    //directives: [CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective]
+    //directives: [MustBeTrueValidatorDirective, RequiredIfValidatorDirective]
 })
-export class RegisterUserComponent implements OnInit {
-    viewModel: RegisterUserViewModel;
-    active: boolean;
+export class EditUserComponent implements OnInit {
+    public viewModel: EditUserViewModel;
 
     constructor(private authenticationService: AuthenticationService,
                 private router: Router,
@@ -25,12 +26,9 @@ export class RegisterUserComponent implements OnInit {
                 private userTypeService: UserTypeService) {
         
         this.viewModel = {
+            id: null,
             userTypes: null,
             userTypeSelected: false,
-            email: null,
-            alreadyRegistered: false,
-            password: null,
-            confirmPassword: null,
             firstName: null,
             lastName: null,
             stageName: null
@@ -38,6 +36,8 @@ export class RegisterUserComponent implements OnInit {
     }
 
     ngOnInit() {
+        
+        //Get current user
         this.userTypeService.get()
             .subscribe(
             response => {
@@ -51,25 +51,16 @@ export class RegisterUserComponent implements OnInit {
             () => {
                 //
             });
-
-        this.active = true;
     }
 
-    clearAlreadyRegistered() {
-        this.viewModel.alreadyRegistered = false;
-    }
-
-    onSubmit(registerUserForm: any) {
-        if (!registerUserForm.valid) {
+    onSubmit(editUserForm: any) {
+        if (!editUserForm.valid) {
             return;
         }
 
         this.authenticationService.clearToken();
         
-        var request: RegisterUserRequest = {
-            username: this.viewModel.email,
-            password: this.viewModel.password,
-            confirmPassword: this.viewModel.confirmPassword,
+        var request: EditUserRequest = {
             firstName: this.viewModel.firstName,
             lastName: this.viewModel.lastName,
             stageName: this.viewModel.stageName,
@@ -78,25 +69,16 @@ export class RegisterUserComponent implements OnInit {
                 .map(userType => { return userType.value; })
         };
 
-        this.userService.register(request)
+        this.userService.edit(this.viewModel.id, request)
             .subscribe(
             response => {
                 this.router.navigate(['user/register-success']);
             },
             error => {
-                if (error.status === 409) {
-                    this.viewModel.alreadyRegistered = true;
-                } else {
-                    console.log('Error:' + error);
-                }
+                console.log('Error:' + error)
             },
             () => {   
                 //Do nothing.
             });
     }
 }
-
-//https://angular.io/docs/ts/latest/guide/forms.html
-//https://medium.com/@daviddentoom/angular-2-form-validation-9b26f73fcb81#.v9rt96s5e
-//http://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/
-//https://vitalets.github.io/checklist-model/

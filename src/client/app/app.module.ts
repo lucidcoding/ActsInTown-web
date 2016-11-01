@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 import { HomeModule } from './components/home/homeModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
+import { EditUserModule } from './components/user/edit/editUserModule';
 import { LoginUserModule } from './components/user/login/loginUserModule';
 import { LogoutUserModule } from './components/user/logout/logoutUserModule';
 import { RegisterUserModule } from './components/user/register/registerUserModule';
