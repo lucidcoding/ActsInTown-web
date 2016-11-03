@@ -57,8 +57,6 @@ export class EditUserComponent implements OnInit {
         if (!editUserForm.valid) {
             return;
         }
-
-        this.authenticationService.clearToken();
         
         var request: EditUserRequest = {
             firstName: this.viewModel.firstName,

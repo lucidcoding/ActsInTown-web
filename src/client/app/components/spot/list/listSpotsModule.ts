@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import { ListSpotsComponent } from './listSpotsComponent';
 import { SpotService, SpotServiceToken } from '../../../services/spot/spot.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
+import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, RouterModule],
+    imports: [CommonModule, FormsModule, LoadingSpinnerModule, RouterModule],
     declarations: [ListSpotsComponent],
     exports: [ListSpotsComponent],
     providers: [

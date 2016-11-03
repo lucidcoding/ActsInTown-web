@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SearchAvailableSpotsResultsViewModel } from './viewModels/searchAvailableSpotsResultsViewModel';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +24,7 @@ export class SearchAvailableSpotsResultsComponent implements OnInit, OnDestroy {
             endDate: null,
             townName: null,
             spots: [],
-            spotsLoaded: false
+            spotsState: ElementState.Loading
         };
     }
 
@@ -47,9 +48,15 @@ export class SearchAvailableSpotsResultsComponent implements OnInit, OnDestroy {
                         };
                     });
 
-                    this.viewModel.spotsLoaded = true;
+
+                    if(this.viewModel.spots.length > 0) {
+                        this.viewModel.spotsState = ElementState.Ready;
+                    } else {
+                        this.viewModel.spotsState = ElementState.NoData;
+                    }
                 },
                 error => {
+                    this.viewModel.spotsState = ElementState.Error;
                     console.error('Error: ' + error);
                 },
                 () => {

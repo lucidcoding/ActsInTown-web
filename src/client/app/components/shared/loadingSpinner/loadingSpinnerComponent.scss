@@ -1,0 +1,13 @@
+@import "../../../../css/globals/_colors";
+
+.spinner {
+    //border: 1px red solid;
+    //display: flex;
+    //min-height: 100%;
+    width: 66px;
+    margin: auto;
+    
+    circle {
+        stroke: $theme-primary;
+    }
+}

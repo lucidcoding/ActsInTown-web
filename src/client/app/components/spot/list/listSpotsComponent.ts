@@ -34,7 +34,11 @@ export class ListSpotsComponent implements OnInit {
                     };
                 });
 
-                this.viewModel.spotsState = ElementState.Ready;
+                if(this.viewModel.spots.length > 0) {
+                    this.viewModel.spotsState = ElementState.Ready;
+                } else {
+                    this.viewModel.spotsState = ElementState.NoData;
+                }
             },
             error => {
                 this.viewModel.spotsState = ElementState.Error;
