@@ -7,9 +7,10 @@ import { SpotService } from '../../../services/spot/spot.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateSelectorModule } from '../../shared/dateSelector/dateSelectorModule';
 import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
+import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({
-    imports: [CommonModule, DateSelectorModule, FormsModule, FutureDateValidatorModule, RouterModule],
+    imports: [CommonModule, DateSelectorModule, FormsModule, FutureDateValidatorModule, LoadingSpinnerModule, RouterModule],
     declarations: [SearchAvailableSpotsResultsComponent],
     exports: [SearchAvailableSpotsResultsComponent],
     providers: [
