@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { IConfigService } from '../config/iconfig.service';
@@ -15,6 +15,7 @@ import { EditUserRequest } from './requests/editUserRequest';
 @Injectable()
 export class UserService {
 	constructor(
+            private standardHttp: Http,
 			@Inject(CustomHttpService) private http: Http,
 			@Inject(ConfigServiceToken) private configService: IConfigService) {
 	}
@@ -24,10 +25,19 @@ export class UserService {
 	}
 	
 	login(request: LoginUserRequest): Observable<any> {
-        var url = this.configService.getApiBaseUrl() + 'token?username=' + 
+        let encoded = btoa("my-trusted-client:");
+ 
+        let headers = new Headers({
+            "Authorization": "Basic " + encoded,
+            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+        });
+        
+        let options = new RequestOptions({ headers: headers });
+        
+        var url = this.configService.getApiBaseUrl() + 'oauth/token?grant_type=password&username=' + 
             encodeURIComponent(request.username) + '&password=' + encodeURIComponent(request.password);
             
-		return this.http.get(url);
+		return this.standardHttp.post(url, {}, options);
 	}
     
 	verify(verificationToken: string): Observable<any> {

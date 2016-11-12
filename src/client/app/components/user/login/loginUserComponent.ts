@@ -50,7 +50,8 @@ export class LoginUserComponent implements OnInit {
         this.userService.login(request)
             .subscribe(
             response => {
-                this.authenticationService.setToken(response._body);
+                let body = JSON.parse(response._body);
+                this.authenticationService.setToken(body.access_token);
                 this.router.navigate(['spot/list']);
             },
             error => {
