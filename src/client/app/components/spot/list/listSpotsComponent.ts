@@ -30,7 +30,8 @@ export class ListSpotsComponent implements OnInit {
                         durationMinutes: spot.durationMinutes,
                         townName: spot.town.name,
                         venueName: spot.venueName,
-                        description: spot.description
+                        description: spot.description,
+                        imageUrl: spot.user.imageUrl
                     };
                 });
 

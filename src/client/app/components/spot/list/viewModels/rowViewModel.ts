@@ -5,4 +5,5 @@ export class RowViewModel {
     townName: string;
     venueName: string;
     description: string;
+    imageUrl: string;
 }

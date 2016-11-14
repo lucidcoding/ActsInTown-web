@@ -1,8 +1,9 @@
 import { Town } from '../../town/responses/town.response';
+import { User } from '../../user/responses/user';
 
 export class Spot {
     id: string;
-    //user: User;
+    user: User;
 	scheduledFor: Date;
 	durationMinutes: number;
 	town: Town;
