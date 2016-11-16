@@ -7,6 +7,7 @@ import { ConfigServiceToken } from '../config/config.service';
 import { LoginUserRequest } from './requests/login.user.request';
 import { RegisterUserRequest } from './requests/register.user.request';
 import { EditUserRequest } from './requests/editUserRequest';
+import { User } from './responses/user';
 
 //https://angular.io/docs/ts/latest/guide/server-communication.html
 //https://auth0.com/blog/angular-2-series-part-3-using-http/
@@ -47,6 +48,11 @@ export class UserService {
     edit(id: string, request: EditUserRequest): Observable<any> {
 		return this.http.put(this.configService.getApiBaseUrl() + 'user/edit/' + id, request, null);
 	}
+    
+    getCurrent(): Observable<User> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'user/current')
+        	.map(response => response.json());
+    }
 }
 
 //export let UserServiceToken = new OpaqueToken('UserServiceToken');

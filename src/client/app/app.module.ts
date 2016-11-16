@@ -14,11 +14,15 @@ import { EditUserModule } from './components/user/edit/editUserModule';
 import { LoginUserModule } from './components/user/login/loginUserModule';
 import { LogoutUserModule } from './components/user/logout/logoutUserModule';
 import { RegisterUserModule } from './components/user/register/registerUserModule';
+import { RegisterUserSuccessModule } from './components/user/registerSuccess/registerUserSuccessModule';
 import { VerifyUserModule } from './components/user/verify/verifyUserModule';
 import { SearchAvailableSpotsModule } from './components/spot/searchAvailable/searchAvailableSpotsModule';
 import { SearchAvailableSpotsResultsModule } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsModule';
 
 
+import { CompareValidatorDirective } from './directives/compare.directive';
+import { MustBeTrueValidatorDirective } from './directives/must-be-true.directive';
+import { RequiredIfValidatorDirective } from './directives/required-if.directive';
 //import { CompareValidator } from './directives/compare.directive';
 
 
@@ -38,9 +42,11 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     HomeModule,
     AddSpotModule,
     ListSpotsModule,
+    EditUserModule,
     LoginUserModule,
     LogoutUserModule,
     RegisterUserModule,
+    RegisterUserSuccessModule,
     VerifyUserModule,
     SearchAvailableSpotsModule,
     SearchAvailableSpotsResultsModule,
@@ -50,7 +56,10 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     //,FormsModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    CompareValidatorDirective,
+    MustBeTrueValidatorDirective,
+    RequiredIfValidatorDirective
     //,
     //CompareValidator,
   ],

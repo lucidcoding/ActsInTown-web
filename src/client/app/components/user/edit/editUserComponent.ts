@@ -36,8 +36,21 @@ export class EditUserComponent implements OnInit {
     }
 
     ngOnInit() {
-        
-        //Get current user
+        this.userService.getCurrent()
+            .subscribe(
+            response => {
+                this.viewModel.id = response.id;
+                this.viewModel.firstName = response.firstName;
+                this.viewModel.lastName = response.lastName;
+                this.viewModel.stageName = response.stageName;
+            },
+            error => {
+                console.log('Error:' + error);
+            },
+            () => {
+                console.log('Done');
+            });
+            
         this.userTypeService.get()
             .subscribe(
             response => {
@@ -49,7 +62,7 @@ export class EditUserComponent implements OnInit {
                 console.log('Error:' + error);
             },
             () => {
-                //
+                console.log('Done');
             });
     }
 

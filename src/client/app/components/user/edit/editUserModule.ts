@@ -6,13 +6,10 @@ import { EditUserComponent } from './editUserComponent';
 import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
-import { CompareValidatorDirective } from '../../../directives/compare.directive';
-import { MustBeTrueValidatorDirective } from '../../../directives/must-be-true.directive';
-import { RequiredIfValidatorDirective } from '../../../directives/required-if.directive';
 
 @NgModule({
     imports: [CommonModule, FormsModule, RouterModule],
-    declarations: [EditUserComponent, CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective],
+    declarations: [EditUserComponent],
     exports: [EditUserComponent],
     providers: [
         provide(ConfigServiceToken, { useClass: ConfigService }),
