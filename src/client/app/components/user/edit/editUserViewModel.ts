@@ -2,7 +2,8 @@ import { Option } from '../../../common/option.common';
 
 export class EditUserViewModel {
     id: string;
-	userTypes: Option[];
+	userTypeOptions: Option[];
+    userTypeIds: string[];
 	userTypeSelected: boolean;
 	firstName: string;
 	lastName: string;
