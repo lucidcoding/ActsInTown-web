@@ -11,17 +11,15 @@
                 <label class="control-label col-sm-4">What type of user are you?
                     <br/>(You can be more than one)</label>
                 <div class="col-sm-6">
-                    <div class="checkbox checkbox-aligned" *ngFor="let userType of viewModel.userTypeOptions">
-                        <input type="checkbox" [checked]="userTypeIdSelected(userType.value)"
-                            (change)="selectUserType(userType.value, $event)"
-                            name="userType_{{userType.value}}" id="userType_{{userType.value}}"
+                    <div class="checkbox checkbox-aligned" *ngFor="let userType of viewModel.userTypes">
+                        <input type="checkbox" [(ngModel)]="userType.selected" name="userType_{{userType.value}}" id="userType_{{userType.value}}"
                         class="styled" />
                         <label attr.for="userType_{{userType.value}}">
                             {{userType.text}}
                         </label>
                     </div>
-                    <!--<input type="hidden" [ngModel]="viewModel.userTypes !== null && (viewModel.userTypes[0].selected || viewModel.userTypes[1].selected || viewModel.userTypes[2].selected || viewModel.userTypes[3].selected)"
-                    #type="ngModel" name="type" mustBeTrue/>-->
+                    <input type="hidden" [ngModel]="viewModel.userTypes !== null && (viewModel.userTypes[0].selected || viewModel.userTypes[1].selected || viewModel.userTypes[2].selected || viewModel.userTypes[3].selected)"
+                    #type="ngModel" name="type" mustBeTrue/>
                     <div *ngIf="editUserForm.submitted">
                         <div class="help-block" *ngIf="type.errors && type.errors.mustBeTrue">
                             One type option must be selected.
@@ -59,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" [class.has-error]="editUserForm.stageName && !stageName.valid" *ngIf="false">
+            <div class="form-group" [class.has-error]="editUserForm.stageName && !stageName.valid" *ngIf="viewModel.userTypes !== null && viewModel.userTypes[0].selected">
                 <label class="control-label col-sm-4">Stage Name</label>
                 <div class="col-sm-4">
                     <input type="text" [(ngModel)]="viewModel.stageName" #stageName="ngModel" name="stageName" class="form-control" maxlength="50"

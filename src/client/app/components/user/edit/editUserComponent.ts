@@ -27,8 +27,7 @@ export class EditUserComponent implements OnInit {
         
         this.viewModel = {
             id: null,
-            userTypeOptions: null,
-            userTypeIds: [],
+            userTypes: null,
             userTypeSelected: false,
             firstName: null,
             lastName: null,
@@ -55,9 +54,27 @@ export class EditUserComponent implements OnInit {
         this.userTypeService.get()
             .subscribe(
             response => {
-                this.viewModel.userTypeOptions = response.map(userType => {
+                this.viewModel.userTypes = response.map(userType => {
                     return new Option(userType.description, userType.id, false);
                 });
+                
+                this.userTypeService.getForCurrentUser()
+                    .subscribe(
+                    response => {
+                        response.forEach(responseUserType => {
+                            this.viewModel.userTypes.forEach(viewModelUserType => {
+                                if(responseUserType.id === viewModelUserType.value) {
+                                    viewModelUserType.selected = true;
+                                }
+                            });
+                        });
+                    },
+                    error => {
+                        console.log('Error:' + error);
+                    },
+                    () => {
+                        console.log('Done');
+                    });
             },
             error => {
                 console.log('Error:' + error);
@@ -65,32 +82,6 @@ export class EditUserComponent implements OnInit {
             () => {
                 console.log('Done');
             });
-            
-        this.userTypeService.getForCurrentUser()
-            .subscribe(
-            response => {
-                this.viewModel.userTypeIds = response.map(userType => {
-                    return userType.id;
-                });
-            },
-            error => {
-                console.log('Error:' + error);
-            },
-            () => {
-                console.log('Done');
-            });
-    }
-
-    userTypeIdSelected(userTypeId: string) {
-        return this.viewModel.userTypeIds.indexOf(userTypeId) > -1;
-    }
-    
-    selectUserType(userTypeId: any, event: any) {
-        if(event.target.checked) {
-            this.viewModel.userTypeIds.push(userTypeId);
-        } else {
-            this.viewModel.userTypeIds.splice(userTypeId, 1);
-        }
     }
     
     onSubmit(editUserForm: any) {
@@ -102,7 +93,7 @@ export class EditUserComponent implements OnInit {
             firstName: this.viewModel.firstName,
             lastName: this.viewModel.lastName,
             stageName: this.viewModel.stageName,
-            userTypeIds: this.viewModel.userTypeOptions
+            userTypeIds: this.viewModel.userTypes
                 .filter(userType => { return userType.selected; })
                 .map(userType => { return userType.value; })
         };
