@@ -98,7 +98,7 @@ export class EditUserComponent implements OnInit {
                 .map(userType => { return userType.value; })
         };
 
-        this.userService.edit(this.viewModel.id, request)
+        this.userService.editCurrent(request)
             .subscribe(
             response => {
                 this.router.navigate(['user/register-success']);

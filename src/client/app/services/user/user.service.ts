@@ -45,8 +45,8 @@ export class UserService {
 		return this.http.get(this.configService.getApiBaseUrl() + 'user/verify?verificationToken=' + verificationToken);
     }
     
-    edit(id: string, request: EditUserRequest): Observable<any> {
-		return this.http.put(this.configService.getApiBaseUrl() + 'user/edit/' + id, request, null);
+    editCurrent(request: EditUserRequest): Observable<any> {
+		return this.http.put(this.configService.getApiBaseUrl() + 'user/edit-current/', request, null);
 	}
     
     getCurrent(): Observable<User> {
