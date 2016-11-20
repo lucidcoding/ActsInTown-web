@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditUserViewModel } from './editUserViewModel';
 import { EditUserRequest } from '../../../services/user/requests/editUserRequest';
+import { ChangePasswordRequest } from '../../../services/user/requests/changePasswordRequest';
 import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
@@ -31,7 +32,10 @@ export class EditUserComponent implements OnInit {
             userTypeSelected: false,
             firstName: null,
             lastName: null,
-            stageName: null
+            stageName: null,
+            oldPassword: null,
+            newPassword: null,
+            confirmNewPassword: null
         };
     }
 
@@ -99,6 +103,30 @@ export class EditUserComponent implements OnInit {
         };
 
         this.userService.editCurrent(request)
+            .subscribe(
+            response => {
+                this.router.navigate(['user/register-success']);
+            },
+            error => {
+                console.log('Error:' + error)
+            },
+            () => {   
+                //Do nothing.
+            });
+    }
+    
+    changePassword(changePasswordForm: any) {
+        if (!changePasswordForm.valid) {
+            return;
+        }
+        
+        var request: ChangePasswordRequest = {
+            oldPassword: this.viewModel.oldPassword,
+            newPassword: this.viewModel.newPassword,
+            confirmNewPassword: this.viewModel.confirmNewPassword
+        }
+        
+        this.userService.changePassword(request)
             .subscribe(
             response => {
                 this.router.navigate(['user/register-success']);
