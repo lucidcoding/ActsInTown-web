@@ -11,6 +11,7 @@ import { HomeModule } from './components/home/homeModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
 import { EditUserModule } from './components/user/edit/editUserModule';
+import { InitializePasswordResetModule } from './components/user/initializePasswordReset/initializePasswordResetModule';
 import { LoginUserModule } from './components/user/login/loginUserModule';
 import { LogoutUserModule } from './components/user/logout/logoutUserModule';
 import { RegisterUserModule } from './components/user/register/registerUserModule';
@@ -37,12 +38,12 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(routes),
     AboutModule,
     HomeModule,
     AddSpotModule,
     ListSpotsModule,
     EditUserModule,
+    InitializePasswordResetModule,
     LoginUserModule,
     LogoutUserModule,
     RegisterUserModule,
@@ -52,8 +53,9 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     SearchAvailableSpotsResultsModule,
     //DateSelectorModule,
     //SharedModule.forRoot(),
-    NavbarModule
+    NavbarModule,
     //,FormsModule
+    RouterModule.forRoot(routes),
   ],
   declarations: [
     AppComponent,

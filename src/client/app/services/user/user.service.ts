@@ -8,6 +8,7 @@ import { LoginUserRequest } from './requests/login.user.request';
 import { RegisterUserRequest } from './requests/register.user.request';
 import { EditUserRequest } from './requests/editUserRequest';
 import { ChangePasswordRequest } from './requests/changePasswordRequest';
+import { InitializePasswordResetRequest } from './requests/initializePasswordResetRequest';
 import { User } from './responses/user';
 
 //https://angular.io/docs/ts/latest/guide/server-communication.html
@@ -58,6 +59,10 @@ export class UserService {
     changePassword(request: ChangePasswordRequest): Observable<any> {
 		return this.http.put(this.configService.getApiBaseUrl() + 'user/change-password/', request, null);
 	}
+    
+    initializePasswordReset(request: InitializePasswordResetRequest): Observable<any> {
+		return this.http.put(this.configService.getApiBaseUrl() + 'user/initialize-password-reset/', request, null);
+    }
 }
 
 //export let UserServiceToken = new OpaqueToken('UserServiceToken');
