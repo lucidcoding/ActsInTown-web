@@ -56,7 +56,7 @@ export class SearchAvailableSpotsResultsComponent implements OnInit, OnDestroy {
                     }
                 },
                 error => {
-                    this.viewModel.spotsState = ElementState.Error;
+                    this.viewModel.spotsState = ElementState.LoadingError;
                     console.error('Error: ' + error);
                 },
                 () => {

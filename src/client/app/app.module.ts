@@ -16,6 +16,7 @@ import { LoginUserModule } from './components/user/login/loginUserModule';
 import { LogoutUserModule } from './components/user/logout/logoutUserModule';
 import { RegisterUserModule } from './components/user/register/registerUserModule';
 import { RegisterUserSuccessModule } from './components/user/registerSuccess/registerUserSuccessModule';
+import { ResetPasswordModule } from './components/user/resetPassword/resetPasswordModule';
 import { VerifyUserModule } from './components/user/verify/verifyUserModule';
 import { SearchAvailableSpotsModule } from './components/spot/searchAvailable/searchAvailableSpotsModule';
 import { SearchAvailableSpotsResultsModule } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsModule';
@@ -48,6 +49,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     LogoutUserModule,
     RegisterUserModule,
     RegisterUserSuccessModule,
+    ResetPasswordModule,
     VerifyUserModule,
     SearchAvailableSpotsModule,
     SearchAvailableSpotsResultsModule,

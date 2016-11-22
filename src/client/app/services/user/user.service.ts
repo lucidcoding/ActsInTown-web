@@ -9,6 +9,7 @@ import { RegisterUserRequest } from './requests/register.user.request';
 import { EditUserRequest } from './requests/editUserRequest';
 import { ChangePasswordRequest } from './requests/changePasswordRequest';
 import { InitializePasswordResetRequest } from './requests/initializePasswordResetRequest';
+import { ResetPasswordRequest } from './requests/resetPasswordRequest';
 import { User } from './responses/user';
 
 //https://angular.io/docs/ts/latest/guide/server-communication.html
@@ -62,6 +63,10 @@ export class UserService {
     
     initializePasswordReset(request: InitializePasswordResetRequest): Observable<any> {
 		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/initialize-password-reset', request, null);
+    }
+    
+    resetPassword(request: ResetPasswordRequest): Observable<any> {
+		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/reset-password', request, null);
     }
 }
 

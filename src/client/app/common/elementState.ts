@@ -1,6 +1,8 @@
 export enum ElementState {
     Loading = 0,
-    Error = 1,
+    LoadingError = 1,
     NoData = 2,
-    Ready = 3
+    Ready = 3,
+    Submitted = 4,
+    SubmissionError = 5
 }

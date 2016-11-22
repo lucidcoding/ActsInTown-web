@@ -10,6 +10,7 @@ import { LoginUserComponent } from './components/user/login/loginUserComponent';
 import { LogoutUserComponent } from './components/user/logout/logoutUserComponent';
 import { RegisterUserComponent } from './components/user/register/registerUserComponent';
 import { RegisterUserSuccessComponent } from './components/user/registerSuccess/registerUserSuccessComponent';
+import { ResetPasswordComponent } from './components/user/resetPassword/resetPasswordComponent';
 import { VerifyUserComponent } from './components/user/verify/verifyUserComponent';
 import { SearchAvailableSpotsComponent } from './components/spot/searchAvailable/searchAvailableSpotsComponent';
 import { SearchAvailableSpotsResultsComponent } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsComponent';
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'user/logout', component: LogoutUserComponent },
   { path: 'user/register', component: RegisterUserComponent },
   { path: 'user/register-success', component: RegisterUserSuccessComponent },
+  { path: 'user/reset-password/:passwordResetToken', component: ResetPasswordComponent },
   { path: 'user/verify/:verificationToken', component: VerifyUserComponent },
   //{ path: 'spot/search-available', component: SearchAvailableSpotsComponent, canActivate: [LoggedInGuard] },
   { path: 'spot/search-available', component: SearchAvailableSpotsComponent },
