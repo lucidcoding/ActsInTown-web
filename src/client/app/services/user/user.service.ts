@@ -61,7 +61,7 @@ export class UserService {
 	}
     
     initializePasswordReset(request: InitializePasswordResetRequest): Observable<any> {
-		return this.http.put(this.configService.getApiBaseUrl() + 'user/initialize-password-reset/', request, null);
+		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/initialize-password-reset', request, null);
     }
 }
 
