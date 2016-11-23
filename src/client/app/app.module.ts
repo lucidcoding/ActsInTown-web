@@ -22,10 +22,13 @@ import { SearchAvailableSpotsModule } from './components/spot/searchAvailable/se
 import { SearchAvailableSpotsResultsModule } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsModule';
 
 
-import { CompareValidatorDirective } from './directives/compare.directive';
-import { MustBeTrueValidatorDirective } from './directives/must-be-true.directive';
-import { RequiredIfValidatorDirective } from './directives/required-if.directive';
+//import { CompareValidatorDirective } from './directives/compareValidator/compareValidatorDirective';
+//import { MustBeTrueValidatorDirective } from './directives/must-be-true.directive';
+//import { RequiredIfValidatorDirective } from './directives/required-if.directive';
 //import { CompareValidator } from './directives/compare.directive';
+
+
+import { CompareValidatorModule } from './directives/compareValidator/compareValidatorModule';
 
 
 import { AboutModule } from './+about/about.module';
@@ -58,12 +61,13 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     NavbarModule,
     //,FormsModule
     RouterModule.forRoot(routes),
+    CompareValidatorModule
   ],
   declarations: [
     AppComponent,
-    CompareValidatorDirective,
-    MustBeTrueValidatorDirective,
-    RequiredIfValidatorDirective
+    //CompareValidatorDirective,
+    //MustBeTrueValidatorDirective,
+    //RequiredIfValidatorDirective
     //,
     //CompareValidator,
   ],

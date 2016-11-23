@@ -6,7 +6,7 @@ import { SearchAvailableSpotsComponent } from './searchAvailableSpotsComponent';
 import { SpotService } from '../../../services/spot/spot.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateSelectorModule } from '../../shared/dateSelector/dateSelectorModule';
-import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
+import { FutureDateValidatorModule } from '../../../directives/futureDateValidator/futureDateValidatorModule';
 
 @NgModule({
     imports: [CommonModule, DateSelectorModule, FormsModule, FutureDateValidatorModule, RouterModule],

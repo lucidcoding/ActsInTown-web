@@ -6,9 +6,12 @@ import { RegisterUserComponent } from './registerUserComponent';
 import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
+import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
+import { MustBeTrueValidatorModule } from '../../../directives/mustBeTrueValidator/mustBeTrueValidatorModule';
+import { RequiredIfValidatorModule } from '../../../directives/requiredIfValidator/requiredIfValidatorModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, RouterModule],
+    imports: [CommonModule, CompareValidatorModule, FormsModule, MustBeTrueValidatorModule, RequiredIfValidatorModule, RouterModule],
     declarations: [RegisterUserComponent],
     exports: [RegisterUserComponent],
     providers: [

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FutureDateValidatorDirective } from './futureDate.directive';
+import { FutureDateValidatorDirective } from './futureDateValidatorDirective';
 
 @NgModule({
     imports: [],

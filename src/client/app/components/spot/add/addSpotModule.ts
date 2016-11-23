@@ -7,7 +7,7 @@ import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateTimeSelectorModule } from '../../shared/dateTimeSelector/dateTimeSelectorModule';
-import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
+import { FutureDateValidatorModule } from '../../../directives/futureDateValidator/futureDateValidatorModule';
 
 @NgModule({
     imports: [CommonModule, DateTimeSelectorModule, FormsModule, FutureDateValidatorModule, RouterModule ],

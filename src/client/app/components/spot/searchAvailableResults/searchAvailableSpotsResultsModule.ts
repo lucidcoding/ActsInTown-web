@@ -6,7 +6,7 @@ import { SearchAvailableSpotsResultsComponent } from './searchAvailableSpotsResu
 import { SpotService } from '../../../services/spot/spot.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateSelectorModule } from '../../shared/dateSelector/dateSelectorModule';
-import { FutureDateValidatorModule } from '../../../directives/futureDateValidatorModule';
+import { FutureDateValidatorModule } from '../../../directives/futureDateValidator/futureDateValidatorModule';
 import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({

@@ -6,14 +6,15 @@ import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
 import { Option } from '../../../common/option.common';
+//import { CompareValidatorDirective } from '../../../directives/compareValidator/compareValidatorDirective';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-register-user',
+    selector: 'sd-register-user', 
     templateUrl: 'registerUserComponent.html',
     styleUrls: ['registerUserComponent.css']
     //,
-    //directives: [CompareValidatorDirective, MustBeTrueValidatorDirective, RequiredIfValidatorDirective]
+    //directives: [CompareValidatorDirective]
 })
 export class RegisterUserComponent implements OnInit {
     viewModel: RegisterUserViewModel;
