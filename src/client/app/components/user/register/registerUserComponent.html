@@ -52,7 +52,7 @@
                 <label class="control-label col-sm-4">Password</label>
                 <div class="col-sm-4">
                     <input type="password" [(ngModel)]="viewModel.password" #password="ngModel" name="password" required class="form-control"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)\S{6,15}$" compare="confirmPassword" compare-reverse="true"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W)\S{6,15}$" compare="confirmPassword" compareReverse="true"
                     />
                     <div *ngIf="registerUserForm.submitted">
                         <div class="help-block" *ngIf="password.errors && password.errors.required">
