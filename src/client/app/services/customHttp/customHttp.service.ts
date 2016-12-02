@@ -1,21 +1,20 @@
 import { Inject, Injectable, OpaqueToken } from '@angular/core';
 import { Http, RequestOptionsArgs, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { ICustomHttpService } from './icustomhttp.service';
 
 //http://stackoverflow.com/questions/35498456/what-is-httpinterceptor-equivalent-in-angular2
 //https://www.illucit.com/blog/2016/03/angular2-http-authentication-interceptor/
 
 @Injectable()
-export class CustomHttpService implements ICustomHttpService {
+export class CustomHttpService {
     constructor( @Inject(Http) private http: Http) {
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         let headers = new Headers();
 
-        if (localStorage.getItem('token')) {
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        if (localStorage.getItem('accessToken')) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
         }
 
         let newOptions = new RequestOptions({ headers: headers });
@@ -26,8 +25,8 @@ export class CustomHttpService implements ICustomHttpService {
         let bodyJson = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
 
-        if (localStorage.getItem('token')) {
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        if (localStorage.getItem('accessToken')) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
         }
 
         let newOptions = new RequestOptions({ headers: headers });
@@ -38,8 +37,8 @@ export class CustomHttpService implements ICustomHttpService {
         let bodyJson = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
 
-        if (localStorage.getItem('token')) {
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        if (localStorage.getItem('accessToken')) {
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
         }
 
         let newOptions = new RequestOptions({ headers: headers });

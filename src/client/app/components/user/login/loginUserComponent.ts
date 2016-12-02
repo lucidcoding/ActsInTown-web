@@ -51,7 +51,7 @@ export class LoginUserComponent implements OnInit {
             .subscribe(
             response => {
                 let body = JSON.parse(response._body);
-                this.authenticationService.setToken(body.access_token);
+                this.authenticationService.setToken(body.access_token, body.refresh_token);
                 this.router.navigate(['spot/list']);
             },
             error => {

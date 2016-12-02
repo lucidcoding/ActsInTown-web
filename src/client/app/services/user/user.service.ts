@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CustomHttpService } from '../customHttp/customHttp.service';
-import { IConfigService } from '../config/iconfig.service';
-import { ConfigServiceToken } from '../config/config.service';
+import { ConfigService } from '../config/config.service';
 import { LoginUserRequest } from './requests/login.user.request';
 import { RegisterUserRequest } from './requests/register.user.request';
 import { EditUserRequest } from './requests/editUserRequest';
@@ -20,8 +19,8 @@ import { User } from './responses/user';
 export class UserService {
 	constructor(
             private standardHttp: Http,
-			@Inject(CustomHttpService) private http: Http,
-			@Inject(ConfigServiceToken) private configService: IConfigService) {
+			private http: CustomHttpService,
+			private configService: ConfigService) {
 	}
 
 	register(request: RegisterUserRequest): Observable<any> {

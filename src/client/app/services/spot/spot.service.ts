@@ -2,8 +2,7 @@ import { Inject, Injectable, OpaqueToken } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
-import { IConfigService } from '../config/iconfig.service';
-import { ConfigServiceToken } from '../config/config.service';
+import { ConfigService } from '../config/config.service';
 import { ISpotService } from './ispot.service';
 import { AddSpotRequest } from './requests/add.spot.request';
 import { Spot } from './responses/spot.response';
@@ -14,8 +13,8 @@ import { Spot } from './responses/spot.response';
 @Injectable()
 export class SpotService implements ISpotService {
 	constructor(
-			@Inject(CustomHttpService) private http: Http,
-			@Inject(ConfigServiceToken) private configService: IConfigService) {
+			private http: CustomHttpService,
+			private configService: ConfigService) {
 	}
 
 	add(request: AddSpotRequest): Observable<any> {

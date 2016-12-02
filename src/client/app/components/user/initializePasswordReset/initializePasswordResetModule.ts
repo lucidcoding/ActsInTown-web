@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InitializePasswordResetComponent } from './initializePasswordResetComponent';
-import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
+import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 

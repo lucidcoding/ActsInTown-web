@@ -1,16 +1,15 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { IConfigService } from '../config/iconfig.service';
-import { ConfigServiceToken } from '../config/config.service';
+import { ConfigService } from '../config/config.service';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { UserType } from './responses/userType.response';
 
 @Injectable()
 export class UserTypeService {
 	constructor( 
-			@Inject(CustomHttpService) private http: Http,
-			@Inject(ConfigServiceToken) private configService: IConfigService) {
+			private http: CustomHttpService,
+			private configService: ConfigService) {
 	}
 
 	get(): Observable<UserType[]> {

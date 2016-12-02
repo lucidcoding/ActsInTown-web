@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EditUserComponent } from './editUserComponent';
-import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
+import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
 
@@ -12,7 +12,7 @@ import { UserTypeService } from '../../../services/userType/userType.service';
     declarations: [EditUserComponent],
     exports: [EditUserComponent],
     providers: [
-        provide(ConfigServiceToken, { useClass: ConfigService }),
+        ConfigService,
         UserService,
         UserTypeService
     ]
