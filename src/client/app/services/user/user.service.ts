@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
@@ -18,8 +18,8 @@ import { User } from './responses/user';
 @Injectable()
 export class UserService {
 	constructor(
-            private standardHttp: Http,
 			private http: CustomHttpService,
+            private standardHttp: Http,
 			private configService: ConfigService) {
 	}
 
@@ -68,5 +68,3 @@ export class UserService {
 		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/reset-password', request, null);
     }
 }
-
-//export let UserServiceToken = new OpaqueToken('UserServiceToken');

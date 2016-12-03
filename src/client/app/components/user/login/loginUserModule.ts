@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginUserComponent } from './loginUserComponent';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
-//import { ConfigService, ConfigServiceToken } from '../../../services/config/config.service';
+import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { UserService } from '../../../services/user/user.service';
     exports: [LoginUserComponent],
     providers: [
         AuthenticationService,
-        //provide(ConfigServiceToken, { useClass: ConfigService }),
+        ConfigService,
         UserService
     ]
 })

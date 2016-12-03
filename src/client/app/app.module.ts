@@ -35,6 +35,7 @@ import { AboutModule } from './+about/about.module';
 
 import { LoggedInGuard } from './loggedInGuard';
 import { AuthenticationService } from './services/authentication/authentication.service';
+import { CustomHttpService } from './services/customHttp/customHttp.service';
 
 import { NavbarModule } from './components/shared/navbar/navbarModule';
  
@@ -76,7 +77,9 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
         useValue: '<%= APP_BASE %>'
     }, 
     LoggedInGuard,
-    AuthenticationService],
+    AuthenticationService,
+    CustomHttpService
+  ],
   bootstrap: [AppComponent]
 })
 

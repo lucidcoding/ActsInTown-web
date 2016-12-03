@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ListSpotsComponent } from './listSpotsComponent';
 import { SpotService, SpotServiceToken } from '../../../services/spot/spot.service';
-import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({
@@ -12,8 +11,7 @@ import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinner
     declarations: [ListSpotsComponent],
     exports: [ListSpotsComponent],
     providers: [
-        provide(SpotServiceToken, { useClass: SpotService }),
-        CustomHttpService]
+        provide(SpotServiceToken, { useClass: SpotService })]
 })
 
 export class ListSpotsModule { }
