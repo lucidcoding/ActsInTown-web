@@ -3,6 +3,7 @@ import { Http, RequestOptionsArgs, Response, RequestOptions, Headers } from '@an
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../config/config.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 //http://stackoverflow.com/questions/35498456/what-is-httpinterceptor-equivalent-in-angular2
 //https://www.illucit.com/blog/2016/03/angular2-http-authentication-interceptor/
@@ -10,15 +11,13 @@ import { ConfigService } from '../config/config.service';
 @Injectable()
 export class CustomHttpService {
     constructor( 
-        @Inject(Http) private http: Http,
-        private router: Router) {
+        private http: Http,
+        private router: Router,
+        private configService: ConfigService,
+        private authenticationService: AuthenticationService) {
     }
 
-    getApiBaseUrl(): string {
-		return 'https://localhost:8443/ActsInTown-api/';
-	}
-    
-    refresh(): Observable<Response> {
+    /*refresh(): Observable<Response> {
         let encoded = btoa("my-trusted-client:");
  
         let headers = new Headers({
@@ -28,11 +27,11 @@ export class CustomHttpService {
         
         let options = new RequestOptions({ headers: headers });
         
-        var url = this.getApiBaseUrl() + 'oauth/token?grant_type=refresh_token&refresh_token=' + 
+        var url = this.configService.getApiBaseUrl() + 'oauth/token?grant_type=refresh_token&refresh_token=' + 
             localStorage.getItem('refreshToken');
             
 		return this.http.post(url, {}, options);
-    }
+    }*/
     
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         let headers = new Headers();
@@ -50,7 +49,7 @@ export class CustomHttpService {
                     //http://stackoverflow.com/questions/38999235/angular2-rest-request-http-status-code-401-changes-to-0
                     
                     // token might be expired, try to refresh token
-                    return this.refresh()
+                    return this.authenticationService.refresh()
                         .flatMap(refreshResult => {
                             let body = JSON.parse(refreshResult._body);
                             localStorage.setItem('accessToken', body.access_token);

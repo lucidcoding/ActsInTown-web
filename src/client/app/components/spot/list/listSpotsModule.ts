@@ -11,7 +11,7 @@ import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinner
     declarations: [ListSpotsComponent],
     exports: [ListSpotsComponent],
     providers: [
-        provide(SpotServiceToken, { useClass: SpotService })]
+        SpotService]
 })
 
 export class ListSpotsModule { }
