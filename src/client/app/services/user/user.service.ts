@@ -3,7 +3,6 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
-import { LoginUserRequest } from './requests/login.user.request';
 import { RegisterUserRequest } from './requests/register.user.request';
 import { EditUserRequest } from './requests/editUserRequest';
 import { ChangePasswordRequest } from './requests/changePasswordRequest';
@@ -25,23 +24,7 @@ export class UserService {
 
 	register(request: RegisterUserRequest): Observable<any> {
 		return this.http.post(this.configService.getApiBaseUrl() + 'user/register', request, null);
-	}
-	
-	login(request: LoginUserRequest): Observable<any> {
-        let encoded = btoa("my-trusted-client:");
- 
-        let headers = new Headers({
-            "Authorization": "Basic " + encoded,
-            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        });
-        
-        let options = new RequestOptions({ headers: headers });
-        
-        var url = this.configService.getApiBaseUrl() + 'oauth/token?grant_type=password&username=' + 
-            encodeURIComponent(request.username) + '&password=' + encodeURIComponent(request.password);
-            
-		return this.standardHttp.post(url, {}, options);
-	}
+    }
     
 	verify(verificationToken: string): Observable<any> {
 		return this.http.get(this.configService.getApiBaseUrl() + 'user/verify?verificationToken=' + verificationToken);

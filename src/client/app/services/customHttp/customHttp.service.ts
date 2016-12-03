@@ -17,31 +17,50 @@ export class CustomHttpService {
         private authenticationService: AuthenticationService) {
     }
 
-    /*refresh(): Observable<Response> {
-        let encoded = btoa("my-trusted-client:");
- 
-        let headers = new Headers({
-            "Authorization": "Basic " + encoded,
-            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
-        });
+    private addAuthenticationHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
+        if (options == null) {
+            options = new RequestOptions();
+        }
         
-        let options = new RequestOptions({ headers: headers });
+        if (options.headers == null) {
+            options.headers = new Headers();
+        }
         
-        var url = this.configService.getApiBaseUrl() + 'oauth/token?grant_type=refresh_token&refresh_token=' + 
-            localStorage.getItem('refreshToken');
-            
-		return this.http.post(url, {}, options);
-    }*/
+        //options.headers.append('Content-Type', 'application/json');
+        options.headers.delete('Authorization');
+        
+        if (localStorage.getItem('accessToken')) {
+            options.headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+        }
+        
+        return options;
+    }
+    
+    private addContentTypeHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
+        if (options == null) {
+            options = new RequestOptions();
+        }
+        
+        if (options.headers == null) {
+            options.headers = new Headers();
+        }
+        
+        options.headers.append('Content-Type', 'application/json');
+
+        return options;
+    }
     
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        let headers = new Headers();
+        /*let headers = new Headers();
 
         if (localStorage.getItem('accessToken')) {
             headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
         }
 
-        let newOptions = new RequestOptions({ headers: headers });
-        return this.http.get(url, newOptions)
+        let newOptions = new RequestOptions({ headers: headers });*/
+        options = this.addAuthenticationHeaders(options);
+        
+        return this.http.get(url, options)
             .catch((initialError: Response) => {
                 
                 if (initialError && initialError.status === 401) { // && isSecureCall === true) {
@@ -54,16 +73,10 @@ export class CustomHttpService {
                             let body = JSON.parse(refreshResult._body);
                             localStorage.setItem('accessToken', body.access_token);
                             localStorage.setItem('refreshToken', body.refresh_token);
-                            
-                            
-                            let headers = new Headers();
-
-                            if (localStorage.getItem('accessToken')) {
-                                headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-                            }
-                    
-                            let newOptions = new RequestOptions({ headers: headers });
-                            return this.http.get(url, newOptions)
+                
+                            //options = null;
+                            options = this.addAuthenticationHeaders(options);
+                            return this.http.get(url, options)
                             
                             
                             
@@ -92,14 +105,16 @@ export class CustomHttpService {
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
         let bodyJson = JSON.stringify(body);
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        options = this.addAuthenticationHeaders(options);
+        options = this.addContentTypeHeaders(options);
+        /*let headers = new Headers({ 'Content-Type': 'application/json' });
 
         if (localStorage.getItem('accessToken')) {
             headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
         }
 
-        let newOptions = new RequestOptions({ headers: headers });
-        return this.http.post(url, bodyJson, newOptions);
+        let newOptions = new RequestOptions({ headers: headers });*/
+        return this.http.post(url, bodyJson, options);
     }
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {

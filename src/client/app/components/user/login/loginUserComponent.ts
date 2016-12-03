@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginUserViewModel } from './loginUserViewModel';
-import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
+import { LoginRequest } from '../../../services/authentication/requests/loginRequest';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -41,13 +41,13 @@ export class LoginUserComponent implements OnInit {
             return;
         }
 
-        var request: LoginUserRequest = {
+        var request: LoginRequest = {
             username: this.viewModel.email,
             password: this.viewModel.password,
             rememberMe: this.viewModel.rememberMe
         };
 
-        this.userService.login(request)
+        this.authenticationService.login(request)
             .subscribe(
             response => {
                 let body = JSON.parse(response._body);
