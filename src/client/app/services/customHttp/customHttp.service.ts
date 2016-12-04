@@ -54,14 +54,14 @@ export class CustomHttpService {
                 if (initialError && initialError.status === 401) {
                     return this.authenticationService.refresh()
                         .flatMap(refreshResult => {
-                            let body = JSON.parse(refreshResult._body);
+                            let body = JSON.parse((<any> refreshResult)._body);
                             localStorage.setItem('accessToken', body.access_token);
                             localStorage.setItem('refreshToken', body.refresh_token);
-                
                             options = this.addAuthenticationHeaders(options);
                             return this.http.request(url, options)
                         })
                         .catch((refreshError: Response) => {
+                            this.router.navigate(['user/login']);
                             return Observable.throw(refreshError);
                         });
                 }
@@ -75,26 +75,6 @@ export class CustomHttpService {
         options = this.addAuthenticationHeaders(options);
         options.method = 'get';
         return this.request(url, options);
-        /*return this.http.get(url, options)
-            .catch((initialError: Response) => {
-                if (initialError && initialError.status === 401) {
-                    return this.authenticationService.refresh()
-                        .flatMap(refreshResult => {
-                            let body = JSON.parse(refreshResult._body);
-                            localStorage.setItem('accessToken', body.access_token);
-                            localStorage.setItem('refreshToken', body.refresh_token);
-                
-                            options = this.addAuthenticationHeaders(options);
-                            return this.http.get(url, options)
-                        })
-                        .catch((refreshError: Response) => {
-                            return Observable.throw(refreshError);
-                        });
-                }
-                else {
-                    return Observable.throw(initialError);
-                }
-            });*/
     }
 
     post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
@@ -112,5 +92,3 @@ export class CustomHttpService {
         return this.http.put(url, bodyJson, options);
     }
 }
-
-export let UserServiceToken = new OpaqueToken('UserServiceToken');

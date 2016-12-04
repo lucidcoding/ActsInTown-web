@@ -1,9 +1,8 @@
 import { Inject, Injectable, OpaqueToken } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
-import { ISpotService } from './ispot.service';
 import { AddSpotRequest } from './requests/add.spot.request';
 import { Spot } from './responses/spot.response';
 
@@ -11,13 +10,13 @@ import { Spot } from './responses/spot.response';
 //http://stackoverflow.com/questions/35498456/what-is-httpinterceptor-equivalent-in-angular2
 
 @Injectable()
-export class SpotService implements ISpotService {
+export class SpotService {
 	constructor(
 			private http: CustomHttpService,
 			private configService: ConfigService) {
 	}
 
-	add(request: AddSpotRequest): Observable<any> {
+	add(request: AddSpotRequest): Observable<Response> {
 		return this.http.post(this.configService.getApiBaseUrl() + 'spot', request, null);
 	}
     
@@ -35,5 +34,3 @@ export class SpotService implements ISpotService {
         	.map(response => response.json());
     }
 }
-
-export let SpotServiceToken = new OpaqueToken('SpotServiceToken');

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ListSpotsComponent } from './listSpotsComponent';
-import { SpotService, SpotServiceToken } from '../../../services/spot/spot.service';
+import { SpotService } from '../../../services/spot/spot.service';
 import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({
@@ -11,7 +11,8 @@ import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinner
     declarations: [ListSpotsComponent],
     exports: [ListSpotsComponent],
     providers: [
-        SpotService]
+        SpotService
+    ]
 })
 
 export class ListSpotsModule { }

@@ -3,11 +3,10 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
-import { ITownService } from './itown.service';
 import { Town } from './responses/town.response';
 
 @Injectable()
-export class TownService implements ITownService {
+export class TownService {
 	constructor( 
 			private http: CustomHttpService,
 			private configService: ConfigService) {
@@ -18,5 +17,3 @@ export class TownService implements ITownService {
         	.map(response => response.json());
 	}
 }
-
-export let TownServiceToken = new OpaqueToken('TownServiceToken');

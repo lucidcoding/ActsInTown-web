@@ -32,7 +32,7 @@ export class AuthenticationService {
         return localStorage.getItem(this.accessTokenKey) !== null;
     }
     
-	login(request: LoginRequest): Observable<any> {
+	login(request: LoginRequest): Observable<Response> {
         let encoded = btoa("my-trusted-client:");
  
         let headers = new Headers({

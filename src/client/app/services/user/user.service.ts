@@ -22,15 +22,15 @@ export class UserService {
 			private configService: ConfigService) {
 	}
 
-	register(request: RegisterUserRequest): Observable<any> {
+	register(request: RegisterUserRequest): Observable<Response> {
 		return this.http.post(this.configService.getApiBaseUrl() + 'user/register', request, null);
     }
     
-	verify(verificationToken: string): Observable<any> {
+	verify(verificationToken: string): Observable<Response> {
 		return this.http.get(this.configService.getApiBaseUrl() + 'user/verify?verificationToken=' + verificationToken);
     }
     
-    editCurrent(request: EditUserRequest): Observable<any> {
+    editCurrent(request: EditUserRequest): Observable<Response> {
 		return this.http.put(this.configService.getApiBaseUrl() + 'user/edit-current/', request, null);
 	}
     
@@ -39,15 +39,15 @@ export class UserService {
         	.map(response => response.json());
     }
     
-    changePassword(request: ChangePasswordRequest): Observable<any> {
+    changePassword(request: ChangePasswordRequest): Observable<Response> {
 		return this.http.put(this.configService.getApiBaseUrl() + 'user/change-password/', request, null);
 	}
     
-    initializePasswordReset(request: InitializePasswordResetRequest): Observable<any> {
+    initializePasswordReset(request: InitializePasswordResetRequest): Observable<Response> {
 		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/initialize-password-reset', request, null);
     }
     
-    resetPassword(request: ResetPasswordRequest): Observable<any> {
+    resetPassword(request: ResetPasswordRequest): Observable<Response> {
 		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/reset-password', request, null);
     }
 }
