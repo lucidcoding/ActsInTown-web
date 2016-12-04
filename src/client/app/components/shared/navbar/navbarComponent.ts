@@ -22,7 +22,7 @@ export class NavbarComponent {
         this.authenticated = this.authenticationService.isLoggedIn();
         this.isCollapsed = true;
         
-        this.authenticationService.authenticatedStateChanged$.subscribe(isAuthenticated => {
+        this.authenticationService.authenticatedStateChanged$.subscribe((isAuthenticated: boolean) => {
             this.authenticated = isAuthenticated;
         });
         
