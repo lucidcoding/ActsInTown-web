@@ -10,6 +10,7 @@ import { routes } from './app.routes';
 import { HomeModule } from './components/home/homeModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
+import { ChangePasswordModule } from './components/user/changePassword/changePasswordModule';
 import { EditUserModule } from './components/user/edit/editUserModule';
 import { InitializePasswordResetModule } from './components/user/initializePasswordReset/initializePasswordResetModule';
 import { LoginUserModule } from './components/user/login/loginUserModule';
@@ -47,6 +48,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     HomeModule,
     AddSpotModule,
     ListSpotsModule,
+    ChangePasswordModule,
     EditUserModule,
     InitializePasswordResetModule,
     LoginUserModule,
