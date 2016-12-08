@@ -13,7 +13,7 @@ import { UserService} from '../../../services/user/user.service';
 })
 export class ChangePasswordComponent implements OnInit {
     public changePasswordForm: FormGroup;
-    
+    public changePasswordFormSubmitted: boolean;
     public viewModel: ChangePasswordViewModel;
 
     constructor(private formBuilder: FormBuilder,
@@ -27,13 +27,22 @@ export class ChangePasswordComponent implements OnInit {
     ngOnInit() {
         this.changePasswordForm = new FormGroup({
             oldPassword: new FormControl('', Validators.required),
-            newPassword: new FormControl(),
-            confirmNewPassword: new FormControl()
+            newPassword: new FormControl('', [
+                Validators.required, 
+                Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)\\S{6,15}')
+            ]),
+            confirmNewPassword: new FormControl('', [
+                Validators.required
+            ])
         });
+        
+        this.changePasswordFormSubmitted = false;
     }
     
-    onSubmit(editUserForm: any) {
-        if (!editUserForm.valid) {
+    onSubmit() {
+        this.changePasswordFormSubmitted = true;
+        
+        if (!this.changePasswordForm.valid) {
             return;
         }
         
