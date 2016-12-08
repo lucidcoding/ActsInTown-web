@@ -39,6 +39,17 @@ export class ChangePasswordComponent implements OnInit {
         this.changePasswordFormSubmitted = false;
     }
     
+    /*compare(formControl: FormControl) {
+        let compareValue = (<FormControl> formControl._parent.controls['confirmNewPassword']).value;
+        if(formControl.value === compareValue) {
+            return {
+                compare: true
+            };
+        } else {
+            return null;
+        }
+    }*/
+
     onSubmit() {
         this.changePasswordFormSubmitted = true;
         
