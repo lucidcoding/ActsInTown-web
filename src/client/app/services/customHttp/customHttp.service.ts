@@ -61,7 +61,10 @@ export class CustomHttpService {
                             return this.http.request(url, options)
                         })
                         .catch((refreshError: Response) => {
-                            this.router.navigate(['user/login']);
+                            if (refreshError && refreshError.status === 401) {
+                                this.router.navigate(['user/login']);
+                            }
+                            
                             return Observable.throw(refreshError);
                         });
                 }

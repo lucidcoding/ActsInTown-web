@@ -32,10 +32,7 @@ export class EditUserComponent implements OnInit {
             userTypeSelected: false,
             firstName: null,
             lastName: null,
-            stageName: null,
-            oldPassword: null,
-            newPassword: null,
-            confirmNewPassword: null
+            stageName: null
         };
     }
 
@@ -103,30 +100,6 @@ export class EditUserComponent implements OnInit {
         };
 
         this.userService.editCurrent(request)
-            .subscribe(
-            response => {
-                this.router.navigate(['user/register-success']);
-            },
-            error => {
-                console.log('Error:' + error)
-            },
-            () => {   
-                //Do nothing.
-            });
-    }
-    
-    changePassword(changePasswordForm: any) {
-        if (!changePasswordForm.valid) {
-            return;
-        }
-        
-        var request: ChangePasswordRequest = {
-            oldPassword: this.viewModel.oldPassword,
-            newPassword: this.viewModel.newPassword,
-            confirmNewPassword: this.viewModel.confirmNewPassword
-        }
-        
-        this.userService.changePassword(request)
             .subscribe(
             response => {
                 this.router.navigate(['user/register-success']);

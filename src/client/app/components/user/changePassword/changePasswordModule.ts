@@ -1,6 +1,6 @@
 import { provide, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChangePasswordComponent } from './changePasswordComponent';
 import { ConfigService } from '../../../services/config/config.service';
@@ -9,7 +9,7 @@ import { CompareValidatorModule } from '../../../directives/compareValidator/com
 import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
 
 @NgModule({
-    imports: [CommonModule, CompareValidatorModule, LoadingSpinnerModule, ReactiveFormsModule, RouterModule],
+    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerModule, RouterModule],
     declarations: [ChangePasswordComponent],
     exports: [ChangePasswordComponent],
     providers: [

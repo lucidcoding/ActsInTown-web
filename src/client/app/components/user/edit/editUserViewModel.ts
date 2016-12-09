@@ -7,7 +7,4 @@ export class EditUserViewModel {
 	firstName: string;
 	lastName: string;
 	stageName: string;
-    oldPassword: string;
-    newPassword: string;
-    confirmNewPassword: string;
 }

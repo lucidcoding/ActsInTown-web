@@ -1,5 +1,4 @@
 import { Component, OnInit  } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChangePasswordViewModel } from './changePasswordViewModel';
 import { ChangePasswordRequest } from '../../../services/user/requests/changePasswordRequest';
@@ -13,21 +12,24 @@ import { ElementState } from '../../../common/elementState';
     styleUrls: ['changePasswordComponent.css']
 })
 export class ChangePasswordComponent implements OnInit {
-    public changePasswordForm: FormGroup;
-    public changePasswordFormSubmitted: boolean;
+    //public changePasswordForm: FormGroup;
+    //public changePasswordFormSubmitted: boolean;
     public viewModel: ChangePasswordViewModel;
 
-    constructor(private formBuilder: FormBuilder,
-                private router: Router,
+    constructor(private router: Router,
                 private userService: UserService) {
        
         this.viewModel = {
+            oldPassword: null,
+            newPassword: null,
+            confirmNewPassword: null,
+            incorrectOldPassword: false,
             elementState: ElementState.Ready
         };
     }
 
     ngOnInit() {
-        this.changePasswordForm = new FormGroup({
+        /*this.changePasswordForm = new FormGroup({
             oldPassword: new FormControl('', Validators.required),
             newPassword: new FormControl('', [
                 Validators.required, 
@@ -38,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
             ])
         });
         
-        this.changePasswordFormSubmitted = false;
+        this.changePasswordFormSubmitted = false;*/
     }
     
     /*compare(formControl: FormControl) {
@@ -52,26 +54,26 @@ export class ChangePasswordComponent implements OnInit {
         }
     }*/
 
-    onSubmit() {
-        this.changePasswordFormSubmitted = true;
+    onSubmit(changePasswordForm: any) {
+        //this.changePasswordFormSubmitted = true;
         
-        if (!this.changePasswordForm.valid) {
+        if (!changePasswordForm.valid) {
             return;
         }
         
         this.viewModel.elementState = ElementState.Loading;
         
-        var request: ChangePasswordRequest = {
+        /*var request: ChangePasswordRequest = {
             oldPassword: (<FormControl> this.changePasswordForm.controls['oldPassword']).value,
             newPassword: (<FormControl> this.changePasswordForm.controls['newPassword']).value,
             confirmNewPassword: (<FormControl> this.changePasswordForm.controls['confirmNewPassword']).value,
-        }
-        
-         /*var request: ChangePasswordRequest = {
-            oldPassword: '',
-            newPassword: '',
-            confirmNewPassword: ''
         }*/
+        
+        var request: ChangePasswordRequest = {
+            oldPassword: this.viewModel.oldPassword,
+            newPassword: this.viewModel.newPassword,
+            confirmNewPassword: this.viewModel.confirmNewPassword
+        };
 
         this.userService.changePassword(request)
             .subscribe(
@@ -79,7 +81,12 @@ export class ChangePasswordComponent implements OnInit {
                 this.viewModel.elementState = ElementState.Submitted;
             },
             error => {
-                this.viewModel.elementState = ElementState.SubmissionError;
+                if (error.status === 400) {
+                    this.viewModel.elementState = ElementState.Ready
+                    this.viewModel.incorrectOldPassword = true;
+                } else {
+                    this.viewModel.elementState = ElementState.SubmissionError;
+                }
             },
             () => {   
                 //Do nothing.
