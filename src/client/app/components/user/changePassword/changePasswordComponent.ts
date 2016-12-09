@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ChangePasswordViewModel } from './changePasswordViewModel';
 import { ChangePasswordRequest } from '../../../services/user/requests/changePasswordRequest';
 import { UserService} from '../../../services/user/user.service';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
@@ -21,6 +22,7 @@ export class ChangePasswordComponent implements OnInit {
                 private userService: UserService) {
        
         this.viewModel = {
+            elementState: ElementState.Ready
         };
     }
 
@@ -57,25 +59,27 @@ export class ChangePasswordComponent implements OnInit {
             return;
         }
         
-        /*var request: ChangePasswordRequest = {
-            oldPassword: this.viewModel.oldPassword,
-            newPassword: this.viewModel.newPassword,
-            confirmNewPassword: this.viewModel.confirmNewPassword
-        }*/
+        this.viewModel.elementState = ElementState.Loading;
         
-         var request: ChangePasswordRequest = {
+        var request: ChangePasswordRequest = {
+            oldPassword: (<FormControl> this.changePasswordForm.controls['oldPassword']).value,
+            newPassword: (<FormControl> this.changePasswordForm.controls['newPassword']).value,
+            confirmNewPassword: (<FormControl> this.changePasswordForm.controls['confirmNewPassword']).value,
+        }
+        
+         /*var request: ChangePasswordRequest = {
             oldPassword: '',
             newPassword: '',
             confirmNewPassword: ''
-        }
+        }*/
 
         this.userService.changePassword(request)
             .subscribe(
             response => {
-                this.router.navigate(['user/register-success']);
+                this.viewModel.elementState = ElementState.Submitted;
             },
             error => {
-                console.log('Error:' + error)
+                this.viewModel.elementState = ElementState.SubmissionError;
             },
             () => {   
                 //Do nothing.

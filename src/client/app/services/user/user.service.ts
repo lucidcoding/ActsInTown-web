@@ -40,7 +40,7 @@ export class UserService {
     }
     
     changePassword(request: ChangePasswordRequest): Observable<Response> {
-		return this.http.put(this.configService.getApiBaseUrl() + 'user/change-password/', request, null);
+		return this.http.put(this.configService.getApiBaseUrl() + 'user/change-password', request, null);
 	}
     
     initializePasswordReset(request: InitializePasswordResetRequest): Observable<Response> {

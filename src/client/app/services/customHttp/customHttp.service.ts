@@ -86,9 +86,10 @@ export class CustomHttpService {
     }
 
     put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-        let bodyJson = JSON.stringify(body);
         options = this.addAuthenticationHeaders(options);
         options = this.addContentTypeHeaders(options);
-        return this.http.put(url, bodyJson, options);
+        options.method = 'put';
+        options.body = JSON.stringify(body);
+        return this.request(url, options);
     }
 }
