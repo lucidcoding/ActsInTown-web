@@ -54,9 +54,9 @@ export class CustomHttpService {
                 if (initialError && initialError.status === 401) {
                     return this.authenticationService.refresh()
                         .flatMap(refreshResult => {
-                            let body = JSON.parse((<any> refreshResult)._body);
+                            /*let body = JSON.parse((<any> refreshResult)._body);
                             localStorage.setItem('accessToken', body.access_token);
-                            localStorage.setItem('refreshToken', body.refresh_token);
+                            localStorage.setItem('refreshToken', body.refresh_token);*/
                             options = this.addAuthenticationHeaders(options);
                             return this.http.request(url, options)
                         })
