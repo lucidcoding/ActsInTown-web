@@ -41,7 +41,6 @@ export class LoginUserComponent implements OnInit {
             return;
         }
 
-return;
         var request: LoginRequest = {
             username: this.viewModel.email,
             password: this.viewModel.password,
