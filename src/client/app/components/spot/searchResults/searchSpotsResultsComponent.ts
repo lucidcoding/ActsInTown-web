@@ -20,6 +20,7 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                 private townService: TownService,
                 private route: ActivatedRoute) {
         this.viewModel = {
+            bookedState: null,
             startDate: null,
             endDate: null,
             townName: null,
@@ -30,13 +31,12 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.route.queryParams.subscribe(params => {
-            console.log('queryParams: ' + params);
+            this.viewModel.bookedState = params['bookedState'];
             var startDate: Date = new Date(params['startDate']);
             var endDate: Date = new Date(params['endDate']);
             var townId: string = params['townId'];
 
-            this.spotService.search(startDate, endDate, townId, 'AVAILABLE')
-                .subscribe(
+            this.spotService.search(startDate, endDate, townId, this.viewModel.bookedState.toUpperCase()).subscribe(
                 response => {
                     this.viewModel.spots = response.map(spot => {
                         return {
@@ -57,7 +57,6 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     this.viewModel.spotsState = ElementState.LoadingError;
-                    console.error('Error: ' + error);
                 },
                 () => {
                     //
@@ -67,9 +66,5 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-    }
-
-    onSubmit(searchAvailableSpotsForm: any) {
-        //
     }
 }

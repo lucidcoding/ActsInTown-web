@@ -3,7 +3,8 @@
     <div class="container row-separated">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Spots</h1>
+                <h1 *ngIf="viewModel.bookedState === 'available'">Available Spots</h1>
+                <h1 *ngIf="viewModel.bookedState === 'booked'">Acts In Town</h1>
             </div>
         </div>
         <div class="row" *ngIf="viewModel.spotsState === 0">
@@ -16,7 +17,7 @@
         <div class="row" *ngIf="viewModel.spotsState === 2">
             <div class="col-sm-12 ">
                 <p>Unfortunately your search returned no results.</p>
-                <a href="" routerLink="/spot/add" routerLinkActive="active" class="btn btn-default">Add Spot</a>
+                <a href="" routerLink="/spot/search/{{viewModel.bookedState}}" routerLinkActive="active" class="btn btn-default">Search Again</a>
             </div>
         </div>
         <ng-container *ngIf="viewModel.spotsState === 3">
