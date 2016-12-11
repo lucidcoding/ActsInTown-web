@@ -1,0 +1,26 @@
+.loading-overlay {
+	.transparency {
+		top: 0;
+		left: 0;
+		position: fixed;
+		min-height: 100%;
+		width: 100%;
+		z-index: 2001;
+		display: block;
+		background-color: white;
+		opacity: 0.75;
+	}
+	
+	.overlay-spinner {
+        position: fixed; /* or absolute */
+        top: 50%;
+        left: 50%;
+		z-index: 2002;
+		position: fixed;
+		/*min-height: 100%;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;*/
+	}
+}

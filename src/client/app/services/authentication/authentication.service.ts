@@ -97,6 +97,6 @@ export class AuthenticationService {
                 }
 
                 return Observable.throw(refreshError);
-            });;
+            });
     }
 }

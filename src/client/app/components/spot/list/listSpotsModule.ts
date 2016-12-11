@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ListSpotsComponent } from './listSpotsComponent';
 import { SpotService } from '../../../services/spot/spot.service';
-import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, LoadingSpinnerModule, RouterModule],
+    imports: [CommonModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
     declarations: [ListSpotsComponent],
     exports: [ListSpotsComponent],
     providers: [

@@ -6,10 +6,10 @@ import { ChangePasswordComponent } from './changePasswordComponent';
 import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
-import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerModule, RouterModule],
+    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
     declarations: [ChangePasswordComponent],
     exports: [ChangePasswordComponent],
     providers: [

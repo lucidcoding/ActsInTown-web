@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { ResetPasswordComponent } from './resetPasswordComponent';
 import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
-import { LoadingSpinnerModule } from '../../shared/loadingSpinner/loadingSpinnerModule';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
 
 @NgModule({
-    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerModule, RouterModule],
+    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
     declarations: [ResetPasswordComponent],
     exports: [ResetPasswordComponent],
     providers: [
