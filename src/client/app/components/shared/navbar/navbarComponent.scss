@@ -20,7 +20,7 @@
     
         .navbar-brand:hover,
         .navbar-brand:focus {
-            color: $theme-focus;
+            color: $white;
         }
     
         .navbar-toggle {
@@ -67,7 +67,7 @@
     .nav > li > ul > li > a {
         text-transform: uppercase;
         font-weight: $font-weight-regular;
-        font-size: $font-size-base;
+        font-size: $font-size-small;
         color: $white;
     }
     
@@ -89,21 +89,24 @@
         
         .navbar-header .navbar-brand:hover,
         .navbar-header .navbar-brand:focus {
-            color: $theme-focus;
+            color: $white;
         }
         
         .nav > li > a,
         .nav > li > a:focus {
             color: $white;
+            font-size: 13px;
         }
         
         .nav > li > a:hover,
         .nav > li > a:focus:hover {
-            color: $theme-focus;
+            color: $white;
         }
         
         .nav > li > ul > li > a {
             color: $theme-primary;
+            font-weight: $font-weight-regular;
+            font-size: $font-size-small;
         }
     
         &.affix {
