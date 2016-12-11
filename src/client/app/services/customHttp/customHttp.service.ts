@@ -92,4 +92,10 @@ export class CustomHttpService {
         options.body = JSON.stringify(body);
         return this.request(url, options);
     }
+
+    delete(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+        options = this.addAuthenticationHeaders(options);
+        options.method = 'delete';
+        return this.request(url, options);
+    }
 }

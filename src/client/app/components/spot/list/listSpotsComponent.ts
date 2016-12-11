@@ -18,10 +18,13 @@ export class ListSpotsComponent implements OnInit {
             spotsState: ElementState.Loading
         };
     }
-
+    
     public ngOnInit() {
-        this.spotService.getForCurrentUser()
-            .subscribe(
+        this.getSpots();
+    }
+
+    private getSpots() {
+        this.spotService.getForCurrentUser().subscribe(
             response => {
                 this.viewModel.spots = response.map(spot => {
                     return {
@@ -43,6 +46,21 @@ export class ListSpotsComponent implements OnInit {
             },
             error => {
                 this.viewModel.spotsState = ElementState.LoadingError;
+            },
+            () => {
+                //
+            });    
+    }
+    
+    public delete(event: any, id: string) { //event is MouseEvent but can't find what package that is in!
+        event.preventDefault();
+        
+        this.spotService.delete(id).subscribe(
+            response => {
+                this.getSpots();
+            },
+            error => {
+                console.log();
             },
             () => {
                 //

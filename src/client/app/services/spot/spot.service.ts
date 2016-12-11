@@ -33,4 +33,8 @@ export class SpotService {
         return this.http.get(this.configService.getApiBaseUrl() + 'spot/search?' + queryString)
         	.map(response => response.json());
     }
+    
+    delete(id: string) {
+		return this.http.delete(this.configService.getApiBaseUrl() + 'spot/' + id, null);
+    }
 }

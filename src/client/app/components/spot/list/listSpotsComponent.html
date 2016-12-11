@@ -32,15 +32,18 @@
                         </a>
                         <div class="details">
                             <h2>
-                            <i class="fa fa-clock-o"></i>
-                            {{spot.scheduledFor | date: 'HH:mm' }}, {{spot.durationMinutes}} mins
-                        </h2>
+                                <i class="fa fa-clock-o"></i>
+                                {{spot.scheduledFor | date: 'HH:mm' }}, {{spot.durationMinutes}} mins
+                            </h2>
                             <h3 class="subtitle">
-                            <i class="fa fa-map-marker"></i>
-                            {{spot.venueName}}, {{spot.townName}}
-                        </h3>
+                                <i class="fa fa-map-marker"></i>
+                                {{spot.venueName}}, {{spot.townName}}
+                            </h3>
                             <p>
                                 {{spot.description}}
+                            </p>
+                            <p>
+                                <a href="" (click)="delete($event, spot.id)">Delete</a>
                             </p>
                         </div>
                     </div>
