@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchSpotsViewModel } from './searchSpotsViewModel';
 import { TownService } from '../../../services/town/town.service';
 import { ElementState } from '../../../common/elementState';
+import '../../../common/dateExtensions';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,7 @@ export class SearchSpotsComponent implements OnInit, OnDestroy {
                 private townService: TownService,
                 private router: Router) {
         var date = new Date();
-        date = date.roundUpTime();
+        date = date.datePart();
         
         this.viewModel = {
             bookedState: null,

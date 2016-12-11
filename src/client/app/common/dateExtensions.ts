@@ -1,5 +1,6 @@
 interface Date {
     roundUpTime: () => Date;
+    datePart: () => Date;
 }
 
 Date.prototype.roundUpTime = function(): Date {
@@ -13,6 +14,10 @@ Date.prototype.roundUpTime = function(): Date {
         newDate = new Date(date.getTime() + (5 * 60000));
     }
     
-    
     return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes(), 0);
+}
+
+Date.prototype.datePart = function(): Date {
+    var date: Date = this;
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
