@@ -1,4 +1,5 @@
 import { Option } from '../../../common/option.common';
+import { ElementState } from '../../../common/elementState';
 
 export class AddSpotViewModel {
     scheduledFor: Date;
@@ -9,4 +10,5 @@ export class AddSpotViewModel {
     townOptionsLoaded: boolean;
     venueName: string;
     description: string;
+    elementState: ElementState;
 }

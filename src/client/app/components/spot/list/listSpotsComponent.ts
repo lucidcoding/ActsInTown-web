@@ -43,7 +43,6 @@ export class ListSpotsComponent implements OnInit {
             },
             error => {
                 this.viewModel.spotsState = ElementState.LoadingError;
-                console.error('Error: ' + error);
             },
             () => {
                 //

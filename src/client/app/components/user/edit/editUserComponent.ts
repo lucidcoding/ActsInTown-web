@@ -6,33 +6,31 @@ import { ChangePasswordRequest } from '../../../services/user/requests/changePas
 import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
-//import { MustBeTrueValidatorDirective } from '../../../directives/must-be-true.directive';
-//import { RequiredIfValidatorDirective } from '../../../directives/required-if.directive';
 import { Option } from '../../../common/option.common';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
     selector: 'sd-edit-user',
     templateUrl: 'editUserComponent.html',
     styleUrls: ['editUserComponent.css']
-    //,
-    //directives: [MustBeTrueValidatorDirective, RequiredIfValidatorDirective]
 })
 export class EditUserComponent implements OnInit {
     public viewModel: EditUserViewModel;
 
     constructor(private authenticationService: AuthenticationService,
-                private router: Router,
-                private userService: UserService,
-                private userTypeService: UserTypeService) {
-        
+        private router: Router,
+        private userService: UserService,
+        private userTypeService: UserTypeService) {
+
         this.viewModel = {
             id: null,
             userTypes: null,
             userTypeSelected: false,
             firstName: null,
             lastName: null,
-            stageName: null
+            stageName: null,
+            elementState: ElementState.Loading
         };
     }
 
@@ -44,51 +42,55 @@ export class EditUserComponent implements OnInit {
                 this.viewModel.firstName = response.firstName;
                 this.viewModel.lastName = response.lastName;
                 this.viewModel.stageName = response.stageName;
-            },
-            error => {
-                console.log('Error:' + error);
-            },
-            () => {
-                console.log('Done');
-            });
-            
-        this.userTypeService.get()
-            .subscribe(
-            response => {
-                this.viewModel.userTypes = response.map(userType => {
-                    return new Option(userType.description, userType.id, false);
-                });
-                
-                this.userTypeService.getForCurrentUser()
+
+                this.userTypeService.get()
                     .subscribe(
                     response => {
-                        response.forEach(responseUserType => {
-                            this.viewModel.userTypes.forEach(viewModelUserType => {
-                                if(responseUserType.id === viewModelUserType.value) {
-                                    viewModelUserType.selected = true;
-                                }
-                            });
+                        this.viewModel.userTypes = response.map(userType => {
+                            return new Option(userType.description, userType.id, false);
                         });
+
+                        this.userTypeService.getForCurrentUser()
+                            .subscribe(
+                            response => {
+                                response.forEach(responseUserType => {
+                                    this.viewModel.userTypes.forEach(viewModelUserType => {
+                                        if (responseUserType.id === viewModelUserType.value) {
+                                            viewModelUserType.selected = true;
+                                        }
+                                    });
+                                });
+                                
+                                this.viewModel.elementState = ElementState.Ready;
+                            },
+                            error => {
+                                this.viewModel.elementState = ElementState.LoadingError;
+                            },
+                            () => {
+                                //Do nothing.
+                            });
                     },
                     error => {
-                        console.log('Error:' + error);
+                        this.viewModel.elementState = ElementState.LoadingError;
                     },
                     () => {
-                        console.log('Done');
+                        //Do nothing.
                     });
             },
             error => {
-                console.log('Error:' + error);
+                this.viewModel.elementState = ElementState.LoadingError;
             },
             () => {
-                console.log('Done');
+                //Do nothing.
             });
     }
-    
+
     onSubmit(editUserForm: any) {
         if (!editUserForm.valid) {
             return;
         }
+
+        this.viewModel.elementState = ElementState.Loading;
         
         var request: EditUserRequest = {
             firstName: this.viewModel.firstName,
@@ -102,10 +104,11 @@ export class EditUserComponent implements OnInit {
         this.userService.editCurrent(request)
             .subscribe(
             response => {
+                this.viewModel.elementState = ElementState.Ready;
                 this.router.navigate(['user/register-success']);
             },
             error => {
-                console.log('Error:' + error)
+                this.viewModel.elementState = ElementState.SubmissionError;
             },
             () => {   
                 //Do nothing.

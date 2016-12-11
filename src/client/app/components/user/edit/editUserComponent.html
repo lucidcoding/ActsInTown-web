@@ -1,8 +1,19 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
 <div class="standard-page">
     <div class="container row-separated">
         <div class="row">
             <div class="col-sm-12">
                 <h1>Edit Profile</h1>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.spotsState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading your profile.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 5">
+            <div class="col-sm-12 ">
+                <p>There was an error updating your profile.</p>
             </div>
         </div>
         <form (ngSubmit)="onSubmit(editUserForm)" #editUserForm="ngForm" class="form-horizontal" role="form"

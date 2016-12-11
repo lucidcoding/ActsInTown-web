@@ -6,19 +6,16 @@ import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
 import { Option } from '../../../common/option.common';
-//import { CompareValidatorDirective } from '../../../directives/compareValidator/compareValidatorDirective';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
     selector: 'sd-register-user', 
     templateUrl: 'registerUserComponent.html',
     styleUrls: ['registerUserComponent.css']
-    //,
-    //directives: [CompareValidatorDirective]
 })
 export class RegisterUserComponent implements OnInit {
     viewModel: RegisterUserViewModel;
-    active: boolean;
 
     constructor(private authenticationService: AuthenticationService,
                 private router: Router,
@@ -34,7 +31,8 @@ export class RegisterUserComponent implements OnInit {
             confirmPassword: null,
             firstName: null,
             lastName: null,
-            stageName: null
+            stageName: null,
+            elementState: ElementState.Ready
         };
     }
 
@@ -45,15 +43,15 @@ export class RegisterUserComponent implements OnInit {
                 this.viewModel.userTypes = response.map(userType => {
                     return new Option(userType.description, userType.id, false);
                 });
+                
+                this.viewModel.elementState = ElementState.Ready;
             },
             error => {
-                console.log('Error:' + error);
+                this.viewModel.elementState = ElementState.LoadingError;
             },
             () => {
-                //
+                //Do nothing.
             });
-
-        this.active = true;
     }
 
     clearAlreadyRegistered() {
@@ -65,6 +63,7 @@ export class RegisterUserComponent implements OnInit {
             return;
         }
 
+        this.viewModel.elementState = ElementState.Loading;
         this.authenticationService.clearToken();
         
         var request: RegisterUserRequest = {
@@ -82,13 +81,14 @@ export class RegisterUserComponent implements OnInit {
         this.userService.register(request)
             .subscribe(
             response => {
+                this.viewModel.elementState = ElementState.Ready;
                 this.router.navigate(['user/register-success']);
             },
             error => {
                 if (error.status === 409) {
                     this.viewModel.alreadyRegistered = true;
                 } else {
-                    console.log('Error:' + error);
+                    this.viewModel.elementState = ElementState.SubmissionError;
                 }
             },
             () => {   

@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchAvailableSpotsViewModel } from './searchAvailableSpotsViewModel';
 import { TownService } from '../../../services/town/town.service';
-//import { FutureDateValidator } from '../../../directives/futureDate.directive';
+import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
     selector: 'sd-search-available-spots',
     templateUrl: 'searchAvailableSpotsComponent.html',
     styleUrls: ['searchAvailableSpotsComponent.css']
-    //,
-    //,directives: [FutureDateValidator]
 })
 export class SearchAvailableSpotsComponent implements OnInit {
     viewModel: SearchAvailableSpotsViewModel;
@@ -25,7 +23,8 @@ export class SearchAvailableSpotsComponent implements OnInit {
             endDate: date,
             townId: null,
             townOptions: [],
-            townOptionsLoaded: false
+            townOptionsLoaded: false,
+            elementState: ElementState.Ready
         };
     }
 
@@ -39,12 +38,13 @@ export class SearchAvailableSpotsComponent implements OnInit {
 
                 this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
                 this.viewModel.townOptionsLoaded = true;
+                this.viewModel.elementState = ElementState.Ready;
             },
             error => {
-                console.error('Error: ' + error);
+                this.viewModel.elementState = ElementState.LoadingError;
             },
             () => {
-                console.log('Completed!');
+                //Do nothing.
             });
     }
 
@@ -56,7 +56,5 @@ export class SearchAvailableSpotsComponent implements OnInit {
                 townId: this.viewModel.townId
             }
         });
-        
-        //this.router.navigate(['spot/search-available-results'], {  queryParams: { page: 6 }});
     }
 }

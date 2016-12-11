@@ -1,4 +1,5 @@
 import { Option } from '../../../common/option.common';
+import { ElementState } from '../../../common/elementState';
 
 export class RegisterUserViewModel {
 	userTypes: Option[];
@@ -10,4 +11,5 @@ export class RegisterUserViewModel {
 	firstName: string;
 	lastName: string;
 	stageName: string;
+    elementState: ElementState;
 }

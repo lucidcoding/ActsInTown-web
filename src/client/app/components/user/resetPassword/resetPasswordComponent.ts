@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             email: null,
             password: null,
             confirmPassword: null,
-            elementState: ElementState.Loading
+            elementState: ElementState.Ready
         };
     }
 

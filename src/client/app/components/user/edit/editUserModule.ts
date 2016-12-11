@@ -6,9 +6,10 @@ import { EditUserComponent } from './editUserComponent';
 import { ConfigService } from '../../../services/config/config.service';
 import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, RouterModule],
+    imports: [CommonModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
     declarations: [EditUserComponent],
     exports: [EditUserComponent],
     providers: [

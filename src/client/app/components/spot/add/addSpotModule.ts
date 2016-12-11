@@ -8,9 +8,10 @@ import { TownService } from '../../../services/town/town.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateTimeSelectorModule } from '../../shared/dateTimeSelector/dateTimeSelectorModule';
 import { FutureDateValidatorModule } from '../../../directives/futureDateValidator/futureDateValidatorModule';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, DateTimeSelectorModule, FormsModule, FutureDateValidatorModule, RouterModule ],
+    imports: [CommonModule, DateTimeSelectorModule, FormsModule, FutureDateValidatorModule, LoadingSpinnerOverlayModule, RouterModule ],
     declarations: [AddSpotComponent],
     exports: [AddSpotComponent],
     providers: [

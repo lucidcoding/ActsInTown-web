@@ -1,4 +1,5 @@
 import { Option } from '../../../common/option.common';
+import { ElementState } from '../../../common/elementState';
 
 export class EditUserViewModel {
     id: string;
@@ -7,4 +8,5 @@ export class EditUserViewModel {
 	firstName: string;
 	lastName: string;
 	stageName: string;
+    elementState: ElementState;
 }

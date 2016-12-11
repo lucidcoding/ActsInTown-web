@@ -5,6 +5,7 @@ import { AddSpotRequest } from '../../../services/spot/requests/add.spot.request
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { Option } from '../../../common/option.common';
+import { ElementState } from '../../../common/elementState';
 import '../../../common/dateExtensions';
 
 @Component({
@@ -30,7 +31,8 @@ export class AddSpotComponent implements OnInit {
             townOptions: [],
             townOptionsLoaded: false,
             venueName: null,
-            description: null
+            description: null,
+            elementState: ElementState.Ready
         };
     }
 
@@ -50,9 +52,10 @@ export class AddSpotComponent implements OnInit {
                 
                 this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
                 this.viewModel.townOptionsLoaded = true;
+                this.viewModel.elementState = ElementState.Ready;
             },
             error => {
-                console.error('Error: ' + error);
+                this.viewModel.elementState = ElementState.LoadingError;
             },
             () => {
                 //
@@ -76,6 +79,8 @@ export class AddSpotComponent implements OnInit {
             return;
         }
 
+        this.viewModel.elementState = ElementState.Loading;
+        
         var request: AddSpotRequest = {
             scheduledFor: this.viewModel.scheduledFor,
             durationMinutes: this.viewModel.durationMinutes,
@@ -87,10 +92,11 @@ export class AddSpotComponent implements OnInit {
         this.spotService.add(request)
             .subscribe(
             response => {
+                this.viewModel.elementState = ElementState.Ready;
                 this.router.navigate(['spot/list']);
             },
             error => {
-                console.log('Error:' + error);
+                this.viewModel.elementState = ElementState.SubmissionError;
             },
             () => {
                 //

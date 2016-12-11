@@ -1,3 +1,4 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
 <div class="standard-page">
     <div class="container row-separated">
         <div class="row">
@@ -5,7 +6,24 @@
                 <h1>Add a Spot</h1>
             </div>
         </div>
-        <form (ngSubmit)="onSubmit(addSpotForm)" #addSpotForm="ngForm" class="form-horizontal" role="form" novalidate>
+        <div class="row" *ngIf="viewModel.spotsState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading your spots.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.spotsState === 2">
+            <div class="col-sm-12 ">
+                <p>You have not yet registered any spots.</p>
+                <a href="" routerLink="/spot/add" routerLinkActive="active" class="btn btn-default">Add Spot</a>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 5">
+            <div class="col-sm-12 ">
+                <p>There was an error adding your spot.</p>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit(addSpotForm)" #addSpotForm="ngForm" class="form-horizontal" role="form" novalidate 
+                *ngIf="viewModel.elementState === 3">
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !scheduledFor.valid">
                 <label class="control-label col-sm-3">Date and time of spot:</label>
                 <div class="col-sm-6">

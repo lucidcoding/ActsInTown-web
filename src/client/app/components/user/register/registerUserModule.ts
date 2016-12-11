@@ -9,9 +9,18 @@ import { UserTypeService } from '../../../services/userType/userType.service';
 import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
 import { MustBeTrueValidatorModule } from '../../../directives/mustBeTrueValidator/mustBeTrueValidatorModule';
 import { RequiredIfValidatorModule } from '../../../directives/requiredIfValidator/requiredIfValidatorModule';
+import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, CompareValidatorModule, FormsModule, MustBeTrueValidatorModule, RequiredIfValidatorModule, RouterModule],
+    imports: [
+        CommonModule,
+        CompareValidatorModule,
+        FormsModule,
+        LoadingSpinnerOverlayModule,
+        MustBeTrueValidatorModule,
+        RequiredIfValidatorModule,
+        RouterModule
+    ],
     declarations: [RegisterUserComponent],
     exports: [RegisterUserComponent],
     providers: [

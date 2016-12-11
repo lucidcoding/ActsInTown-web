@@ -1,3 +1,4 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
 <div class="standard-page">
     <div class="container row-separated">
         <div class="row">
@@ -5,8 +6,18 @@
                 <h1>Register for Acts in Town</h1>
             </div>
         </div>
-        <form *ngIf="active" (ngSubmit)="onSubmit(registerUserForm)" #registerUserForm="ngForm" class="form-horizontal" role="form"
-        novalidate>
+        <div class="row" *ngIf="viewModel.spotsState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading the register user form.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 5">
+            <div class="col-sm-12 ">
+                <p>There was an error registering you as a user.</p>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit(registerUserForm)" #registerUserForm="ngForm" class="form-horizontal" role="form"
+                novalidate *ngIf="viewModel.elementState === 3">
             <div class="form-group" [class.has-error]="registerUserForm.submitted && !type.valid">
                 <label class="control-label col-sm-4">What type of user are you?
                     <br/>(You can be more than one)</label>
