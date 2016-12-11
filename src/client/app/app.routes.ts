@@ -13,8 +13,8 @@ import { RegisterUserComponent } from './components/user/register/registerUserCo
 import { RegisterUserSuccessComponent } from './components/user/registerSuccess/registerUserSuccessComponent';
 import { ResetPasswordComponent } from './components/user/resetPassword/resetPasswordComponent';
 import { VerifyUserComponent } from './components/user/verify/verifyUserComponent';
-import { SearchAvailableSpotsComponent } from './components/spot/searchAvailable/searchAvailableSpotsComponent';
-import { SearchAvailableSpotsResultsComponent } from './components/spot/searchAvailableResults/searchAvailableSpotsResultsComponent';
+import { SearchSpotsComponent } from './components/spot/search/searchSpotsComponent';
+import { SearchSpotsResultsComponent } from './components/spot/searchResults/searchSpotsResultsComponent';
 import { AboutRoutes } from './+about/index';
 
 export const routes: Routes = [
@@ -32,9 +32,7 @@ export const routes: Routes = [
   { path: 'user/register-success', component: RegisterUserSuccessComponent },
   { path: 'user/reset-password/:passwordResetToken', component: ResetPasswordComponent },
   { path: 'user/verify/:verificationToken', component: VerifyUserComponent },
-  //{ path: 'spot/search-available', component: SearchAvailableSpotsComponent, canActivate: [LoggedInGuard] },
-  { path: 'spot/search-available', component: SearchAvailableSpotsComponent },
-  //{ path: 'spot/search-available-results', component: SearchAvailableSpotsResultsComponent, canActivate: [LoggedInGuard] },
-  { path: 'spot/search-available-results', component: SearchAvailableSpotsResultsComponent },
+  { path: 'spot/search/:bookedState', component: SearchSpotsComponent, canActivate: [LoggedInGuard] },
+  { path: 'spot/search-results', component: SearchSpotsResultsComponent, canActivate: [LoggedInGuard] },
   ...AboutRoutes
 ];

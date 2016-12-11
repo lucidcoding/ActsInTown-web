@@ -1,7 +1,9 @@
 import { Option } from '../../../common/option.common';
 import { ElementState } from '../../../common/elementState';
+import { BookedState } from '../../../common/bookedState';
 
-export class SearchAvailableSpotsViewModel {
+export class SearchSpotsViewModel {
+    bookedState: BookedState;
     startDate: Date;
     endDate: Date;
     townId: string;

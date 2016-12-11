@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SearchAvailableSpotsResultsViewModel } from './viewModels/searchAvailableSpotsResultsViewModel';
+import { SearchSpotsResultsViewModel } from './viewModels/searchSpotsResultsViewModel';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { ElementState } from '../../../common/elementState';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-search-available-spots-results',
-    templateUrl: 'searchAvailableSpotsResultsComponent.html',
-    styleUrls: ['searchAvailableSpotsResultsComponent.css']
+    selector: 'sd-search-spots-results',
+    templateUrl: 'searchSpotsResultsComponent.html',
+    styleUrls: ['searchSpotsResultsComponent.css']
 })
-export class SearchAvailableSpotsResultsComponent implements OnInit, OnDestroy {
-    public viewModel: SearchAvailableSpotsResultsViewModel;
+export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
+    public viewModel: SearchSpotsResultsViewModel;
     public page: number;
     private sub: any;
 

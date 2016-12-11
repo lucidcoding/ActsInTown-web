@@ -3,7 +3,8 @@
     <div class="container row-separated">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Search</h1>
+                <h1 *ngIf="viewModel.bookedState === 0">Search Available Spots</h1>
+                <h1 *ngIf="viewModel.bookedState === 1">Search Acts In Town</h1>
             </div>
         </div>
         <div class="row" *ngIf="viewModel.spotsState === 1">

@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SearchAvailableSpotsViewModel } from './searchAvailableSpotsViewModel';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchSpotsViewModel } from './searchSpotsViewModel';
 import { TownService } from '../../../services/town/town.service';
 import { ElementState } from '../../../common/elementState';
+import { BookedState } from '../../../common/bookedState';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-search-available-spots',
-    templateUrl: 'searchAvailableSpotsComponent.html',
-    styleUrls: ['searchAvailableSpotsComponent.css']
+    selector: 'sd-search-spots',
+    templateUrl: 'searchSpotsComponent.html',
+    styleUrls: ['searchSpotsComponent.css']
 })
-export class SearchAvailableSpotsComponent implements OnInit {
-    viewModel: SearchAvailableSpotsViewModel;
+export class SearchSpotsComponent implements OnInit, OnDestroy {
+    public viewModel: SearchSpotsViewModel;
+    private sub: any;
 
-    constructor(private townService: TownService,
+    constructor(private activatedRoute: ActivatedRoute,
+                private townService: TownService,
                 private router: Router) {
         var date = new Date();
         date = date.roundUpTime();
         
         this.viewModel = {
+            bookedState: null,
             startDate: date,
             endDate: date,
             townId: null,
@@ -29,6 +33,14 @@ export class SearchAvailableSpotsComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.sub = this.activatedRoute.params.subscribe(params => {
+            if (params['bookedState'] === 'available') {
+                this.viewModel.bookedState = BookedState.Available;
+            } else if (params['bookedState'] === 'booked') {
+                this.viewModel.bookedState = BookedState.Booked;
+            }
+        });
+        
         this.townService.get()
             .subscribe(
             response => {
@@ -49,12 +61,16 @@ export class SearchAvailableSpotsComponent implements OnInit {
     }
 
     onSubmit(searchAvailableSpotsForm: any) {
-        this.router.navigate(['spot/search-available-results'], {
+        this.router.navigate(['spot/search-results'], {
             queryParams: {
                 startDate: this.viewModel.startDate,
                 endDate: this.viewModel.endDate,
                 townId: this.viewModel.townId
             }
         });
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 }

@@ -63,7 +63,7 @@ export class AddSpotComponent implements OnInit {
             });
     }
 
-    onNotify(ev:any) {
+    onNotify(ev: any) {
         console.log(ev);
     }
     
@@ -82,7 +82,7 @@ export class AddSpotComponent implements OnInit {
 
         this.viewModel.elementState = ElementState.Loading;
         this.viewModel.validationErrors = null;
-        
+
         var request: AddSpotRequest = {
             scheduledFor: this.viewModel.scheduledFor,
             durationMinutes: this.viewModel.durationMinutes,
@@ -101,7 +101,7 @@ export class AddSpotComponent implements OnInit {
                 if(error.status === 400) {
                     this.viewModel.elementState = ElementState.Ready;
                     var body = JSON.parse(error._body);
-                    this.viewModel.validationErrors = body.map(validationError => validationError.text);
+                    this.viewModel.validationErrors = body.map((validationError: any) => validationError.text);
                 } else {
                     this.viewModel.elementState = ElementState.SubmissionError;
                 }

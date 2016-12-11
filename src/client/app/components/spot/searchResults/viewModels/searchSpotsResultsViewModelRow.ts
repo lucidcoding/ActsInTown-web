@@ -1,4 +1,4 @@
-export class SearchAvailableSpotsResultsViewModelRow {
+export class SearchSpotsResultsViewModelRow {
     id: string;
     scheduledFor: Date;
     durationMinutes: number;
