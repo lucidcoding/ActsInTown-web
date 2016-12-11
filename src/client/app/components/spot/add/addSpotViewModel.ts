@@ -11,4 +11,5 @@ export class AddSpotViewModel {
     venueName: string;
     description: string;
     elementState: ElementState;
+    validationErrors: string[];
 }

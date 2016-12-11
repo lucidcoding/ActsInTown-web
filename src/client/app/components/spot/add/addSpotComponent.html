@@ -22,6 +22,14 @@
                 <p>There was an error adding your spot.</p>
             </div>
         </div>
+        <div class="row" *ngIf="viewModel.elementState === 3 && viewModel.validationErrors !== null">
+            <div class="col-sm-12 ">
+                <p>The following validation errors occured:</p>
+                <ul>
+                    <li *ngFor="let validationError of viewModel.validationErrors">{{validationError}}</li>
+                </ul>
+            </div>
+        </div>
         <form (ngSubmit)="onSubmit(addSpotForm)" #addSpotForm="ngForm" class="form-horizontal" role="form" novalidate 
                 *ngIf="viewModel.elementState === 3">
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !scheduledFor.valid">

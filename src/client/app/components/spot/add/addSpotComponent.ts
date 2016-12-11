@@ -32,7 +32,8 @@ export class AddSpotComponent implements OnInit {
             townOptionsLoaded: false,
             venueName: null,
             description: null,
-            elementState: ElementState.Ready
+            elementState: ElementState.Ready,
+            validationErrors: null
         };
     }
 
@@ -80,6 +81,7 @@ export class AddSpotComponent implements OnInit {
         }
 
         this.viewModel.elementState = ElementState.Loading;
+        this.viewModel.validationErrors = null;
         
         var request: AddSpotRequest = {
             scheduledFor: this.viewModel.scheduledFor,
@@ -96,7 +98,13 @@ export class AddSpotComponent implements OnInit {
                 this.router.navigate(['spot/list']);
             },
             error => {
-                this.viewModel.elementState = ElementState.SubmissionError;
+                if(error.status === 400) {
+                    this.viewModel.elementState = ElementState.Ready;
+                    var body = JSON.parse(error._body);
+                    this.viewModel.validationErrors = body.map(validationError => validationError.text);
+                } else {
+                    this.viewModel.elementState = ElementState.SubmissionError;
+                }
             },
             () => {
                 //
