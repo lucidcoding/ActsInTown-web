@@ -37,16 +37,19 @@ export class AuthenticationService {
         if (localStorage.getItem(this.accessTokenKey) === null) {
             return false;
         }
-
+        
+        return true;
+    }
+    
+    isExpired(): boolean {                    
         let expiry = new Date(localStorage.getItem(this.expiryKey));
         let now = new Date();
         
-        //Improve this implementation.
         if (now > expiry) {
             return true;
         }
 
-        return true;
+        return false;
     }
 
     login(request: LoginRequest): Observable<Response> {
