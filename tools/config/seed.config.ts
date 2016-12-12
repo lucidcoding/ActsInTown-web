@@ -138,7 +138,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular2-seed!';
+  APP_TITLE = 'Acts In Town';
 
   /**
    * The base folder of the applications source files.

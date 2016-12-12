@@ -11,4 +11,5 @@ export class Spot {
 	addedOn: Date;
 	cancelled: boolean;
     description: string;
+    bookedState: string;
 }

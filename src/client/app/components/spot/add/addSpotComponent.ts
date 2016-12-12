@@ -24,6 +24,8 @@ export class AddSpotComponent implements OnInit {
         date = date.roundUpTime();
         
         this.viewModel = {
+            bookedState: null,
+            bookedStateOptions: [],
             scheduledFor: date,
             durationMinutes: null,
             durationMinutesOptions: [],
@@ -61,6 +63,12 @@ export class AddSpotComponent implements OnInit {
             () => {
                 //
             });
+            
+        this.viewModel.bookedStateOptions = [
+            new Option('Please select...', null, true),
+            new Option('A spot I am booked for', 'booked', false),
+            new Option('A spot I have available', 'available', false)
+        ];
     }
 
     onNotify(ev: any) {
@@ -88,11 +96,11 @@ export class AddSpotComponent implements OnInit {
             durationMinutes: this.viewModel.durationMinutes,
             townId: this.viewModel.townId,
             venueName: this.viewModel.venueName,
-            description: this.viewModel.description
+            description: this.viewModel.description,
+            bookedState: this.viewModel.bookedState.toUpperCase()
         };
 
-        this.spotService.add(request)
-            .subscribe(
+        this.spotService.add(request).subscribe(
             response => {
                 this.viewModel.elementState = ElementState.Ready;
                 this.router.navigate(['spot/list']);

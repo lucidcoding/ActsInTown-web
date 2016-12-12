@@ -32,6 +32,27 @@
         </div>
         <form (ngSubmit)="onSubmit(addSpotForm)" #addSpotForm="ngForm" class="form-horizontal" role="form" novalidate 
                 *ngIf="viewModel.elementState === 3">
+            <div class="form-group" [class.has-error]="addSpotForm.submitted && !bookedState.valid">
+                <label class="control-label col-sm-3">I am adding:</label>
+                <div class="col-sm-6">
+                    <select class="form-control" [(ngModel)]="viewModel.bookedState" #bookedState="ngModel" name="bookedState" required>
+                        <option *ngFor="let bookedStateOption of viewModel.bookedStateOptions" [value]="bookedStateOption.value" [selected]="bookedStateOption.selected">
+                            {{bookedStateOption.text}}
+                        </option>
+                    </select>
+                    <p class="option-info" *ngIf="viewModel.bookedState === 'available'">
+                        Use this option if you are a promoter or venue owner and you have an empty spot that you need filling.
+                    </p>
+                    <p class="option-info" *ngIf="viewModel.bookedState === 'booked'">
+                        Use this option if you are an agent or act that has already been booked and you want venues and promoters to see that you are in town.
+                    </p>
+                    <div *ngIf="addSpotForm.submitted">
+                        <div class="help-block" *ngIf="bookedState.errors && bookedState.errors.required">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !scheduledFor.valid">
                 <label class="control-label col-sm-3">Date and time of spot:</label>
                 <div class="col-sm-6">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListViewModel } from './viewModels/listSpotViewModel';
 import { SpotService } from '../../../services/spot/spot.service';
 import { ElementState } from '../../../common/elementState';
+import { RowViewModel } from './viewModels/rowViewModel';
 
 @Component({
     moduleId: module.id,
@@ -27,15 +28,24 @@ export class ListSpotsComponent implements OnInit {
         this.spotService.getForCurrentUser().subscribe(
             response => {
                 this.viewModel.spots = response.map(spot => {
-                    return {
+                    let viewModelRow: RowViewModel = {
                         id: spot.id,
                         scheduledFor: spot.scheduledFor,
                         durationMinutes: spot.durationMinutes,
                         townName: spot.town.name,
                         venueName: spot.venueName,
                         description: spot.description,
-                        imageUrl: spot.user.imageUrl
+                        imageUrl: spot.user.imageUrl,
+                        bookedStateDescription: null
                     };
+                    
+                    if (spot.bookedState === 'AVAILABLE') {
+                        viewModelRow.bookedStateDescription = 'A spot I have available';
+                    } else if (spot.bookedState === 'BOOKED') {
+                        viewModelRow.bookedStateDescription = 'A spot I am booked for';
+                    }
+                    
+                    return viewModelRow;
                 });
 
                 if(this.viewModel.spots.length > 0) {

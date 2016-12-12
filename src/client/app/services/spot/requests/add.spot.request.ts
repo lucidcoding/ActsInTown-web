@@ -4,4 +4,5 @@ export class AddSpotRequest {
     townId: string;
     venueName: string;
     description: string;
+    bookedState: string;
 }

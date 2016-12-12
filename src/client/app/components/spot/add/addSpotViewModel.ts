@@ -2,6 +2,8 @@ import { Option } from '../../../common/option.common';
 import { ElementState } from '../../../common/elementState';
 
 export class AddSpotViewModel {
+    bookedState: string;
+    bookedStateOptions: Option[];
     scheduledFor: Date;
     durationMinutes: number;
     durationMinutesOptions: Option[];

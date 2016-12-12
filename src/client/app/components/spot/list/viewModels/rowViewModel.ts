@@ -6,4 +6,5 @@ export class RowViewModel {
     venueName: string;
     description: string;
     imageUrl: string;
+    bookedStateDescription: string;
 }
