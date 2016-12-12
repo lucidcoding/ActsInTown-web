@@ -4,4 +4,5 @@ export class SearchSpotsResultsViewModelRow {
     durationMinutes: number;
     townName: string;
     venueName: string;
+    username: string;
 }

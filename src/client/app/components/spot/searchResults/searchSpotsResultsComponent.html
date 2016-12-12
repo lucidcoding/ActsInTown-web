@@ -30,13 +30,17 @@
                         </a>
                         <div class="details">
                             <h2>
-                            <i class="fa fa-clock-o"></i>
-                            {{spot.scheduledFor | date: 'd MMM yyyy HH:mm' }}, {{spot.durationMinutes}} mins
-                        </h2>
+                                <i class="fa fa-clock-o"></i>
+                                {{spot.scheduledFor | date: 'd MMM yyyy HH:mm' }}, {{spot.durationMinutes}} mins
+                            </h2>
                             <h3 class="subtitle">
-                            <i class="fa fa-map-marker"></i>
-                            {{spot.venueName}}, {{spot.townName}}
-                        </h3>
+                                <i class="fa fa-map-marker"></i>
+                                {{spot.venueName}}, {{spot.townName}}
+                            </h3>
+                            <h3 class="subtitle">
+                                <i class="fa fa-user"></i>
+                                {{spot.username}}
+                            </h3>
                             <p>
                                 Brief description of the slot - who it would be suitable for, what kind of crowd etc.
                             </p>

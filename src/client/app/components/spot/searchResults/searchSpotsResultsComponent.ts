@@ -44,7 +44,8 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                             scheduledFor: spot.scheduledFor,
                             durationMinutes: spot.durationMinutes,
                             townName: spot.town.name,
-                            venueName: spot.venueName
+                            venueName: spot.venueName,
+                            username: spot.user.firstName + ' ' + spot.user.lastName
                         };
                     });
 
