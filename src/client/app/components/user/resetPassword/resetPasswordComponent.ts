@@ -44,6 +44,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             return;
         }
 
+        this.viewModel.elementState = ElementState.Loading;
+        
         var request: ResetPasswordRequest = {
             username: this.viewModel.email,
             passwordResetToken: this.viewModel.passwordResetToken,
@@ -51,13 +53,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             confirmPassword: this.viewModel.confirmPassword
         };
 
-        this.userService.resetPassword(request)
-            .subscribe(
+        this.userService.resetPassword(request).subscribe(
             response => {
-                console.log('OK');
+                this.viewModel.elementState = ElementState.Submitted;
             },
             error => {
-                console.log('Error:' + error);
+                this.viewModel.elementState = ElementState.SubmissionError;
             },
             () => {   
                 //Do nothing.
