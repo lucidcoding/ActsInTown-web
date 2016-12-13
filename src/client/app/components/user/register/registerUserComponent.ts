@@ -28,6 +28,7 @@ export class RegisterUserComponent implements OnInit {
             email: null,
             alreadyRegistered: false,
             password: null,
+            //passwordPattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)\\S{6,15}$',
             confirmPassword: null,
             firstName: null,
             lastName: null,

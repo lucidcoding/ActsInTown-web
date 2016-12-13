@@ -6,9 +6,17 @@ import { ResetPasswordComponent } from './resetPasswordComponent';
 import { UserService } from '../../../services/user/user.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
+import { PasswordValidatorModule } from '../../../directives/passwordValidator/passwordValidatorModule';
 
 @NgModule({
-    imports: [CommonModule, CompareValidatorModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
+    imports: [
+        CommonModule,
+        CompareValidatorModule,
+        FormsModule,
+        LoadingSpinnerOverlayModule,
+        PasswordValidatorModule,
+        RouterModule
+    ],
     declarations: [ResetPasswordComponent],
     exports: [ResetPasswordComponent],
     providers: [

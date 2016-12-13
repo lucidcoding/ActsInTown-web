@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user/user.service';
 import { UserTypeService } from '../../../services/userType/userType.service';
 import { CompareValidatorModule } from '../../../directives/compareValidator/compareValidatorModule';
 import { MustBeTrueValidatorModule } from '../../../directives/mustBeTrueValidator/mustBeTrueValidatorModule';
+import { PasswordValidatorModule } from '../../../directives/passwordValidator/passwordValidatorModule';
 import { RequiredIfValidatorModule } from '../../../directives/requiredIfValidator/requiredIfValidatorModule';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
@@ -18,6 +19,7 @@ import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/
         FormsModule,
         LoadingSpinnerOverlayModule,
         MustBeTrueValidatorModule,
+        PasswordValidatorModule,
         RequiredIfValidatorModule,
         RouterModule
     ],

@@ -7,6 +7,7 @@ export class RegisterUserViewModel {
 	email: string;
 	alreadyRegistered: boolean;
 	password: string;
+    //passwordPattern: string;
 	confirmPassword: string;
 	firstName: string;
 	lastName: string;
