@@ -32,7 +32,9 @@ export const routes: Routes = [
   { path: 'user/register-success', component: RegisterUserSuccessComponent },
   { path: 'user/reset-password/:passwordResetToken', component: ResetPasswordComponent },
   { path: 'user/verify/:verificationToken', component: VerifyUserComponent },
-  { path: 'spot/search/:bookedState', component: SearchSpotsComponent, canActivate: [LoggedInGuard] },
-  { path: 'spot/search-results', component: SearchSpotsResultsComponent, canActivate: [LoggedInGuard] },
+  //{ path: 'spot/search/:bookedState', component: SearchSpotsComponent, canActivate: [LoggedInGuard] },
+  { path: 'spot/search/:bookedState', component: SearchSpotsComponent },
+  //{ path: 'spot/search-results', component: SearchSpotsResultsComponent, canActivate: [LoggedInGuard] },
+  { path: 'spot/search-results', component: SearchSpotsResultsComponent },
   ...AboutRoutes
 ];

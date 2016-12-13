@@ -23,6 +23,21 @@ export class ListSpotsComponent implements OnInit {
     public ngOnInit() {
         this.getSpots();
     }
+    
+    public delete(event: any, id: string) { //event is MouseEvent but can't find what package that is in!
+        event.preventDefault();
+        
+        this.spotService.delete(id).subscribe(
+            response => {
+                this.getSpots();
+            },
+            error => {
+                console.log();
+            },
+            () => {
+                //
+            });
+    }
 
     private getSpots() {
         this.spotService.getForCurrentUser().subscribe(
@@ -60,20 +75,5 @@ export class ListSpotsComponent implements OnInit {
             () => {
                 //
             });    
-    }
-    
-    public delete(event: any, id: string) { //event is MouseEvent but can't find what package that is in!
-        event.preventDefault();
-        
-        this.spotService.delete(id).subscribe(
-            response => {
-                this.getSpots();
-            },
-            error => {
-                console.log();
-            },
-            () => {
-                //
-            });
     }
 }

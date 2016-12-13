@@ -2,7 +2,6 @@ import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditUserViewModel } from './editUserViewModel';
 import { EditUserRequest } from '../../../services/user/requests/editUserRequest';
-import { ChangePasswordRequest } from '../../../services/user/requests/changePasswordRequest';
 import { UserTypeService } from '../../../services/userType/userType.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';

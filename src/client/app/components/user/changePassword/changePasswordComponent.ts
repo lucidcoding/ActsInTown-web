@@ -82,7 +82,7 @@ export class ChangePasswordComponent implements OnInit {
             },
             error => {
                 if (error.status === 400) {
-                    this.viewModel.elementState = ElementState.Ready
+                    this.viewModel.elementState = ElementState.Ready;
                     this.viewModel.incorrectOldPassword = true;
                 } else {
                     this.viewModel.elementState = ElementState.SubmissionError;

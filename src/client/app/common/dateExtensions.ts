@@ -15,9 +15,9 @@ Date.prototype.roundUpTime = function(): Date {
     }
     
     return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), newDate.getMinutes(), 0);
-}
+};
 
 Date.prototype.datePart = function(): Date {
     var date: Date = this;
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
+};

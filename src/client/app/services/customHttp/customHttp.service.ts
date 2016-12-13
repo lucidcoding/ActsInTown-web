@@ -1,4 +1,4 @@
-import { Inject, Injectable, OpaqueToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, Response, RequestOptions, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
@@ -13,38 +13,6 @@ export class CustomHttpService {
         private configService: ConfigService,
         private authenticationService: AuthenticationService) {
     }
-
-    private addAuthenticationHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
-        if (options == null) {
-            options = new RequestOptions();
-        }
-        
-        if (options.headers == null) {
-            options.headers = new Headers();
-        }
-        
-        options.headers.delete('Authorization');
-        
-        if (localStorage.getItem('accessToken')) {
-            options.headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-        }
-        
-        return options;
-    }
-    
-    private addContentTypeHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
-        if (options == null) {
-            options = new RequestOptions();
-        }
-        
-        if (options.headers == null) {
-            options.headers = new Headers();
-        }
-        
-        options.headers.append('Content-Type', 'application/json');
-
-        return options;
-    }
     
     request(url: string, options?: RequestOptionsArgs): Observable<Response> {
         options = this.addAuthenticationHeaders(options);
@@ -55,7 +23,7 @@ export class CustomHttpService {
                     return this.authenticationService.refresh()
                         .flatMap(refreshResult => {
                             options = this.addAuthenticationHeaders(options);
-                            return this.http.request(url, options)
+                            return this.http.request(url, options);
                         })
                         .catch((refreshError: Response) => {
                             if (refreshError && refreshError.status === 401) {
@@ -64,8 +32,7 @@ export class CustomHttpService {
                             
                             return Observable.throw(refreshError);
                         });
-                }
-                else {
+                } else {
                     return Observable.throw(initialError);
                 }
             });
@@ -97,5 +64,37 @@ export class CustomHttpService {
         options = this.addAuthenticationHeaders(options);
         options.method = 'delete';
         return this.request(url, options);
+    }
+
+    private addAuthenticationHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
+        if (typeof options === 'undefined' || options === null) {
+            options = new RequestOptions();
+        }
+        
+        if (typeof options.headers === 'undefined' || options.headers === null) {
+            options.headers = new Headers();
+        }
+        
+        options.headers.delete('Authorization');
+        
+        if (localStorage.getItem('accessToken')) {
+            options.headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+        }
+        
+        return options;
+    }
+    
+    private addContentTypeHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
+        if (typeof options === 'undefined' || options === null) {
+            options = new RequestOptions();
+        }
+        
+        if (typeof options.headers === 'undefined' || options.headers === null) {
+            options.headers = new Headers();
+        }
+        
+        options.headers.append('Content-Type', 'application/json');
+
+        return options;
     }
 }

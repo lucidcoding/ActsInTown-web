@@ -42,7 +42,10 @@
                                 {{spot.username}}
                             </h3>
                             <p>
-                                Brief description of the slot - who it would be suitable for, what kind of crowd etc.
+                                {{spot.description}}
+                            </p>
+                            <p>
+                                <a href="" (click)="enquireAbout($event, spot.id)">Enquire</a>
                             </p>
                         </div>
                     </div>

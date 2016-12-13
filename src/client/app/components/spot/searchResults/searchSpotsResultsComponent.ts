@@ -65,6 +65,21 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
         });
     }
 
+    enquireAbout(event: any, id: string) { //event is MouseEvent but can't find what package that is in!
+        event.preventDefault();
+        
+        this.spotService.enquireAbout(id, null).subscribe(
+            response => {
+                alert('An email has been sent to the user who registered this spot.');
+            },
+            error => {
+                alert('There was an error enquiring about this spot.');
+            },
+            () => {
+                //
+            });
+    }
+    
     ngOnDestroy() {
         this.sub.unsubscribe();
     }

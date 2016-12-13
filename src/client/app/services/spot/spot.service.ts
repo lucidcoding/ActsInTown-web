@@ -1,9 +1,10 @@
-import { Inject, Injectable, OpaqueToken } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
 import { AddSpotRequest } from './requests/add.spot.request';
+import { EnquireAboutSpotRequest } from './requests/enquireAboutSpotRequest';
 import { Spot } from './responses/spot.response';
 
 //custom http for security and headers?
@@ -34,7 +35,11 @@ export class SpotService {
         	.map(response => response.json());
     }
     
-    delete(id: string) {
+    delete(id: string): Observable<Response> {
 		return this.http.delete(this.configService.getApiBaseUrl() + 'spot/' + id, null);
+    }
+    
+    enquireAbout(id: string, request: EnquireAboutSpotRequest): Observable<Response> {
+        return this.http.put(this.configService.getApiBaseUrl() + 'spot/enquire-about/' + id, request, null);
     }
 }

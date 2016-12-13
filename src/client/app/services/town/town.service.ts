@@ -1,5 +1,4 @@
-import { Inject, Injectable, OpaqueToken } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';

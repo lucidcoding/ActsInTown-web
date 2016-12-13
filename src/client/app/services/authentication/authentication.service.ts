@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OpaqueToken } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../config/config.service';
@@ -53,11 +53,11 @@ export class AuthenticationService {
     }
 
     login(request: LoginRequest): Observable<Response> {
-        let encoded = btoa("my-trusted-client:");
+        let encoded = btoa('my-trusted-client:');
 
         let headers = new Headers({
-            "Authorization": "Basic " + encoded,
-            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+            'Authorization': 'Basic ' + encoded,
+            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         });
 
         let options = new RequestOptions({ headers: headers });
@@ -69,11 +69,11 @@ export class AuthenticationService {
     }
 
     refresh(): Observable<Response> {
-        let encoded = btoa("my-trusted-client:");
+        let encoded = btoa('my-trusted-client:');
 
         let headers = new Headers({
-            "Authorization": "Basic " + encoded,
-            "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+            'Authorization': 'Basic ' + encoded,
+            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
         });
 
         let options = new RequestOptions({ headers: headers });

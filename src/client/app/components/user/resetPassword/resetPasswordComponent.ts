@@ -2,8 +2,6 @@ import { Component, OnDestroy, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ResetPasswordViewModel } from './resetPasswordViewModel';
 import { ResetPasswordRequest } from '../../../services/user/requests/resetPasswordRequest';
-import { UserTypeService } from '../../../services/userType/userType.service';
-import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService} from '../../../services/user/user.service';
 import { ElementState } from '../../../common/elementState';
 
