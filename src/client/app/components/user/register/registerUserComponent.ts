@@ -88,6 +88,7 @@ export class RegisterUserComponent implements OnInit {
             error => {
                 if (error.status === 409) {
                     this.viewModel.alreadyRegistered = true;
+                    this.viewModel.elementState = ElementState.Ready;
                 } else {
                     this.viewModel.elementState = ElementState.SubmissionError;
                 }

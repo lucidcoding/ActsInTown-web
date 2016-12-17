@@ -17,7 +17,7 @@
             </div>
         </div>
         <form (ngSubmit)="onSubmit(registerUserForm)" #registerUserForm="ngForm" class="form-horizontal" role="form"
-                novalidate *ngIf="viewModel.elementState === 3">
+                novalidate [hidden]="viewModel.elementState !== 3">
             <div class="form-group" [class.has-error]="registerUserForm.submitted && !type.valid">
                 <label class="control-label col-sm-4">What type of user are you?
                     <br/>(You can be more than one)</label>
