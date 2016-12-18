@@ -22,6 +22,7 @@ var onlyDirs = function (es: any) {
 export = () => {
   return gulp.src([
     join(APP_SRC, '**'),
+    join(APP_SRC, '.*'),
     '!' + join(APP_SRC, '**', '*.ts'),
     '!' + join(APP_SRC, '**', '*.css'),
     '!' + join(APP_SRC, '**', '*.html'),
