@@ -77,6 +77,12 @@ export class SearchSpotsComponent implements OnInit, OnDestroy {
             });
     }
 
+    startDateChanged(newStartDate: Date) {
+        if (newStartDate > this.viewModel.endDate) {
+            this.viewModel.endDate = newStartDate;
+        }
+    }
+    
     filterTowns(countyId: string) {
         this.viewModel.elementState = ElementState.Loading;
         this.viewModel.townOptionsLoaded = false;

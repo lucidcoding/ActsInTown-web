@@ -18,6 +18,10 @@ export class DateSelectorComponent implements OnInit, OnChanges {
     years: Option[];
 
     ngOnInit() {
+        this.setValues();
+    }
+    
+    setValues() {
         //this.value = new Date();
         this.days = [];
         this.months = [];
@@ -48,7 +52,7 @@ export class DateSelectorComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: any) {
-        //This needs implementing for when value is changed externally.
+        this.setValues();
     }
 
     dayChanged(day: string) {

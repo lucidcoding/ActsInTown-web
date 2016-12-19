@@ -22,14 +22,14 @@
             <div class="form-group" [class.has-error]="searchAvailableSpotsForm.submitted && !startDate.valid">
                 <label class="control-label col-sm-4">Start date:</label>
                 <div class="col-sm-4">
-                    <sd-date-selector [(value)]="viewModel.startDate"></sd-date-selector>
+                    <sd-date-selector [(value)]="viewModel.startDate" (valueChange)="startDateChanged($event)"></sd-date-selector>
                     <input type="hidden" [(ngModel)]="viewModel.startDate" #startDate="ngModel" name="startDate" futureDate />
                     <div *ngIf="searchAvailableSpotsForm.submitted">
                         <div class="help-block" *ngIf="startDate.errors && startDate.errors.futureDate">
                             Date must not be in the past.
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
             <div class="form-group" [class.has-error]="searchAvailableSpotsForm.submitted && !endDate.valid">
                 <label class="control-label col-sm-4">End date:</label>
