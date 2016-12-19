@@ -14,7 +14,8 @@ export class PasswordValidatorDirective implements Validator {
     }
     
     validate(c: AbstractControl): { [key: string]: any } {
-        var pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)\\S{6,15}$');
+        //var pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W)\\S{6,15}$');
+        var pattern = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\\S{6,15}$');
 
         if(typeof c.value !== 'undefined' && c.value !== null && c.value !== '' && !pattern.test(c.value)) {
             return {
