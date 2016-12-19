@@ -8,11 +8,11 @@ import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { DateTimeSelectorModule } from '../../shared/dateTimeSelector/dateTimeSelectorModule';
-import { FutureDateValidatorModule } from '../../../directives/futureDateValidator/futureDateValidatorModule';
+import { FutureDateTimeValidatorModule } from '../../../directives/futureDateTimeValidator/futureDateTimeValidatorModule';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, DateTimeSelectorModule, FormsModule, FutureDateValidatorModule, LoadingSpinnerOverlayModule, RouterModule ],
+    imports: [CommonModule, DateTimeSelectorModule, FormsModule, FutureDateTimeValidatorModule, LoadingSpinnerOverlayModule, RouterModule ],
     declarations: [AddSpotComponent],
     exports: [AddSpotComponent],
     providers: [
