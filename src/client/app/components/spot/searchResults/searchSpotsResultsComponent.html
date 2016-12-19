@@ -31,11 +31,12 @@
                         <div class="details">
                             <h2>
                                 <i class="fa fa-clock-o"></i>
-                                {{spot.scheduledFor | date: 'd MMM yyyy HH:mm' }}, {{spot.durationMinutes}} mins
+                                {{spot.scheduledFor | date: 'd MMM yyyy HH:mm' }}
+                                <ng-container *ngIf="spot.durationMinutes !== null">, {{spot.durationMinutes}} mins</ng-container>
                             </h2>
                             <h3 class="subtitle">
                                 <i class="fa fa-map-marker"></i>
-                                {{spot.venueName}}, {{spot.townName}}
+                                <ng-container *ngIf="spot.venueName !== null">{{spot.venueName}}, </ng-container>{{spot.townName}}
                             </h3>
                             <h3 class="subtitle">
                                 <i class="fa fa-user"></i>

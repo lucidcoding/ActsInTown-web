@@ -73,18 +73,13 @@
                             {{durationMinutesOption.text}}
                         </option>
                     </select>
-                    <input type="hidden" required [(ngModel)]="viewModel.durationMinutes" #durationMinutes="ngModel" name="durationMinutes" required/>
-                    <div *ngIf="addSpotForm.submitted">
-                        <div class="help-block" *ngIf="durationMinutes.errors && durationMinutes.errors.required">
-                            Duration field is required.
-                        </div>
-                    </div>
+                    <input type="hidden" [(ngModel)]="viewModel.durationMinutes" #durationMinutes="ngModel" name="durationMinutes" />
                 </div>
             </div>
             <div class="form-group" >
                 <label class="control-label col-sm-3">County:</label>
                 <div class="col-sm-6">
-                    <select [(ngModel)]="viewModel.countyId" #countyId="ngModel" name="countyId" required class="form-control loading" 
+                    <select [(ngModel)]="viewModel.countyId" #countyId="ngModel" name="countyId" class="form-control loading" 
                         [disabled]="!viewModel.countyOptionsLoaded" (change)="filterTowns($event.target.value)">
                         <option *ngFor="let countyOption of viewModel.countyOptions" [value]="countyOption.value" [selected]="countyOption.selected">
                             {{countyOption.text}}
@@ -112,13 +107,8 @@
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !venueName.valid">
                 <label class="control-label col-sm-3">Venue:</label>
                 <div class="col-sm-6">
-                    <input type="text" [(ngModel)]="viewModel.venueName" #venueName="ngModel" name="venueName" required class="form-control"
+                    <input type="text" [(ngModel)]="viewModel.venueName" #venueName="ngModel" name="venueName" class="form-control"
                     maxlength="50" />
-                    <div *ngIf="addSpotForm.submitted">
-                        <div class="help-block" *ngIf="venueName.errors && venueName.errors.required">
-                            Venue field is required.
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="form-group" [class.has-error]="addSpotForm.submitted && !description.valid">

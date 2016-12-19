@@ -46,7 +46,7 @@
             <div class="form-group" >
                 <label class="control-label col-sm-4">County:</label>
                 <div class="col-sm-4">
-                    <select [(ngModel)]="viewModel.countyId" #countyId="ngModel" name="countyId" required class="form-control loading" 
+                    <select [(ngModel)]="viewModel.countyId" #countyId="ngModel" name="countyId" class="form-control loading" 
                         [disabled]="!viewModel.countyOptionsLoaded" (change)="filterTowns($event.target.value)">
                         <option *ngFor="let countyOption of viewModel.countyOptions" [value]="countyOption.value" [selected]="countyOption.selected">
                             {{countyOption.text}}
