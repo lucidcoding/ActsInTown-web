@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddSpotComponent } from './addSpotComponent';
+import { CountyService } from '../../../services/county/countyService';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
@@ -16,6 +17,7 @@ import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/
     exports: [AddSpotComponent],
     providers: [
         SpotService,
+        CountyService,
         TownService,
         CustomHttpService]
 })

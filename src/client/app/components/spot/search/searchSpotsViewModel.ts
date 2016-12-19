@@ -5,6 +5,9 @@ export class SearchSpotsViewModel {
     bookedState: string;
     startDate: Date;
     endDate: Date;
+    countyId: string;
+    countyOptions: Option[];
+    countyOptionsLoaded: boolean;
     townId: string;
     townOptions: Option[];
     townOptionsLoaded: boolean;

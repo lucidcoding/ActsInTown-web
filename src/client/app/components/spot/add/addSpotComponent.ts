@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AddSpotViewModel } from './addSpotViewModel';
 import { AddSpotRequest } from '../../../services/spot/requests/add.spot.request';
+import { CountyService } from '../../../services/county/countyService';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { Option } from '../../../common/option.common';
@@ -17,7 +18,8 @@ import '../../../common/dateExtensions';
 export class AddSpotComponent implements OnInit {
     public viewModel: AddSpotViewModel;
 
-    constructor(private spotService: SpotService,
+    constructor(private countyService: CountyService,
+                private spotService: SpotService,
                 private townService: TownService,
                 private router: Router) {
         var date = new Date();
@@ -29,6 +31,9 @@ export class AddSpotComponent implements OnInit {
             scheduledFor: date,
             durationMinutes: null,
             durationMinutesOptions: [],
+            countyId: null,
+            countyOptions: [],
+            countyOptionsLoaded: false,
             townId: null,
             townOptions: [],
             townOptionsLoaded: false,
@@ -55,7 +60,23 @@ export class AddSpotComponent implements OnInit {
                 
                 this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
                 this.viewModel.townOptionsLoaded = true;
-                this.viewModel.elementState = ElementState.Ready;
+                
+                this.countyService.get().subscribe(
+                    response => {
+                        this.viewModel.countyOptions = response.map(county => {
+                            return new Option(county.name, county.id, false);
+                        });
+        
+                        this.viewModel.countyOptions.splice(0, 0, new Option('Please select...', null, true)); 
+                        this.viewModel.countyOptionsLoaded = true;                       
+                        this.viewModel.elementState = ElementState.Ready;
+                    },
+                    error => {
+                        this.viewModel.elementState = ElementState.LoadingError;
+                    },
+                    () => {
+                        //Do nothing.
+                    });
             },
             error => {
                 this.viewModel.elementState = ElementState.LoadingError;
@@ -83,6 +104,47 @@ export class AddSpotComponent implements OnInit {
         }
     }
 
+    filterTowns(countyId: string) {
+        this.viewModel.elementState = ElementState.Loading;
+        this.viewModel.townOptionsLoaded = false;
+        
+        if(typeof countyId === 'undefined' || countyId === null || countyId === 'null') {
+            this.townService.get().subscribe(
+                response => {
+                    this.viewModel.townOptions = response.map(town => {
+                        return new Option(town.name, town.id, false);
+                    });
+    
+                    this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
+                    this.viewModel.townOptionsLoaded = true;
+                    this.viewModel.elementState = ElementState.Ready;
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.LoadingError;
+                },
+                () => {
+                    //Do nothing.
+                });
+        } else {
+            this.townService.getForCounty(countyId).subscribe(
+                response => {
+                    this.viewModel.townOptions = response.map(town => {
+                        return new Option(town.name, town.id, false);
+                    });
+    
+                    this.viewModel.townOptions.splice(0, 0, new Option('Please select...', null, true));
+                    this.viewModel.townOptionsLoaded = true;
+                    this.viewModel.elementState = ElementState.Ready;
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.LoadingError;
+                },
+                () => {
+                    //Do nothing.
+                });
+        }
+    }
+    
     onSubmit(addSpotForm: any) {
         if (!addSpotForm.valid) {
             return;

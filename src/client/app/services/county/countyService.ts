@@ -2,22 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
-import { Town } from './responses/town.response';
+import { County } from './responses/countyResponse';
 
 @Injectable()
-export class TownService {
+export class CountyService {
 	constructor( 
 			private http: CustomHttpService,
 			private configService: ConfigService) {
 	}
 
-	get(): Observable<Town[]> {
-		return this.http.get(this.configService.getApiBaseUrl() + 'town')
-        	.map(response => response.json());
-	}
-    
-    getForCounty(countyId: string): Observable<Town[]> {
-		return this.http.get(this.configService.getApiBaseUrl() + 'town/for-county/' + countyId)
+	get(): Observable<County[]> {
+		return this.http.get(this.configService.getApiBaseUrl() + 'county')
         	.map(response => response.json());
 	}
 }

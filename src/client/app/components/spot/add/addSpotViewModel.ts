@@ -7,6 +7,9 @@ export class AddSpotViewModel {
     scheduledFor: Date;
     durationMinutes: number;
     durationMinutesOptions: Option[];
+    countyId: string;
+    countyOptions: Option[];
+    countyOptionsLoaded: boolean;
     townId: string;
     townOptions: Option[];
     townOptionsLoaded: boolean;
