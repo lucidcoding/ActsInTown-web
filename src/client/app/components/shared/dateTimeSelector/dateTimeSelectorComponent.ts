@@ -43,8 +43,11 @@ export class DateTimeSelectorComponent implements OnInit, OnChanges {
             ));
         }
 
-        var months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 
-            'July', 'August', 'September', 'October', 'November', 'December'];
+        /*var months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 
+            'July', 'August', 'September', 'October', 'November', 'December'];*/
+        
+        var months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         for (var monthIndex = 0; monthIndex < 12; monthIndex++) {
             this.months.push(new Option(months[monthIndex], monthIndex.toString(), monthIndex === this.month));
@@ -111,10 +114,12 @@ export class DateTimeSelectorComponent implements OnInit, OnChanges {
 
     setDays() {
         var daysInMonth = this.getDaysInMonth();
+        var dayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];     
         this.days = [];
 
         for (var dayIndex = 1; dayIndex <= daysInMonth; dayIndex++) {
-            this.days.push(new Option(dayIndex.toString(), dayIndex.toString(), dayIndex === this.day));
+            var currentDate = new Date(this.year, this.month, dayIndex);
+            this.days.push(new Option(dayNames[currentDate.getDay()] + ', ' + dayIndex.toString(), dayIndex.toString(), dayIndex === this.day));
         }
     }
 
