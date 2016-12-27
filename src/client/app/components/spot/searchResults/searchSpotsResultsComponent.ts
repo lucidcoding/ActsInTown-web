@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SearchSpotsResultsViewModel } from './viewModels/searchSpotsResultsViewModel';
 import { SpotService } from '../../../services/spot/spot.service';
+import { Spot } from '../../../services/spot/responses/spot.response';
 import { TownService } from '../../../services/town/town.service';
 import { ElementState } from '../../../common/elementState';
+import '../../../common/dateExtensions';
 
 @Component({
     moduleId: module.id,
@@ -17,8 +19,8 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
     private sub: any;
 
     constructor(private spotService: SpotService,
-                private townService: TownService,
-                private route: ActivatedRoute) {
+        private townService: TownService,
+        private route: ActivatedRoute) {
         this.viewModel = {
             bookedState: null,
             startDate: null,
@@ -38,19 +40,46 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
 
             this.spotService.search(startDate, endDate, townId, this.viewModel.bookedState.toUpperCase()).subscribe(
                 response => {
-                    this.viewModel.spots = response.map(spot => {
-                        return {
+                    this.viewModel.spots = response.map((spot: Spot) => {
+                        let viewModelRow = {
                             id: spot.id,
-                            scheduledFor: spot.scheduledFor,
-                            durationMinutes: spot.durationMinutes,
-                            townName: spot.town.name,
-                            venueName: spot.venueName,
+                            //scheduledFor: spot.scheduledFor,
+                            //durationMinutes: spot.durationMinutes,
+                            //townName: spot.town.name,
+                            //venueName: spot.venueName,
+                            dateTimeHeading: '',
+                            locationHeader: '',
                             username: spot.user.firstName + ' ' + spot.user.lastName
                         };
+                    
+                        //Seems to be some sort of bug in Angular2 which means I have to do this?
+                        let scheduledForAny = <any>spot.scheduledFor;
+                        let scheduledFor = new Date(scheduledForAny);
+
+                        viewModelRow.dateTimeHeading =
+                            scheduledFor.getTwoCharacterDate() + ' ' +
+                            scheduledFor.getShortMonthString() + ' ' +
+                            scheduledFor.getFullYear() + ' ' +
+                            scheduledFor.getHours() + ':' +
+                            scheduledFor.getMinutes();
+
+                        if (typeof spot.durationMinutes !== 'undefined' && spot.durationMinutes !== null) {
+                            viewModelRow.dateTimeHeading = viewModelRow.dateTimeHeading + ', ' +
+                                spot.durationMinutes + 'mins';
+                        }
+
+                        viewModelRow.locationHeader = '';
+
+                        if (typeof spot.venueName !== 'undefined' && spot.venueName !== null) {
+                            viewModelRow.locationHeader = viewModelRow.locationHeader + spot.venueName + ', ';
+                        }
+
+                        viewModelRow.locationHeader = viewModelRow.locationHeader + spot.town.name;
+
+                        return viewModelRow;
                     });
 
-
-                    if(this.viewModel.spots.length > 0) {
+                    if (this.viewModel.spots.length > 0) {
                         this.viewModel.spotsState = ElementState.Ready;
                     } else {
                         this.viewModel.spotsState = ElementState.NoData;
@@ -67,7 +96,7 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
 
     enquireAbout(event: any, id: string) { //event is MouseEvent but can't find what package that is in!
         event.preventDefault();
-        
+
         this.spotService.enquireAbout(id, null).subscribe(
             response => {
                 alert('An email has been sent to the user who registered this spot.');
@@ -79,7 +108,7 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                 //
             });
     }
-    
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }

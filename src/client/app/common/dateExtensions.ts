@@ -1,6 +1,9 @@
 interface Date {
     roundUpTime: () => Date;
     datePart: () => Date;
+    getMonthString: () => string;
+    getShortMonthString: () => string;
+    getTwoCharacterDate: () => string;
 }
 
 Date.prototype.roundUpTime = function(): Date {
@@ -21,3 +24,27 @@ Date.prototype.datePart = function(): Date {
     var date: Date = this;
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
+
+Date.prototype.getMonthString = function(): string {
+    var date: Date = this;
+    
+    var months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 
+        'July', 'August', 'September', 'October', 'November', 'December'];
+            
+    return months[date.getMonth()];
+}
+
+Date.prototype.getShortMonthString = function(): string {
+    var date: Date = this;
+    
+    var months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+    return months[date.getMonth()];
+}
+
+Date.prototype.getTwoCharacterDate = function(): string {
+    var date: Date = this;
+    var dateString = '0'+ date.getDate();
+    return dateString.substring(dateString.length - 2, 2);
+}

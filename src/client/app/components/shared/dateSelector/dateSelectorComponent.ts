@@ -94,7 +94,8 @@ export class DateSelectorComponent implements OnInit, OnChanges {
 
         for (var dayIndex = 1; dayIndex <= daysInMonth; dayIndex++) {
             var currentDate = new Date(this.year, this.month, dayIndex);
-            this.days.push(new Option(dayNames[currentDate.getDay()] + ', ' + dayIndex.toString(), dayIndex.toString(), dayIndex === this.day));
+            this.days.push(new Option(dayNames[currentDate.getDay()] + ', ' + 
+                dayIndex.toString(), dayIndex.toString(), dayIndex === this.day));
         }
     }
 
