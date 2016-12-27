@@ -5,6 +5,7 @@ import { Spot } from '../../../services/spot/responses/spot.response';
 import { ElementState } from '../../../common/elementState';
 import { RowViewModel } from './viewModels/rowViewModel';
 import '../../../common/dateExtensions';
+import '../../../common/numberExtensions';
 
 @Component({
     moduleId: module.id,
@@ -47,10 +48,6 @@ export class ListSpotsComponent implements OnInit {
                 this.viewModel.spots = response.map((spot: Spot) => {
                     let viewModelRow: RowViewModel = {
                         id: spot.id,
-                        //scheduledFor: spot.scheduledFor,
-                        //durationMinutes: spot.durationMinutes,
-                        //townName: spot.town.name,
-                        //venueName: spot.venueName,
                         dateTimeHeading: '',
                         locationHeader: '',
                         description: spot.description,
@@ -63,15 +60,15 @@ export class ListSpotsComponent implements OnInit {
                     let scheduledFor = new Date(scheduledForAny);
 
                     viewModelRow.dateTimeHeading =
-                        scheduledFor.getTwoCharacterDate() + ' ' +
+                        padLeft(scheduledFor.getDate()) + ' ' +
                         scheduledFor.getShortMonthString() + ' ' +
                         scheduledFor.getFullYear() + ' ' +
-                        scheduledFor.getHours() + ':' +
-                        scheduledFor.getMinutes();
+                        padLeft(scheduledFor.getHours()) + ':' +
+                        padLeft(scheduledFor.getMinutes());
 
                     if (typeof spot.durationMinutes !== 'undefined' && spot.durationMinutes !== null) {
                         viewModelRow.dateTimeHeading = viewModelRow.dateTimeHeading + ', ' +
-                            spot.durationMinutes + 'mins';
+                            spot.durationMinutes + ' mins';
                     }
 
                     viewModelRow.locationHeader = '';

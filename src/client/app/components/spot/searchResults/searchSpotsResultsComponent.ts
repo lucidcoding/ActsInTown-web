@@ -6,6 +6,7 @@ import { Spot } from '../../../services/spot/responses/spot.response';
 import { TownService } from '../../../services/town/town.service';
 import { ElementState } from '../../../common/elementState';
 import '../../../common/dateExtensions';
+import '../../../common/numberExtensions';
 
 @Component({
     moduleId: module.id,
@@ -43,10 +44,6 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                     this.viewModel.spots = response.map((spot: Spot) => {
                         let viewModelRow = {
                             id: spot.id,
-                            //scheduledFor: spot.scheduledFor,
-                            //durationMinutes: spot.durationMinutes,
-                            //townName: spot.town.name,
-                            //venueName: spot.venueName,
                             dateTimeHeading: '',
                             locationHeader: '',
                             username: spot.user.firstName + ' ' + spot.user.lastName
@@ -57,15 +54,15 @@ export class SearchSpotsResultsComponent implements OnInit, OnDestroy {
                         let scheduledFor = new Date(scheduledForAny);
 
                         viewModelRow.dateTimeHeading =
-                            scheduledFor.getTwoCharacterDate() + ' ' +
+                            padLeft(scheduledFor.getDate()) + ' ' +
                             scheduledFor.getShortMonthString() + ' ' +
                             scheduledFor.getFullYear() + ' ' +
-                            scheduledFor.getHours() + ':' +
-                            scheduledFor.getMinutes();
+                            padLeft(scheduledFor.getHours()) + ':' +
+                            padLeft(scheduledFor.getMinutes());
 
                         if (typeof spot.durationMinutes !== 'undefined' && spot.durationMinutes !== null) {
                             viewModelRow.dateTimeHeading = viewModelRow.dateTimeHeading + ', ' +
-                                spot.durationMinutes + 'mins';
+                                spot.durationMinutes + ' mins';
                         }
 
                         viewModelRow.locationHeader = '';

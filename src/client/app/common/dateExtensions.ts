@@ -3,7 +3,6 @@ interface Date {
     datePart: () => Date;
     getMonthString: () => string;
     getShortMonthString: () => string;
-    getTwoCharacterDate: () => string;
 }
 
 Date.prototype.roundUpTime = function(): Date {
@@ -32,7 +31,7 @@ Date.prototype.getMonthString = function(): string {
         'July', 'August', 'September', 'October', 'November', 'December'];
             
     return months[date.getMonth()];
-}
+};
 
 Date.prototype.getShortMonthString = function(): string {
     var date: Date = this;
@@ -41,10 +40,4 @@ Date.prototype.getShortMonthString = function(): string {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
     return months[date.getMonth()];
-}
-
-Date.prototype.getTwoCharacterDate = function(): string {
-    var date: Date = this;
-    var dateString = '0'+ date.getDate();
-    return dateString.substring(dateString.length - 2, 2);
-}
+};
