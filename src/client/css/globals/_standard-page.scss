@@ -1,159 +1,161 @@
 @import "./_colors";
 @import "./_vars";
 
-.standard-page {
-    padding-top: 50px;  
-    position: relative;
-    display: flex;
-    min-height: 100%;
-    
-    background: url('../../../assets/img/mic-lo.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
-    .container {
-        padding-right: $standard-spacing;
-        padding-left: $standard-spacing;
-        text-align: left;
-        height: auto;
-        background-color: $white;
-        width: 100%;
+sd-app {
+    .standard-page {
+        padding-top: 50px;  
+        position: relative;
+        display: flex;
+        min-height: 100%;
         
-        h1 {
-            padding: 0;
-            margin: 0;
-            font-size: $font-size-large;
-            font-weight: $font-weight-bold;
+        background: url('../../../assets/img/mic-lo.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        
+        .container {
+            padding-right: $standard-spacing;
+            padding-left: $standard-spacing;
+            text-align: left;
+            height: auto;
+            background-color: $white;
+            width: 100%;
             
-            &.has-buttons {
-                float: left;
-                padding: 6px 0;
-            }
-        }
-        
-        .col-sm-12 {
-            padding-top: $standard-spacing;
-            padding-bottom: $standard-spacing;
-        }
-    
-        &.row-separated > .row:not(:last-child) > .col-sm-12:after {
-            content: '';
-            background: $theme-primary; 
-            position: absolute; 
-            left: 0;
-            right: 0;
-            bottom: 0; 
-            height: 1px;
-        }
-        
-        .row {
-            margin-left: -$standard-spacing;
-            margin-right: -$standard-spacing;
-            position: relative;
-        
-            div[class^="col-"] {
-                padding-left: $standard-spacing;
-                padding-right: $standard-spacing;
-            }
-              
-            .list-record {
-                .avatar {
+            h1 {
+                padding: 0;
+                margin: 0;
+                font-size: $font-size-large;
+                font-weight: $font-weight-bold;
+                
+                &.has-buttons {
                     float: left;
-                    
-                    & > img {
-                        height: $avatar-size;
-                        width: $avatar-size;
-                        border-radius: 50%;
-                        background-color: $theme-primary;
-                    }
-                } 
-                    
-                .details {
-                    margin-left: $avatar-size + $standard-spacing;
-                    
-                    & > h2 {
-                        margin-top: 0;
-                        font-size: $font-size-large;
-                        font-weight: $font-weight-bold;
-                        color: $gray-base;
+                    padding: 6px 0;
+                }
+            }
+            
+            .col-sm-12 {
+                padding-top: $standard-spacing;
+                padding-bottom: $standard-spacing;
+            }
+        
+            &.row-separated > .row:not(:last-child) > .col-sm-12:after {
+                content: '';
+                background: $theme-primary; 
+                position: absolute; 
+                left: 0;
+                right: 0;
+                bottom: 0; 
+                height: 1px;
+            }
+            
+            .row {
+                margin-left: -$standard-spacing;
+                margin-right: -$standard-spacing;
+                position: relative;
+            
+                div[class^="col-"] {
+                    padding-left: $standard-spacing;
+                    padding-right: $standard-spacing;
+                }
+                
+                .list-record {
+                    .avatar {
+                        float: left;
                         
+                        & > img {
+                            height: $avatar-size;
+                            width: $avatar-size;
+                            border-radius: 50%;
+                            background-color: $theme-primary;
+                        }
+                    } 
+                        
+                    .details {
+                        margin-left: $avatar-size + $standard-spacing;
+                        
+                        & > h2 {
+                            margin-top: 0;
+                            font-size: $font-size-large;
+                            font-weight: $font-weight-bold;
+                            color: $gray-base;
+                            
+                        }
+                        
+                        & > h3 {
+                            margin-top: 0;
+                            font-size: $font-size-base;
+                            font-weight: $font-weight-regular;
+                            color: $theme-primary;
+                            font-style: italic;
+                            display: block;
+                        }
+                        
+                        & > h2 > i,
+                        & > h3 > i {
+                            width: $standard-spacing;
+                            text-align: center;
+                        }
+                        
+                        & > p {
+                            margin-top: 0;
+                            margin-bottom: 0;
+                            font-size: $font-size-base;
+                            color: $gray;
+                        }
                     }
-                    
-                    & > h3 {
-                        margin-top: 0;
-                        font-size: $font-size-base;
-                        font-weight: $font-weight-regular;
-                        color: $theme-primary;
-                        font-style: italic;
-                        display: block;
-                    }
-                    
-                    & > h2 > i,
-                    & > h3 > i {
-                        width: $standard-spacing;
-                        text-align: center;
-                    }
-                    
-                    & > p {
-                        margin-top: 0;
-                        margin-bottom: 0;
-                        font-size: $font-size-base;
-                        color: $gray;
-                    }
+                }
+            }
+        }
+        
+        form .form-group:first-child { 
+            margin-top: 15px; 
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .standard-page {
+            .container {
+                width: $container-width-sm - (2 * $standard-spacing);
+                margin-right: auto;
+                margin-left: auto;
+                -webkit-box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
+                -moz-box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
+                box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
+                -webkit-border-radius: $box-border-radius;
+                -moz-border-radius: $box-border-radius;
+                border-radius: $box-border-radius;
+                margin-top: $standard-spacing;
+                margin-bottom: $standard-spacing;
+                
+                &.row-separated > .row:not(:last-child) > .col-sm-12:after {
+                    left: $standard-spacing;
+                    right: $standard-spacing;
                 }
             }
         }
     }
     
-    form .form-group:first-child { 
-        margin-top: 15px; 
-    }
-}
-
-@media (min-width: 768px) {
-    .standard-page {
-        .container {
-            width: $container-width-sm - (2 * $standard-spacing);
-            margin-right: auto;
-            margin-left: auto;
-            -webkit-box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
-            -moz-box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
-            box-shadow: -2px 2px 9px -3px rgba(0,0,0,0.6);
-            -webkit-border-radius: $box-border-radius;
-            -moz-border-radius: $box-border-radius;
-            border-radius: $box-border-radius;
-            margin-top: $standard-spacing;
-            margin-bottom: $standard-spacing;
-            
-            &.row-separated > .row:not(:last-child) > .col-sm-12:after {
-                left: $standard-spacing;
-                right: $standard-spacing;
+    @media (min-width: 992px) {
+        .standard-page {
+            .container {
+                width: $container-width-md - (2 * $standard-spacing);;
             }
         }
     }
-}
-
-@media (min-width: 992px) {
-    .standard-page {
-        .container {
-            width: $container-width-md - (2 * $standard-spacing);;
+    
+    @media (min-width: 1200px) {
+        .standard-page {
+            .container {
+                width: $container-width-lg - (2 * $standard-spacing);;
+            }
         }
     }
-}
-
-@media (min-width: 1200px) {
-    .standard-page {
-        .container {
-            width: $container-width-lg - (2 * $standard-spacing);;
+    
+    @media (min-width: 768px) {
+        .separator {
+            left: $standard-spacing;
+            right: $standard-spacing;
         }
-    }
-}
-
-@media (min-width: 768px) {
-    .separator {
-        left: $standard-spacing;
-        right: $standard-spacing;
     }
 }
