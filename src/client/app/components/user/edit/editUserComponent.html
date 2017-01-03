@@ -6,18 +6,8 @@
                 <h1>Edit Profile</h1>
             </div>
         </div>
-        <div class="row" *ngIf="viewModel.spotsState === 1">
-            <div class="col-sm-12 ">
-                <p>There was an error loading your profile.</p>
-            </div>
-        </div>
-        <div class="row" *ngIf="viewModel.elementState === 5">
-            <div class="col-sm-12 ">
-                <p>There was an error updating your profile.</p>
-            </div>
-        </div>
-        <form (ngSubmit)="onSubmit(editUserForm)" #editUserForm="ngForm" class="form-horizontal" role="form"
-        novalidate>
+        <form (ngSubmit)="onSubmit(editUserForm)" #editUserForm="ngForm" class="form-horizontal" role="form" novalidate
+                [hidden]="viewModel.elementState !== 3">
             <div class="form-group" [class.has-error]="editUserForm.submitted && !type.valid">
                 <label class="control-label col-sm-4">What type of user are you?
                     <br/>(You can be more than one)</label>
@@ -89,5 +79,20 @@
                 </div>
             </div>
         </form>
+        <div class="row" *ngIf="viewModel.spotsState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading your profile.</p>
+            </div>
+        </div> 
+        <div class="row" *ngIf="viewModel.elementState === 4">
+            <div class="col-sm-12 ">
+                <p>Your profile has been successfully updated.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 5">
+            <div class="col-sm-12 ">
+                <p>There was an error updating your profile.</p>
+            </div>
+        </div>
     </div> 
 </div>

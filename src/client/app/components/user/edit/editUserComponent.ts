@@ -103,8 +103,8 @@ export class EditUserComponent implements OnInit {
         this.userService.editCurrent(request)
             .subscribe(
             response => {
-                this.viewModel.elementState = ElementState.Ready;
-                this.router.navigate(['user/register-success']);
+                this.viewModel.elementState = ElementState.Submitted;
+                //this.router.navigate(['user/register-success']);
             },
             error => {
                 this.viewModel.elementState = ElementState.SubmissionError;
