@@ -1,8 +1,11 @@
+//import './common/numberExtensions';
+
 interface Date {
     roundUpTime: () => Date;
     datePart: () => Date;
     getMonthString: () => string;
     getShortMonthString: () => string;
+    getFormattedString: () => string;
 }
 
 Date.prototype.roundUpTime = function(): Date {
@@ -41,3 +44,14 @@ Date.prototype.getShortMonthString = function(): string {
             
     return months[date.getMonth()];
 };
+
+Date.prototype.getFormattedString = function(): string {
+    var date: Date = this;
+    
+    return padLeft(date.getDate()) + ' ' +
+        date.getShortMonthString() + ' ' +
+        date.getFullYear() + ' ' +
+        padLeft(date.getHours()) + ':' +
+        padLeft(date.getMinutes());
+        
+}

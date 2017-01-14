@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoggedInGuard } from './loggedInGuard';
 
 import { HomeComponent } from './components/home/homeComponent';
+import { ViewConversationComponent } from './components/conversation/view/viewConversationComponent';
 import { AddSpotComponent } from './components/spot/add/addSpotComponent';
 import { ListSpotsComponent } from './components/spot/list/listSpotsComponent';
 import { ChangePasswordComponent } from './components/user/changePassword/changePasswordComponent';
@@ -19,6 +20,7 @@ import { AboutRoutes } from './+about/index';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'conversation/view/:conversationId', component: ViewConversationComponent, canActivate: [LoggedInGuard] },
   { path: 'spot/add', component: AddSpotComponent, canActivate: [LoggedInGuard] },
   //{ path: 'spot/add', component: AddSpotComponent },
   { path: 'spot/list', component: ListSpotsComponent, canActivate: [LoggedInGuard] },

@@ -8,4 +8,5 @@ export class User {
 	stageName: string;
 	profilePictureUploaded: boolean;
     imageUrl: string;
+    fullName: string;
 }

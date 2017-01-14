@@ -59,12 +59,14 @@ export class ListSpotsComponent implements OnInit {
                     let scheduledForAny = <any>spot.scheduledFor;
                     let scheduledFor = new Date(scheduledForAny);
 
-                    viewModelRow.dateTimeHeading =
+                    /*viewModelRow.dateTimeHeading =
                         padLeft(scheduledFor.getDate()) + ' ' +
                         scheduledFor.getShortMonthString() + ' ' +
                         scheduledFor.getFullYear() + ' ' +
                         padLeft(scheduledFor.getHours()) + ':' +
-                        padLeft(scheduledFor.getMinutes());
+                        padLeft(scheduledFor.getMinutes());*/
+                        
+                    viewModelRow.dateTimeHeading = scheduledFor.getFormattedString();
 
                     if (typeof spot.durationMinutes !== 'undefined' && spot.durationMinutes !== null) {
                         viewModelRow.dateTimeHeading = viewModelRow.dateTimeHeading + ', ' +

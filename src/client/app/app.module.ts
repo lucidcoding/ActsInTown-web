@@ -8,6 +8,8 @@ import { routes } from './app.routes';
 
 
 import { HomeModule } from './components/home/homeModule';
+
+import { ViewConversationModule } from './components/conversation/view/viewConversationModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
 import { ChangePasswordModule } from './components/user/changePassword/changePasswordModule';
@@ -46,6 +48,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     HttpModule,
     AboutModule,
     HomeModule,
+    ViewConversationModule,
     AddSpotModule,
     ListSpotsModule,
     ChangePasswordModule,
