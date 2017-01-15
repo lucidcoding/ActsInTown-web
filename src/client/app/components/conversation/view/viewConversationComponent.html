@@ -1,9 +1,9 @@
 <sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
 <div class="standard-page">
-    <div class="container row-separated">
+    <div class="container container-messages row-separated">
         <div class="row">
             <div class="col-sm-12">
-                <h1>Conversation</h1>
+                <h1>Conversation with {{viewModel.otherUserName}}</h1>
             </div>
         </div>
         <div class="row" *ngIf="viewModel.elementState === 1">
@@ -16,65 +16,53 @@
                 <p>This conversation contains no messages.</p>
             </div>
         </div>
-        <ng-container *ngIf="viewModel.elementState === 3">
-            <div class="row" *ngFor="let message of viewModel.messages">
-                <div class="col-sm-12 ">
-                    <div class="list-record clearfix">
-                        <a class="avatar" href="#">
-                            <!--<img src="https://localhost:8443/ActsInTown-uploads/Pawel.jpeg"/>-->
-                            <img src="{{message.imageUrl}}"/>
-                        </a>
-                        <div class="details">
-                            <h2>{{message.fullName}}</h2>
-                            <h3 class="subtitle">
-                                <i class="fa fa-clock-o"></i>
-                                {{message.addedOn}}
-                            </h3>
-                            <p>{{message.body}}</p>
-                            <!--<h2>
-                                <i class="fa fa-clock-o"></i>
-                                {{spot.dateTimeHeading}}
-                            </h2>
-                            <h3 class="subtitle">
-                                <i class="fa fa-map-marker"></i>
-                                {{spot.locationHeader}}
-                            </h3>
-                            <h3 class="subtitle">
-                                <i class="fa fa-check-square-o"></i>
-                                {{spot.bookedStateDescription}}
-                            </h3>
-                            <p>
-                                {{spot.description}}
-                            </p>
-                            <p>
-                                <a href="" (click)="delete($event, spot.id)">Delete</a>
-                            </p>-->
+        <div class="row row-messages" >
+            <div class="col-sm-12 column-messages">
+                <div #scrollMe class="holder-messages">
+                    <div class="holder-messages-inner">
+                        <div class="row" *ngFor="let message of viewModel.messages">
+                            <div class="col-sm-12 ">
+                                <div class="list-record clearfix">
+                                    <a class="avatar" href="#">
+                                        <img src="{{message.imageUrl}}"/>
+                                    </a>
+                                    <div class="details">
+                                        <h2>{{message.fullName}}</h2>
+                                        <h3 class="subtitle">
+                                            <i class="fa fa-clock-o"></i>
+                                            {{message.addedOn}}
+                                        </h3>
+                                        <p>{{message.body}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            
             </div>
-        </ng-container>
-        <form (ngSubmit)="createMessage(createMessageForm)" #createMessageForm="ngForm" class="form-horizontal" role="form" novalidate >
-            <div class="form-group" [class.has-error]="createMessageForm.newMessageBody && !newMessageBody.valid" >
-                <label class="control-label col-sm-4">Add Message</label>
-                <div class="col-sm-4">
-                    <input type="text" [(ngModel)]="viewModel.newMessageBody" #newMessageBody="ngModel" name="newMessageBody" 
-                        class="form-control" maxlength="255"/>
-                    <div *ngIf="createMessageForm.submitted">
-                        <div class="help-block" *ngIf="newMessageBody.errors && newMessageBody.errors.required">
-                            Message field is required.
-                        </div>
-                        <div class="help-block" *ngIf="newMessageBody.errors && newMessageBody.errors.maxlength">
-                            Message field cannot be more than 50 characters.
-                        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form (ngSubmit)="createMessage(createMessageForm)" #createMessageForm="ngForm" class="form-horizontal" role="form" novalidate >
+                    <div  [class.has-error]="createMessageForm.newMessageBody && !newMessageBody.valid" >
+                
+                            <input class="form-control" style="width:50%;display:inline;" type="text" [(ngModel)]="viewModel.newMessageBody" #newMessageBody="ngModel" name="newMessageBody" 
+                                maxlength="255"/>
+                            <!--<div *ngIf="createMessageForm.submitted">
+                                <div class="help-block" *ngIf="newMessageBody.errors && newMessageBody.errors.required">
+                                    Message field is required.
+                                </div>
+                                <div class="help-block" *ngIf="newMessageBody.errors && newMessageBody.errors.maxlength">
+                                    Message field cannot be more than 50 characters.
+                                </div>
+                            </div>-->
+                            
+                            <button type="submit" class="btn btn-success">Send</button>
+                
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-success">Send</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

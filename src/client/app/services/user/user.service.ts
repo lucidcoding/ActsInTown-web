@@ -50,4 +50,9 @@ export class UserService {
     resetPassword(request: ResetPasswordRequest): Observable<Response> {
 		return this.standardHttp.put(this.configService.getApiBaseUrl() + 'user/reset-password', request, null);
     }
+    
+    getForConversation(conversationId: string): Observable<User[]> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'user/for-conversation/' + conversationId)
+        	.map(response => response.json());
+    }
 }

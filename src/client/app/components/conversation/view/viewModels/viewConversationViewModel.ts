@@ -3,7 +3,7 @@ import { ElementState } from '../../../../common/elementState';
 
 export class ViewConversationViewModel {
     id: string;
-    userNames: string[];
+    otherUserName: string;
     messages: ViewConversationMessageViewModel[];
     newMessageBody: string;
     elementState: ElementState;

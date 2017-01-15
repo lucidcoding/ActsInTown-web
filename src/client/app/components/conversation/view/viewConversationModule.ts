@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewConversationComponent } from './viewConversationComponent';
 import { MessageService } from '../../../services/message/messageService';
+import { UserService } from '../../../services/user/user.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
@@ -11,7 +12,8 @@ import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/
     declarations: [ViewConversationComponent],
     exports: [ViewConversationComponent],
     providers: [
-        MessageService
+        MessageService,
+        UserService
     ]
 })
 

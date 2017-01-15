@@ -1,11 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ViewConversationViewModel } from './viewModels/viewConversationViewModel';
 import { ViewConversationMessageViewModel } from './viewModels/viewConversationMessageViewModel';
 import { MessageService } from '../../../services/message/messageService';
+import { UserService } from '../../../services/user/user.service';
 import { Message } from '../../../services/message/responses/messageResponse';
+import { User } from '../../../services/user/responses/user';
 import { ElementState } from '../../../common/elementState';
 import { CreateMessageRequest } from '../../../services/message/requests/createMessageRequest';
+//import '../../../common/arrayExtensions';
 import '../../../common/dateExtensions';
 
 @Component({
@@ -14,15 +17,17 @@ import '../../../common/dateExtensions';
     templateUrl: 'viewConversationComponent.html',
     styleUrls: ['viewConversationComponent.css']
 })
-export class ViewConversationComponent implements OnInit, OnDestroy {
+export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDestroy {
+    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ViewConversationViewModel;
     private sub: any;
 
     constructor(private route: ActivatedRoute,
-                private messageService: MessageService) {
+        private messageService: MessageService,
+        private userService: UserService) {
         this.viewModel = {
             id: null,
-            userNames: null,
+            otherUserName: null,
             messages: [],
             newMessageBody: null,
             elementState: ElementState.Loading,
@@ -34,17 +39,40 @@ export class ViewConversationComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.id = params['conversationId'];
             this.getNextMessages();
+
+            var currentUser;
+
+            this.userService.getForConversation(this.viewModel.id).subscribe(
+                response => {
+                    this.viewModel.otherUserName = response[0].fullName;
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.LoadingError;
+                },
+                () => {
+                    //
+                });
         });
     }
-
+    
+    ngAfterViewChecked() {        
+        this.scrollToBottom();        
+    } 
+    
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
 
+    scrollToBottom() {
+        //try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        //} catch(err) { }                 
+    }
+    
     private getNextMessages() {
         this.messageService.getForConversation(this.viewModel.id, this.viewModel.page, 10).subscribe(
             response => {
-                this.viewModel.messages = response.map((message: Message) => {
+                this.viewModel.messages = response.reverse().map((message: Message) => {
                     let messageModelRow: ViewConversationMessageViewModel = {
                         id: message.id,
                         imageUrl: message.user.imageUrl,
@@ -58,18 +86,6 @@ export class ViewConversationComponent implements OnInit, OnDestroy {
                     let addedOnAny = <any>message.addedOn;
                     let addedOn = new Date(addedOnAny);
                     messageModelRow.addedOn = addedOn.getFormattedString();
-                    
-                    //Seems to be some sort of bug in Angular2 which means I have to do this?
-                    /*let addedOnAny = <any>message.addedOn;
-                    let addedOn = new Date(addedOnAny);
-
-                    viewModelRow.dateTimeHeading =
-                        padLeft(scheduledFor.getDate()) + ' ' +
-                        scheduledFor.getShortMonthString() + ' ' +
-                        scheduledFor.getFullYear() + ' ' +
-                        padLeft(scheduledFor.getHours()) + ':' +
-                        padLeft(scheduledFor.getMinutes());*/
-
                     return messageModelRow;
                 });
 
@@ -86,26 +102,27 @@ export class ViewConversationComponent implements OnInit, OnDestroy {
                 //
             });
     }
-    
+
     public createMessage(createMessageForm: any) {
         if (!createMessageForm.valid) {
             return;
         }
-        
+
         var createMessageRequest: CreateMessageRequest = {
             conversationId: this.viewModel.id,
             body: this.viewModel.newMessageBody
         };
-        
+
         this.messageService.createMessage(createMessageRequest).subscribe(
             response => {
                 this.getNextMessages();
+                this.scrollToBottom(); 
             },
             error => {
                 this.viewModel.elementState = ElementState.LoadingError;
             },
             () => {
                 //
-            });    
+            });
     }
 }
