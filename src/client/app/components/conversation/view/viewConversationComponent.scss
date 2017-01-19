@@ -1,37 +1,18 @@
 .container-messages {
-    /*display: flex; 
-    flex-direction: column;*/
-    
     .row-messages {
-        /*flex-grow: 1;*/
-        /*border: 1px solid red;*/
-        /*max-height: calc(100% -130px);*/
-        /*max-height: 100%;*/
         height: calc(100% - 115px);
-        /*max-height: calc(100% - 140px);*/
-        /*position: relative;*/
         
         .column-messages {
-            /*border: 1px solid green;*/
             height: 100%;
-            /*flex-grow: 1;*/
-            
             
             .holder-messages {
                 overflow-y: scroll;
-                /*margin: -15px;*/
-                /*height: calc(100% - 130px);
-                max-height: calc(100% - 130px);*/
                 height: 100%;
-                /*border: 1px solid blue;*/
                 position: relative;
 
                 .holder-messages-inner {
+                    width: 90%;
                     position: absolute;
-                    /*height: calc(100% -130px);*/
-                    /*max-height: calc(100% -130px);*/
-                    /*overflow-y: hidden;
-                    position: relative;*/
                 }
             }
         }
