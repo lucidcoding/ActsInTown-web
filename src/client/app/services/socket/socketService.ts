@@ -12,7 +12,39 @@ export class SocketService {
     private socket: any;
     
     constructor() {
-        this.socket = io('http://localhost:3000');
+        //this.socket = io('http://localhost:3000');
+        var your_jwt = localStorage.getItem('accessToken');
+
+/*
+this.socket = io.connect('http://localhost:3000');
+this.socket.on('connect', (socket: any) => {
+  socket
+    .on('authenticated', function () {
+      //do other things 
+    })
+    .emit('authenticate', {token: your_jwt}); //send the jwt 
+});
+*/
+
+
+     
+        this.socket = io.connect('http://localhost:3000', {
+            'query': 'token=' + your_jwt
+        });
+
+
+// Authed and connected!
+			this.socket.on('connect', () => {
+				console.log('connected!');
+			});
+
+			this.socket.on('heartbeat', function(data) {
+				console.log('Socket heartbeat');
+			});
+
+
+
+
         console.log();
     }
     
