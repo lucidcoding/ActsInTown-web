@@ -14,11 +14,11 @@ export class MessageService {
 	}
 
     getForConversation(conversationId: string, page: number, pageSize: number): Observable<Message[]> {
-        return this.http.get(this.configService.getApiBaseUrl() + 'message/for-conversation/' + conversationId + '/' + page + '/' + pageSize)
+        return this.http.get('http://localhost:3010/' + 'message/for-conversation/' + conversationId + '/' + page + '/' + pageSize)
         	.map(response => response.json());
     }
     
     createMessage(createMessageRequest: CreateMessageRequest): Observable<Response> {
-		return this.http.post(this.configService.getApiBaseUrl() + 'message', createMessageRequest, null);
+		return this.http.post('http://localhost:3010/' + 'message', createMessageRequest, null);
     }
 }

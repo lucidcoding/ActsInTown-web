@@ -55,4 +55,9 @@ export class UserService {
         return this.http.get(this.configService.getApiBaseUrl() + 'user/for-conversation/' + conversationId)
         	.map(response => response.json());
     }
+    
+    getByIds(ids: string[]): Observable<User[]> {
+        return this.http.post(this.configService.getApiBaseUrl() + 'user/by-ids', ids, null)
+            .map(response => response.json());
+    }
 }

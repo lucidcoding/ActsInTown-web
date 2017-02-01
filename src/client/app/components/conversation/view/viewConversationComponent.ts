@@ -9,7 +9,7 @@ import { Message } from '../../../services/message/responses/messageResponse';
 import { User } from '../../../services/user/responses/user';
 import { ElementState } from '../../../common/elementState';
 import { CreateMessageRequest } from '../../../services/message/requests/createMessageRequest';
-//import '../../../common/arrayExtensions';
+import '../../../common/arrayExtensions';
 import '../../../common/dateExtensions';
 
 @Component({
@@ -21,6 +21,7 @@ import '../../../common/dateExtensions';
 export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDestroy {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ViewConversationViewModel;
+    private users: User[];
     private sub: any;
 
     constructor(private route: ActivatedRoute,
@@ -40,13 +41,16 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.id = params['conversationId'];
-            this.getNextMessages();
 
             var currentUser;
 
-            this.userService.getForConversation(this.viewModel.id).subscribe(
+            this.userService.getByIds([
+                'ccd93a3a-5737-43a0-848c-5f6332067735',
+                '01d67a77-74dd-4853-99b6-5a5114f5b062'
+            ]).subscribe(
                 response => {
-                    this.viewModel.otherUserName = response[0].fullName;
+                    this.users = response;
+                    this.getNextMessages();
                 },
                 error => {
                     this.viewModel.elementState = ElementState.LoadingError;
@@ -55,19 +59,19 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
                     //
                 });
         });
-        
+
         this.socketService.on('chatMessage', (message) => {
             let messageModelRow: ViewConversationMessageViewModel = {
-                id: 'aa',
+                id: message._id,
                 imageUrl: '',
                 fullName: 'test',
                 addedOn: new Date().toString(),
                 body: message.text,
                 sentOk: true
             };
-        
+
             this.viewModel.messages.push(messageModelRow);
-            
+
             console.log('yay');
         });
     }
@@ -86,11 +90,15 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         //} catch(err) { }                 
     }
 
-    private mapMessage(message: Message): ViewConversationMessageViewModel {
+    private mapMessage(message: Message, users: User[]): ViewConversationMessageViewModel {
+        let user = users.single((item: User) => {
+            return item.id.toLowerCase() === message.userId.toLowerCase();
+        });
+
         let messageModelRow: ViewConversationMessageViewModel = {
-            id: message.id,
-            imageUrl: message.user.imageUrl,
-            fullName: message.user.fullName,
+            id: message._id,
+            imageUrl: user.imageUrl,
+            fullName: user.fullName,
             addedOn: null,
             body: message.body,
             sentOk: true
@@ -106,7 +114,9 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
     private getNextMessages() {
         this.messageService.getForConversation(this.viewModel.id, this.viewModel.page, 10).subscribe(
             response => {
-                this.viewModel.messages = response.reverse().map(this.mapMessage);
+                this.viewModel.messages = response.reverse().map((message: Message) => {
+                    return this.mapMessage(message, this.users);
+                });
 
                 if (this.viewModel.messages.length > 0) {
                     this.viewModel.elementState = ElementState.Ready;
@@ -136,7 +146,7 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
             (response: any) => {
                 if (response.status === 201) {
                     var message: Message = JSON.parse(response._body);
-                    this.viewModel.messages.push(this.mapMessage(message));
+                    this.viewModel.messages.push(this.mapMessage(message, this.users));
                 }
                 //this.getNextMessages();
                 //this.scrollToBottom(); 

@@ -28,7 +28,7 @@ this.socket.on('connect', (socket: any) => {
 
 
      
-        this.socket = io.connect('http://localhost:3000', {
+        this.socket = io.connect('http://localhost:3010', {
             'query': 'token=' + your_jwt
         });
 
