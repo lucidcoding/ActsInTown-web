@@ -8,13 +8,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
+            <ul class="nav navbar-nav pull-right visible-xs">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </a>
+                </li>
+            </ul>
             <a routerLink="/" routerLinkActive="active" class="navbar-brand">
                 <img src="/assets/svg/acts-in-town-logo-white.svg" alt="Acts in town logo" /> Acts In Town
             </a>
         </div>
         <div id="navbar" class="navbar-collapse" [class.collapse]="isCollapsed">
-        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<div id="navbar" class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-right">
+                <li class="menu-item  hidden-xs">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            Messages
+                    </a>                
+                </li>
                 <li class="menu-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Spots<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="menu-item dropdown dropdown-submenu"><a href="" routerLink="/spot/add" routerLinkActive="active">Add spot</a></li>
@@ -50,7 +64,7 @@
             </a>
         </div>
         <div id="navbar" class="navbar-collapse" [class.collapse]="isCollapsed">
-        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<div id="navbar" class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="" routerLink="/user/login" routerLinkActive="active">Sign In</a></li>
                 <li><a href="" routerLink="/spot/search/available" routerLinkActive="active">Search Spots</a></li>

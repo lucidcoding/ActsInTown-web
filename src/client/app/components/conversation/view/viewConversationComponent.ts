@@ -59,8 +59,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
                     //
                 });
         });
-
-        this.socketService.connect();
         
         this.socketService.on('MessageAdded', (message: Message) => {
             /*let messageModelRow: ViewConversationMessageViewModel = {

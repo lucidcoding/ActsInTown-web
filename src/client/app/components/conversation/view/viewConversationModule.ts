@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewConversationComponent } from './viewConversationComponent';
 import { MessageService } from '../../../services/message/messageService';
-import { SocketService } from '../../../services/socket/socketService';
+//import { SocketService } from '../../../services/socket/socketService';
 import { UserService } from '../../../services/user/user.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
@@ -14,7 +14,7 @@ import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/
     exports: [ViewConversationComponent],
     providers: [
         MessageService,
-        SocketService,
+        //SocketService,
         UserService
     ]
 })

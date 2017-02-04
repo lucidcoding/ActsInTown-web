@@ -39,9 +39,10 @@ import { AboutModule } from './+about/about.module';
 import { LoggedInGuard } from './loggedInGuard';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { CustomHttpService } from './services/customHttp/customHttp.service';
+import { SocketService } from './services/socket/socketService';
 
 import { NavbarModule } from './components/shared/navbar/navbarModule';
- 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -78,12 +79,13 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     //CompareValidator,
   ],
   providers: [{
-        provide: APP_BASE_HREF,
-        useValue: '<%= APP_BASE %>'
-    }, 
+    provide: APP_BASE_HREF,
+    useValue: '<%= APP_BASE %>'
+  },
     LoggedInGuard,
     AuthenticationService,
-    CustomHttpService
+    CustomHttpService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })
