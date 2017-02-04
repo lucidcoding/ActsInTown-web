@@ -60,7 +60,9 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
                 });
         });
 
-        this.socketService.on('chatMessage', (message) => {
+        this.socketService.connect();
+        
+        this.socketService.on('MessageAdded', (message: any) => {
             let messageModelRow: ViewConversationMessageViewModel = {
                 id: message._id,
                 imageUrl: '',

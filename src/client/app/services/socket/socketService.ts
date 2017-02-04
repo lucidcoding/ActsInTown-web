@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 //import * as io from "socket.io-client";
 
-interface Window { io: any;  }
+interface Window { io: any; }
 
 //import { IMessage, ISocketItem } from "../../models";
 @Injectable()
@@ -10,66 +10,56 @@ export class SocketService {
     //private name: string;
     //private host: string = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
     private socket: any;
-    
+
     constructor() {
+    }
+
+    connect() {
         //this.socket = io('http://localhost:3000');
         var your_jwt = localStorage.getItem('accessToken');
 
-/*
-this.socket = io.connect('http://localhost:3000');
-this.socket.on('connect', (socket: any) => {
-  socket
-    .on('authenticated', function () {
-      //do other things 
-    })
-    .emit('authenticate', {token: your_jwt}); //send the jwt 
-});
-*/
-
-
-     
         this.socket = io.connect('http://localhost:3010', {
             'query': 'token=' + your_jwt
         });
 
+        this.socket.on('connect', () => {
+            console.log('connected!');
+        });
 
-// Authed and connected!
-			this.socket.on('connect', () => {
-				console.log('connected!');
-			});
-
-			this.socket.on('heartbeat', function(data) {
-				console.log('Socket heartbeat');
-			});
+        this.socket.on('heartbeat', function (data: any) {
+            console.log('Socket heartbeat');
+        });
 
 
-
+        /*this.socket.on('MessageAdded', function (data: any) {
+            console.log('Socket MessageAdded');
+        });*/ 
 
         console.log();
     }
-    
+
     // Wrap the Socket.io 'on' method
-    on(eventName, callback) {
-            if (this.socket) {
-                this.socket.on(eventName, function(data) {
-                    callback(data);
-                });
-            }
+    on(eventName: string, callback: Function) {
+        if (this.socket) {
+            this.socket.on(eventName, function (data: any) {
+                callback(data);
+            });
         }
+    }
 
-        // Wrap the Socket.io 'emit' method
-    emit(eventName, data) {
-            if (this.socket) {
-                this.socket.emit(eventName, data);
-            }
+    // Wrap the Socket.io 'emit' method
+    emit(eventName: string, data: Function) {
+        if (this.socket) {
+            this.socket.emit(eventName, data);
         }
+    }
 
-        // Wrap the Socket.io 'removeListener' method
-    removeListener(eventName) {
-            if (this.socket) {
-                this.socket.removeListener(eventName);
-            }
-        };
+    // Wrap the Socket.io 'removeListener' method
+    removeListener(eventName: string) {
+        if (this.socket) {
+            this.socket.removeListener(eventName);
+        }
+    };
 }
 
 /*

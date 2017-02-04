@@ -44,6 +44,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
+                <a href="" (click)="sendMessage()">Send a message</a>
                 <form (ngSubmit)="createMessage(createMessageForm)" #createMessageForm="ngForm" class="form-horizontal" role="form" novalidate >
                     <div  [class.has-error]="createMessageForm.newMessageBody && !newMessageBody.valid" >
                 
@@ -58,7 +59,7 @@
                                 </div>
                             </div>-->
                             
-                            <button type="submit" class="btn btn-success">Send</button>
+                            <input type="submit" class="btn btn-success" value="Send" />
                 
                     </div>
                 </form>
