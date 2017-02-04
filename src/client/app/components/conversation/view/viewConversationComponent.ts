@@ -62,19 +62,19 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
 
         this.socketService.connect();
         
-        this.socketService.on('MessageAdded', (message: any) => {
-            let messageModelRow: ViewConversationMessageViewModel = {
+        this.socketService.on('MessageAdded', (message: Message) => {
+            /*let messageModelRow: ViewConversationMessageViewModel = {
                 id: message._id,
                 imageUrl: '',
                 fullName: 'test',
                 addedOn: new Date().toString(),
-                body: message.text,
+                body: message.body,
                 sentOk: true
-            };
+            };*/
 
+            let messageModelRow: ViewConversationMessageViewModel = this.mapMessage(message, this.users);
             this.viewModel.messages.push(messageModelRow);
-
-            console.log('yay');
+            console.log('Message received: ' + JSON.stringify(message));
         });
     }
 
@@ -84,6 +84,7 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+        this.socketService.removeListener('MessageAdded');
     }
 
     scrollToBottom() {
@@ -97,19 +98,19 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
             return item.id.toLowerCase() === message.userId.toLowerCase();
         });
 
+        //Seems to be some sort of bug in Angular2 which means I have to do this?
+        //let addedOn = message.addedOn.getFormattedString();
+        let addedOn = new Date(<any>message.addedOn).getFormattedString();
+
         let messageModelRow: ViewConversationMessageViewModel = {
             id: message._id,
             imageUrl: user.imageUrl,
             fullName: user.fullName,
-            addedOn: null,
+            addedOn: addedOn,
             body: message.body,
             sentOk: true
         };
                     
-        //This Angular2 bug again?
-        let addedOnAny = <any>message.addedOn;
-        let addedOn = new Date(addedOnAny);
-        messageModelRow.addedOn = addedOn.getFormattedString();
         return messageModelRow;
     }
 

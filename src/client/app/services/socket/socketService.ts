@@ -23,19 +23,12 @@ export class SocketService {
         });
 
         this.socket.on('connect', () => {
-            console.log('connected!');
+            console.log('Connected on socket: ' + this.socket.id);
         });
 
         this.socket.on('heartbeat', function (data: any) {
             console.log('Socket heartbeat');
         });
-
-
-        /*this.socket.on('MessageAdded', function (data: any) {
-            console.log('Socket MessageAdded');
-        });*/ 
-
-        console.log();
     }
 
     // Wrap the Socket.io 'on' method
