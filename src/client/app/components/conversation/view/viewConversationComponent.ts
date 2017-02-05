@@ -42,8 +42,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.id = params['conversationId'];
 
-            var currentUser;
-
             this.userService.getByIds([
                 'ccd93a3a-5737-43a0-848c-5f6332067735',
                 '01d67a77-74dd-4853-99b6-5a5114f5b062'

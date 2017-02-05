@@ -3,12 +3,12 @@ interface Array<T> {
 	single(expression: Function): T;
 	exists(expression: Function): boolean;
 	last(): T;
-	move(oldIndex: number, newIndex: number);
+	move(oldIndex: number, newIndex: number): void;
 	max(expression: Function): T;
 }
 
 Array.prototype.where = function (expression: Function) {
-	var matchingElements = [];
+	var matchingElements: any[] = [];
 
 	for (var index: number = 0; index < this.length; index++) {
 		var element = this[index];
@@ -33,7 +33,7 @@ Array.prototype.last = function () {
 	return this[this.length - 1];
 };
 
-Array.prototype.move = function (oldIndex: number, newIndex: number) {
+Array.prototype.move = function (oldIndex: number, newIndex: number): void {
 	if (newIndex >= this.length) {
 		var k = newIndex - this.length;
 		while ((k--) + 1) {

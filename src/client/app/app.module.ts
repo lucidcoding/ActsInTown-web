@@ -9,6 +9,7 @@ import { routes } from './app.routes';
 
 import { HomeModule } from './components/home/homeModule';
 
+import { ListConversationsModule } from './components/conversation/list/listConversationsModule';
 import { ViewConversationModule } from './components/conversation/view/viewConversationModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
@@ -49,6 +50,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     HttpModule,
     AboutModule,
     HomeModule,
+    ListConversationsModule,
     ViewConversationModule,
     AddSpotModule,
     ListSpotsModule,

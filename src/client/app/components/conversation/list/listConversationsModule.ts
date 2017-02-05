@@ -2,19 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ViewConversationComponent } from './viewConversationComponent';
+import { ListConversationsComponent } from './listConversationsComponent';
+import { ConversationService } from '../../../services/conversation/conversationService';
 import { MessageService } from '../../../services/message/messageService';
 import { UserService } from '../../../services/user/user.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule],
-    declarations: [ViewConversationComponent],
-    exports: [ViewConversationComponent],
+    imports: [CommonModule, LoadingSpinnerOverlayModule, RouterModule],
+    declarations: [ListConversationsComponent],
+    exports: [ListConversationsComponent],
     providers: [
+        ConversationService,
         MessageService,
         UserService
     ]
 })
 
-export class ViewConversationModule { }
+export class ListConversationsModule { }
