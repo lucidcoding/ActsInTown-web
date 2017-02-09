@@ -30,6 +30,7 @@ sd-app {
     a:hover,
     a:focus {
         color: $theme-focus;
+        text-decoration: none;
     }
     
     h1,

@@ -1,0 +1,24 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
+<div class="standard-page">
+    <div class="container row-separated">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>{{viewModel.fullName}}</h1>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading the user.</p>
+            </div>
+        </div>
+        <ng-container *ngIf="viewModel.elementState === 3">
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <a href="" (click)="messageUser($event)" routerLinkActive="active">
+                        Message User
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

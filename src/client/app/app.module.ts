@@ -22,6 +22,7 @@ import { RegisterUserModule } from './components/user/register/registerUserModul
 import { RegisterUserSuccessModule } from './components/user/registerSuccess/registerUserSuccessModule';
 import { ResetPasswordModule } from './components/user/resetPassword/resetPasswordModule';
 import { VerifyUserModule } from './components/user/verify/verifyUserModule';
+import { ViewUserModule } from './components/user/view/viewUserModule';
 import { SearchSpotsModule } from './components/spot/search/searchSpotsModule';
 import { SearchSpotsResultsModule } from './components/spot/searchResults/searchSpotsResultsModule';
 
@@ -63,6 +64,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     RegisterUserSuccessModule,
     ResetPasswordModule,
     VerifyUserModule,
+    ViewUserModule,
     SearchSpotsModule,
     SearchSpotsResultsModule,
     //DateSelectorModule,

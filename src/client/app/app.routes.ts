@@ -15,6 +15,7 @@ import { RegisterUserComponent } from './components/user/register/registerUserCo
 import { RegisterUserSuccessComponent } from './components/user/registerSuccess/registerUserSuccessComponent';
 import { ResetPasswordComponent } from './components/user/resetPassword/resetPasswordComponent';
 import { VerifyUserComponent } from './components/user/verify/verifyUserComponent';
+import { ViewUserComponent } from './components/user/view/viewUserComponent';
 import { SearchSpotsComponent } from './components/spot/search/searchSpotsComponent';
 import { SearchSpotsResultsComponent } from './components/spot/searchResults/searchSpotsResultsComponent';
 import { AboutRoutes } from './+about/index';
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'user/register', component: RegisterUserComponent },
   { path: 'user/register-success', component: RegisterUserSuccessComponent },
   { path: 'user/reset-password/:passwordResetToken', component: ResetPasswordComponent },
+  { path: 'user/view/:userId', component: ViewUserComponent, canActivate: [LoggedInGuard]  },
   { path: 'user/verify/:verificationToken', component: VerifyUserComponent },
   //{ path: 'spot/search/:bookedState', component: SearchSpotsComponent, canActivate: [LoggedInGuard] },
   { path: 'spot/search/:bookedState', component: SearchSpotsComponent },

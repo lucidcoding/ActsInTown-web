@@ -59,15 +59,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         });
         
         this.socketService.on('MessageAdded', (message: Message) => {
-            /*let messageModelRow: ViewConversationMessageViewModel = {
-                id: message._id,
-                imageUrl: '',
-                fullName: 'test',
-                addedOn: new Date().toString(),
-                body: message.body,
-                sentOk: true
-            };*/
-
             let messageModelRow: ViewConversationMessageViewModel = this.mapMessage(message, this.users);
             this.viewModel.messages.push(messageModelRow);
             console.log('Message received: ' + JSON.stringify(message));
