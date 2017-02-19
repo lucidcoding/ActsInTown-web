@@ -22,6 +22,22 @@ export class SocketService {
             'query': 'token=' + your_jwt
         });
 
+        this.socket.on('connect_error', () => {
+            console.log('Connection Error');
+        });
+
+        this.socket.on('connect_failed', () => {
+            console.log('Connection Failed');
+        });
+
+        this.socket.on('error', (err: any) => {
+            console.log('General Socket Error: ' + err);
+        });
+
+        this.socket.on('connecting', () => {
+            console.log('Connecting on socket...');
+        });
+
         this.socket.on('connect', () => {
             console.log('Connected on socket: ' + this.socket.id);
         });

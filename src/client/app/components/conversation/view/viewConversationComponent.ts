@@ -2,9 +2,11 @@ import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild }
 import { ActivatedRoute } from '@angular/router';
 import { ViewConversationViewModel } from './viewModels/viewConversationViewModel';
 import { ViewConversationMessageViewModel } from './viewModels/viewConversationMessageViewModel';
+import { ConversationService } from '../../../services/conversation/conversationService';
 import { MessageService } from '../../../services/message/messageService';
 import { SocketService } from '../../../services/socket/socketService';
 import { UserService } from '../../../services/user/user.service';
+import { Conversation } from '../../../services/conversation/responses/conversationResponse';
 import { Message } from '../../../services/message/responses/messageResponse';
 import { User } from '../../../services/user/responses/user';
 import { ElementState } from '../../../common/elementState';
@@ -24,10 +26,13 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
     private users: User[];
     private sub: any;
 
-    constructor(private route: ActivatedRoute,
+    constructor(
+        private route: ActivatedRoute,
+        private conversationService: ConversationService,
         private messageService: MessageService,
         private socketService: SocketService,
         private userService: UserService) {
+
         this.viewModel = {
             id: null,
             otherUserName: null,
@@ -42,22 +47,34 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.id = params['conversationId'];
 
-            this.userService.getByIds([
-                'ccd93a3a-5737-43a0-848c-5f6332067735',
-                '01d67a77-74dd-4853-99b6-5a5114f5b062'
-            ]).subscribe(
-                response => {
-                    this.users = response;
-                    this.getNextMessages();
+            this.conversationService.get(this.viewModel.id).subscribe(
+                (conversation: Conversation) => {
+                    let userIds: string[] = conversation.users.map((user) => {
+                        return user.userId;
+                    });
+
+                    this.userService.getByIds(userIds).subscribe(
+                        (users: User[]) => {
+                            this.users = users;
+                            this.getNextMessages();
+                        },
+                        error => {
+                            console.log('Error loading users')
+                            this.viewModel.elementState = ElementState.LoadingError;
+                        },
+                        () => {
+                            //
+                        });
                 },
                 error => {
+                    console.log('Error loading conversation')
                     this.viewModel.elementState = ElementState.LoadingError;
                 },
                 () => {
                     //
                 });
         });
-        
+
         this.socketService.on('MessageAdded', (message: Message) => {
             let messageModelRow: ViewConversationMessageViewModel = this.mapMessage(message, this.users);
             this.viewModel.messages.push(messageModelRow);
@@ -97,7 +114,7 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
             body: message.body,
             sentOk: true
         };
-                    
+
         return messageModelRow;
     }
 

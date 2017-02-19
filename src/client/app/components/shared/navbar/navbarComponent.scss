@@ -46,6 +46,23 @@
         font-weight: 700;
         font-size: 13px;
         color: $white;
+
+        .badge {
+            background: $theme-alert;
+        }
+
+        &.messages {
+            padding-top: 4px;
+            padding-right: 30px;
+            font-size: 24px;
+
+            .badge {
+                z-index: 1000;
+                position: absolute;
+                top: 0px;
+                left: 30px;
+            }
+        }
     }
     
     .nav > li > a:hover,

@@ -13,6 +13,11 @@ export class ConversationService {
 		private configService: ConfigService) {
 	}
 
+	get(id: string): Observable<Conversation> {
+        return this.http.get('http://localhost:3010/' + 'conversation/' + id)
+        	.map(response => response.json());
+	}
+
     getForCurrentUser(page: number, pageSize: number): Observable<Conversation[]> {
         return this.http.get('http://localhost:3010/' + 'conversation/for-current-user/' + page + '/' + pageSize)
         	.map(response => response.json());
