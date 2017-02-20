@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { ConfigService } from '../config/config.service';
 //import * as io from "socket.io-client";
 
 interface Window { io: any; }
@@ -11,14 +12,15 @@ export class SocketService {
     //private host: string = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
     private socket: any;
 
-    constructor() {
+    constructor(
+		private configService: ConfigService) {
     }
 
     connect() {
         //this.socket = io('http://localhost:3000');
         var your_jwt = localStorage.getItem('accessToken');
 
-        this.socket = io.connect('http://localhost:3010', {
+        this.socket = io.connect(this.configService.getMessengerApiBaseUrl(), {
             'query': 'token=' + your_jwt
         });
 

@@ -8,4 +8,7 @@ export class ConfigService {
 		//return 'http://api.actsintown.co.uk/';
         return Config.API;
 	}
+	getMessengerApiBaseUrl(): string {
+        return Config.MESSENGER_API;
+	}
 } 

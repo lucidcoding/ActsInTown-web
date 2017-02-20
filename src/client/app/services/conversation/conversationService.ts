@@ -14,22 +14,22 @@ export class ConversationService {
 	}
 
 	get(id: string): Observable<Conversation> {
-        return this.http.get('http://localhost:3010/' + 'conversation/' + id)
+        return this.http.get(this.configService.getMessengerApiBaseUrl() + 'conversation/' + id)
         	.map(response => response.json());
 	}
 
     getForCurrentUser(page: number, pageSize: number): Observable<Conversation[]> {
-        return this.http.get('http://localhost:3010/' + 'conversation/for-current-user/' + page + '/' + pageSize)
+        return this.http.get(this.configService.getMessengerApiBaseUrl() + 'conversation/for-current-user/' + page + '/' + pageSize)
         	.map(response => response.json());
     }
 
 	getForCurrentUserAndUser(userId: string): Observable<Conversation> {
-        return this.http.get('http://localhost:3010/' + 'conversation/for-current-user-and-user/' + userId)
+        return this.http.get(this.configService.getMessengerApiBaseUrl() + 'conversation/for-current-user-and-user/' + userId)
         	.map(response => response.json());
     }
 
 	start(request: StartConversationRequest): Observable<Conversation> {
-		return this.http.post('http://localhost:3010/' + 'conversation', request, null)
+		return this.http.post(this.configService.getMessengerApiBaseUrl() + 'conversation', request, null)
         	.map(response => response.json());
 	}
 }

@@ -22,7 +22,6 @@ import '../../../common/dateExtensions';
 export class ListConversationsComponent implements OnInit, OnDestroy {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ListConversationsViewModel;
-    private users: User[];
 
     constructor(private route: ActivatedRoute,
         private conversationService: ConversationService,
@@ -38,10 +37,12 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        this.userService.getByIds([
-            'ccd93a3a-5737-43a0-848c-5f6332067735',
-            '01d67a77-74dd-4853-99b6-5a5114f5b062'
-        ]).subscribe(
+        this.getNextConversations();
+        /*let userIds: string[] = conversation.users.map((user) => {
+            return user.userId;
+        });
+
+        this.userService.getByIds(userIds).subscribe(
             response => {
                 this.users = response;
                 this.getNextConversations();
@@ -51,7 +52,7 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
             },
             () => {
                 //
-            });
+            });*/
     }
 
     ngOnDestroy() {
@@ -78,6 +79,8 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     private getNextConversations() {
         this.conversationService.getForCurrentUser(this.viewModel.page, 10).subscribe(
             response => {
+                let users = [];
+    
                 this.viewModel.rows = response.reverse().map((conversation: Conversation) => {
                     return this.mapConversation(conversation, this.users);
                 });
