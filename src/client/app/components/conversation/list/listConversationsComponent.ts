@@ -22,6 +22,7 @@ import '../../../common/dateExtensions';
 export class ListConversationsComponent implements OnInit, OnDestroy {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ListConversationsViewModel;
+    private currentUser: User;
 
     constructor(private route: ActivatedRoute,
         private conversationService: ConversationService,
@@ -37,22 +38,14 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        this.getNextConversations();
-        /*let userIds: string[] = conversation.users.map((user) => {
-            return user.userId;
-        });
-
-        this.userService.getByIds(userIds).subscribe(
-            response => {
-                this.users = response;
+        this.userService.getCurrent().subscribe(
+            (response: User) => {
+                this.currentUser = response;      
                 this.getNextConversations();
             },
             error => {
                 this.viewModel.elementState = ElementState.LoadingError;
-            },
-            () => {
-                //
-            });*/
+            });
     }
 
     ngOnDestroy() {
@@ -60,17 +53,18 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     }
 
     private mapConversation(conversation: Conversation, users: User[]): ListConversationsRowViewModel {
-        /*let user = users.single((item: User) => {
-            return item.id.toLowerCase() === conversation.userId.toLowerCase();
-        });*/
+        let otherConversationUser: any = conversation.users.find((currentUser: any) => {
+            return currentUser.userId.toLowerCase() !== this.currentUser.id.toLowerCase();
+        });
 
-        //Seems to be some sort of bug in Angular2 which means I have to do this?
-        //let addedOn = new Date(<any>message.addedOn).getFormattedString();
+        let otherUser = users.find((currentUser: User) => {
+            return currentUser.id === otherConversationUser.userId;
+        });
 
         let rowViewModel: ListConversationsRowViewModel = {
             id: conversation._id,
-            otherUserName: 'TEST',
-            otherUserImageUrl: ''
+            otherUserName: otherUser.fullName,
+            otherUserImageUrl: otherUser.imageUrl
         };
 
         return rowViewModel;
@@ -78,24 +72,35 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
 
     private getNextConversations() {
         this.conversationService.getForCurrentUser(this.viewModel.page, 10).subscribe(
-            response => {
-                let users = [];
-    
-                this.viewModel.rows = response.reverse().map((conversation: Conversation) => {
-                    return this.mapConversation(conversation, this.users);
+            (conversationResponse: Conversation[]) => {
+                let userIds: string[] = [];
+
+                conversationResponse.forEach((currentConversation: Conversation) => {
+                    currentConversation.users.forEach((currentUser: any) => {
+                        if (userIds.indexOf(currentUser.userId) === -1) {
+                            userIds.push(currentUser.userId);
+                        }
+                    });
                 });
 
-                if (this.viewModel.rows.length > 0) {
-                    this.viewModel.elementState = ElementState.Ready;
-                } else {
-                    this.viewModel.elementState = ElementState.NoData;
-                }
+                this.userService.getByIds(userIds).subscribe(
+                    (usersResponse: User[]) => {
+                        this.viewModel.rows = conversationResponse.reverse().map((conversation: Conversation) => {
+                            return this.mapConversation(conversation, usersResponse);
+                        });
+
+                        if (this.viewModel.rows.length > 0) {
+                            this.viewModel.elementState = ElementState.Ready;
+                        } else {
+                            this.viewModel.elementState = ElementState.NoData;
+                        }
+                    },
+                    error => {
+                        this.viewModel.elementState = ElementState.LoadingError;
+                    });
             },
             error => {
                 this.viewModel.elementState = ElementState.LoadingError;
-            },
-            () => {
-                //
             });
     }
 }
