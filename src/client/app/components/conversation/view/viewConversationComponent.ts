@@ -47,32 +47,18 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.id = params['conversationId'];
 
-            this.conversationService.get(this.viewModel.id).subscribe(
-                (conversation: Conversation) => {
-                    let userIds: string[] = conversation.users.map((user) => {
-                        return user.userId;
-                    });
-
-                    this.userService.getByIds(userIds).subscribe(
-                        (users: User[]) => {
-                            this.users = users;
-                            this.getNextMessages();
-                        },
-                        error => {
-                            console.log('Error loading users')
-                            this.viewModel.elementState = ElementState.LoadingError;
-                        },
-                        () => {
-                            //
-                        });
-                },
-                error => {
-                    console.log('Error loading conversation')
-                    this.viewModel.elementState = ElementState.LoadingError;
-                },
-                () => {
-                    //
+            this.conversationService.get(this.viewModel.id).flatMap((conversation: Conversation) => {
+                let userIds: string[] = conversation.entity.users.map((user) => {
+                    return user.userId;
                 });
+
+                return this.userService.getByIds(userIds);
+            }).subscribe((users: User[]) => {
+                this.users = users;
+                this.getNextMessages();
+            }, error => {
+                this.viewModel.elementState = ElementState.LoadingError;
+            });
         });
 
         this.socketService.on('MessageAdded', (message: Message) => {

@@ -58,13 +58,13 @@ export class ViewUserComponent implements OnInit, OnDestroy {
         this.conversationService.getForCurrentUserAndUser(this.viewModel.id).subscribe(
             response => {
                 if (response !== null) {
-                    this.router.navigate(['conversation/view/' + response._id]);
+                    this.router.navigate(['conversation/view/' + response.entity._id]);
                 } else {
                     this.conversationService.start({
                         usersToIds: [ this.viewModel.id ]
                     }).subscribe(
                         response => {
-                            this.router.navigate(['conversation/view/' + response._id]);
+                            this.router.navigate(['conversation/view/' + response.entity._id]);
                         },
                         error => {
                             this.viewModel.elementState = ElementState.LoadingError;

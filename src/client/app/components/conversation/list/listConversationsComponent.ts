@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { ListConversationsViewModel } from './viewModels/listConversationsViewModel';
 import { ListConversationsRowViewModel } from './viewModels/listConversationsRowViewModel';
 import { ConversationService } from '../../../services/conversation/conversationService';
@@ -53,16 +54,12 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     }
 
     private mapConversation(conversation: Conversation, users: User[]): ListConversationsRowViewModel {
-        let otherConversationUser: any = conversation.users.find((currentUser: any) => {
-            return currentUser.userId.toLowerCase() !== this.currentUser.id.toLowerCase();
-        });
-
         let otherUser = users.find((currentUser: User) => {
-            return currentUser.id === otherConversationUser.userId;
+            return currentUser.id === conversation.otherUserIds[0];
         });
 
         let rowViewModel: ListConversationsRowViewModel = {
-            id: conversation._id,
+            id: conversation.entity._id,
             otherUserName: otherUser.fullName,
             otherUserImageUrl: otherUser.imageUrl
         };
@@ -71,36 +68,39 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     }
 
     private getNextConversations() {
-        this.conversationService.getForCurrentUser(this.viewModel.page, 10).subscribe(
-            (conversationResponse: Conversation[]) => {
-                let userIds: string[] = [];
+        /*Observable.forkJoin([
+            this.conversationService.getForCurrentUser(this.viewModel.page, 10),
+            this.userService.getByIds(userIds)]).subscribe((response: Observable<any>[]) => {
+                var conversationResponse = response[0];
+                var usersResponse = response[1];
+            });*/
+        let conversationResponse: Conversation[] = [];
 
-                conversationResponse.forEach((currentConversation: Conversation) => {
-                    currentConversation.users.forEach((currentUser: any) => {
-                        if (userIds.indexOf(currentUser.userId) === -1) {
-                            userIds.push(currentUser.userId);
-                        }
-                    });
+        this.conversationService.getForCurrentUser(this.viewModel.page, 10).flatMap((response: Conversation[]) => {
+            conversationResponse = response;
+            let userIds: string[] = [];
+
+            conversationResponse.forEach((currentConversation: Conversation) => {
+                currentConversation.entity.users.forEach((currentUser: any) => {
+                    if (userIds.indexOf(currentUser.userId) === -1) {
+                        userIds.push(currentUser.userId);
+                    }
                 });
-
-                this.userService.getByIds(userIds).subscribe(
-                    (usersResponse: User[]) => {
-                        this.viewModel.rows = conversationResponse.reverse().map((conversation: Conversation) => {
-                            return this.mapConversation(conversation, usersResponse);
-                        });
-
-                        if (this.viewModel.rows.length > 0) {
-                            this.viewModel.elementState = ElementState.Ready;
-                        } else {
-                            this.viewModel.elementState = ElementState.NoData;
-                        }
-                    },
-                    error => {
-                        this.viewModel.elementState = ElementState.LoadingError;
-                    });
-            },
-            error => {
-                this.viewModel.elementState = ElementState.LoadingError;
             });
+
+            return this.userService.getByIds(userIds);
+        }).subscribe((response: User[]) => {
+            this.viewModel.rows = conversationResponse.reverse().map((conversation: Conversation) => {
+                return this.mapConversation(conversation, response);
+            });
+
+            if (this.viewModel.rows.length > 0) {
+                this.viewModel.elementState = ElementState.Ready;
+            } else {
+                this.viewModel.elementState = ElementState.NoData;
+            }
+        }, error => {
+            this.viewModel.elementState = ElementState.LoadingError;
+        });
     }
 }
