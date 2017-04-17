@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Config } from './shared/index';
-import { SocketService } from './services/socket/socketService';
+import { Config } from './shared/index'
 
 //import { FutureDateValidator } from './directives/futureDate.directive';
 /**
@@ -17,13 +16,7 @@ import { SocketService } from './services/socket/socketService';
 })
 
 export class AppComponent {
-    constructor(
-        private socketService: SocketService) {
+    constructor() {
         console.log('Environment config', Config);
-    }
-
-
-    public ngOnInit() {
-        this.socketService.connect();
     }
 }

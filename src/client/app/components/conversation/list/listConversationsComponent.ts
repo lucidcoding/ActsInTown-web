@@ -1,11 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ListConversationsViewModel } from './viewModels/listConversationsViewModel';
 import { ListConversationsRowViewModel } from './viewModels/listConversationsRowViewModel';
 import { ConversationService } from '../../../services/conversation/conversationService';
 import { MessageService } from '../../../services/message/messageService';
-import { SocketService } from '../../../services/socket/socketService';
 import { UserService } from '../../../services/user/user.service';
 import { Conversation } from '../../../services/conversation/responses/conversationResponse';
 import { User } from '../../../services/user/responses/user';
@@ -20,7 +19,7 @@ import '../../../common/dateExtensions';
     templateUrl: 'listConversationsComponent.html',
     styleUrls: ['listConversationsComponent.css']
 })
-export class ListConversationsComponent implements OnInit, OnDestroy {
+export class ListConversationsComponent implements OnInit {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ListConversationsViewModel;
     private currentUser: User;
@@ -28,7 +27,6 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private conversationService: ConversationService,
         private messageService: MessageService,
-        private socketService: SocketService,
         private userService: UserService) {
 
         this.viewModel = {
@@ -47,10 +45,6 @@ export class ListConversationsComponent implements OnInit, OnDestroy {
             error => {
                 this.viewModel.elementState = ElementState.LoadingError;
             });
-    }
-
-    ngOnDestroy() {
-        this.socketService.removeListener('MessageAdded');
     }
 
     private mapConversation(conversation: Conversation, users: User[]): ListConversationsRowViewModel {

@@ -41,7 +41,6 @@ import { AboutModule } from './+about/about.module';
 import { LoggedInGuard } from './loggedInGuard';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { CustomHttpService } from './services/customHttp/customHttp.service';
-import { SocketService } from './services/socket/socketService';
 
 import { NavbarModule } from './components/shared/navbar/navbarModule';
 
@@ -88,8 +87,7 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
   },
     LoggedInGuard,
     AuthenticationService,
-    CustomHttpService,
-    SocketService
+    CustomHttpService
   ],
   bootstrap: [AppComponent]
 })

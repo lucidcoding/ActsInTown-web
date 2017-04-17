@@ -4,7 +4,6 @@ import { ViewConversationViewModel } from './viewModels/viewConversationViewMode
 import { ViewConversationMessageViewModel } from './viewModels/viewConversationMessageViewModel';
 import { ConversationService } from '../../../services/conversation/conversationService';
 import { MessageService } from '../../../services/message/messageService';
-import { SocketService } from '../../../services/socket/socketService';
 import { UserService } from '../../../services/user/user.service';
 import { Conversation } from '../../../services/conversation/responses/conversationResponse';
 import { Message } from '../../../services/message/responses/messageResponse';
@@ -30,7 +29,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
         private route: ActivatedRoute,
         private conversationService: ConversationService,
         private messageService: MessageService,
-        private socketService: SocketService,
         private userService: UserService) {
 
         this.viewModel = {
@@ -60,12 +58,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
                 this.viewModel.elementState = ElementState.LoadingError;
             });
         });
-
-        this.socketService.on('MessageAdded', (message: Message) => {
-            let messageModelRow: ViewConversationMessageViewModel = this.mapMessage(message, this.users);
-            this.viewModel.messages.push(messageModelRow);
-            console.log('Message received: ' + JSON.stringify(message));
-        });
     }
 
     ngAfterViewChecked() {
@@ -74,7 +66,6 @@ export class ViewConversationComponent implements AfterViewChecked, OnInit, OnDe
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-        this.socketService.removeListener('MessageAdded');
     }
 
     scrollToBottom() {

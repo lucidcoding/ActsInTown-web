@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
-import { SocketService } from '../../../services/socket/socketService';
 import { Message } from '../../../services/message/responses/messageResponse';
 import 'rxjs/add/operator/filter';
 
@@ -22,8 +21,7 @@ export class NavbarComponent {
     private sub: any;
     
     constructor(private router: Router,
-                private authenticationService: AuthenticationService,
-                private socketService: SocketService) {
+                private authenticationService: AuthenticationService) {
         this.authenticated = this.authenticationService.isLoggedIn();
         this.isCollapsed = true;
         
@@ -38,22 +36,5 @@ export class NavbarComponent {
             });
 
         this.newMessages = false;
-    }
-
-    public ngOnInit() {
-        this.socketService.on('UnreadMessages', (message: Message) => {
-            if (this.router.url !== '/conversation/view/' + message.conversation) {
-                this.newMessages = true;
-            }
-        });
-
-        this.socketService.on('AllMessageRead', (message: Message) => {
-            this.newMessages = false;
-        });
-    }
-    
-    ngOnDestroy() {
-        this.socketService.removeListener('UnreadMessage');
-        this.socketService.removeListener('AllMessageRead');
     }
 }
