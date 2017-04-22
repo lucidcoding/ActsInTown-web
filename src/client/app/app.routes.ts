@@ -4,6 +4,10 @@ import { LoggedInGuard } from './loggedInGuard';
 import { HomeComponent } from './components/home/homeComponent';
 import { ListConversationsComponent } from './components/conversation/list/listConversationsComponent';
 import { ViewConversationComponent } from './components/conversation/view/viewConversationComponent';
+import { ComposeMessageComponent } from './components/message/compose/composeMessageComponent';
+import { ListSentMessagesComponent } from './components/message/listSent/listSentMessagesComponent';
+import { ListReceivedMessagesComponent } from './components/message/listReceived/listReceivedMessagesComponent';
+import { ReadMessageComponent } from './components/message/read/readMessageComponent';
 import { AddSpotComponent } from './components/spot/add/addSpotComponent';
 import { ListSpotsComponent } from './components/spot/list/listSpotsComponent';
 import { ChangePasswordComponent } from './components/user/changePassword/changePasswordComponent';
@@ -24,6 +28,11 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'conversation/list', component: ListConversationsComponent, canActivate: [LoggedInGuard] },
   { path: 'conversation/view/:conversationId', component: ViewConversationComponent, canActivate: [LoggedInGuard] },
+  { path: 'message/compose/:recipientId', component: ComposeMessageComponent, canActivate: [LoggedInGuard] },
+  { path: 'message/reply/:messageId', component: ComposeMessageComponent, canActivate: [LoggedInGuard] },
+  { path: 'message/list-sent/:page', component: ListSentMessagesComponent, canActivate: [LoggedInGuard] },
+  { path: 'message/list-received/:page', component: ListReceivedMessagesComponent, canActivate: [LoggedInGuard] },
+  { path: 'message/read/:messageId', component: ReadMessageComponent, canActivate: [LoggedInGuard] },
   { path: 'spot/add', component: AddSpotComponent, canActivate: [LoggedInGuard] },
   //{ path: 'spot/add', component: AddSpotComponent },
   { path: 'spot/list', component: ListSpotsComponent, canActivate: [LoggedInGuard] },

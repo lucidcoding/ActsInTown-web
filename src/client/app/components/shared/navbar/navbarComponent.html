@@ -10,6 +10,16 @@
             </button>
 
             <ul class="nav navbar-nav pull-right visible-xs">
+                <li class="menu-item dropdown">
+                    <ul class="dropdown-menu">
+                        <li class="menu-item dropdown dropdown-submenu">
+                            <a href="" routerLink="/message/list-received/1" routerLinkActive="active">Inbox</a>
+                        </li>
+                        <li class="menu-item dropdown dropdown-submenu">
+                            <a href="" routerLink="/message/list-sent/1" routerLinkActive="active">Sent Items</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" routerLink="/conversation/list" routerLinkActive="active" class="messages">
                         <span class="glyphicon glyphicon-envelope"></span>
@@ -24,11 +34,19 @@
         <div id="navbar" class="navbar-collapse" [class.collapse]="isCollapsed">
             <!--<div id="navbar" class="navbar-collapse collapse">-->
             <ul class="nav navbar-nav navbar-right">
-                <li class="menu-item  hidden-xs">
-                    <a href="#" routerLink="/conversation/list" routerLinkActive="active">
-                        Messages
+                <li class="menu-item dropdown hidden-xs">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="badge" *ngIf="newMessages">+</span>
-                    </a>                
+                        Messages<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="menu-item dropdown dropdown-submenu">
+                            <a href="" routerLink="/message/list-received/1" routerLinkActive="active">Inbox</a>
+                        </li>
+                        <li class="menu-item dropdown dropdown-submenu">
+                            <a href="" routerLink="/message/list-sent/1" routerLinkActive="active">Sent Items</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="menu-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Spots<b class="caret"></b></a>
                     <ul class="dropdown-menu">

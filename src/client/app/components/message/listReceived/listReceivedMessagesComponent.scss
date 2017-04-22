@@ -1,0 +1,7 @@
+@import "../../../../css/globals/_colors";
+@import "../../../../css/globals/_vars";
+
+.row.unread > div > a > .list-record > .details > p {
+    color: $theme-primary;
+    font-weight: $font-weight-bold;
+}

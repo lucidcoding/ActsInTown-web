@@ -1,0 +1,47 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
+<div class="standard-page">
+    <div class="container row-separated">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Inbox</h1>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading your messages.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 2">
+            <div class="col-sm-12 ">
+                <p>You have no messages.</p>
+            </div>
+        </div>
+        <ng-container *ngIf="viewModel.elementState === 3">
+            <div class="row" *ngFor="let row of viewModel.rows" [class.unread]="!row.read">
+                <div class="col-sm-12">
+                    <a href="#" routerLink="/message/read/{{row.id}}" routerLinkActive="active">
+                        <div class="list-record clearfix">
+                            <a class="avatar" href="#">
+                                <img src="{{row.senderImageUrl}}"/>
+                            </a>
+                            <div class="details">
+                                <h2>
+                                    <i class="fa fa-user"></i>
+                                    {{row.senderFullName}}
+                                </h2>
+                                <h3 class="subtitle">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{row.sentOn}}
+                                </h3>
+                                <p>
+                                    {{row.title}}
+                                </p>
+                                    
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

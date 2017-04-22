@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
 import { Message } from './responses/messageResponse';
-import { CreateMessageRequest } from './requests/createMessageRequest';
+import { SendMessageRequest } from './requests/sendMessageRequest';
 
 @Injectable()
 export class MessageService {
@@ -13,12 +13,22 @@ export class MessageService {
 		private configService: ConfigService) {
 	}
 
-    getForConversation(conversationId: string, page: number, pageSize: number): Observable<Message[]> {
-        return this.http.get(this.configService.getMessengerApiBaseUrl() + 'message/for-conversation/' + conversationId + '/' + page + '/' + pageSize)
+    getInbox(page: number, pageSize: number): Observable<Message[]> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'message/inbox/' + page + '/' + pageSize)
         	.map(response => response.json());
     }
-    
-    createMessage(createMessageRequest: CreateMessageRequest): Observable<Response> {
-		return this.http.post(this.configService.getMessengerApiBaseUrl() + 'message', createMessageRequest, null);
+
+    get(id: string): Observable<Message> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'message/' + id)
+        	.map(response => response.json());
+    }
+
+    getSentItems(page: number, pageSize: number): Observable<Message[]> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'message/sent-items/' + page + '/' + pageSize)
+        	.map(response => response.json());
+    }
+
+    sendMessage(sendMessageRequest: SendMessageRequest): Observable<Response> {
+		return this.http.post(this.configService.getApiBaseUrl() + 'message', sendMessageRequest, null);
     }
 }

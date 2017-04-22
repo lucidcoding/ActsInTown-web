@@ -1,0 +1,68 @@
+<sd-loading-overlay-spinner *ngIf="viewModel.elementState === 0"></sd-loading-overlay-spinner>
+<div class="standard-page">
+    <div class="container row-separated">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Compose Message</h1>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 1">
+            <div class="col-sm-12 ">
+                <p>There was an error loading the required data.</p>
+            </div>
+        </div>
+        <div class="row" *ngIf="viewModel.elementState === 5">
+            <div class="col-sm-12 ">
+                <p>There was an error sending your message.</p>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit(composeMessageForm)" #composeMessageForm="ngForm" class="form-horizontal" role="form" novalidate
+            *ngIf="viewModel.elementState === 3">
+            <div class="form-group">
+                <div class="form-info-label col-sm-2">
+                    To
+                </div>
+                <div class="form-info col-sm-10">
+                    {{viewModel.recipientName}}
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="composeMessageForm.submitted">
+                <label class="control-label col-sm-2">Subject</label>
+                <div class="col-sm-10">
+                    <input type="text" [(ngModel)]="viewModel.title" #title="ngModel" name="title" required class="form-control" 
+                        maxlength="25" />
+                    <div *ngIf="composeMessageForm.submitted">
+                        <div class="help-block" *ngIf="title.errors && title.errors.required">
+                            Title field is required.
+                        </div>
+                        <div class="help-block" *ngIf="title.errors && title.errors.maxlength">
+                            Title cannot be more than 25 characters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="composeMessageForm.submitted">
+                <label class="control-label col-sm-2">Message</label>
+                <div class="col-sm-10">
+                    <textarea type="text" [(ngModel)]="viewModel.body" #body="ngModel" name="body" required 
+                        class="form-control message-body" maxlength="1000">
+                    </textarea>
+                    <div *ngIf="composeMessageForm.submitted">
+                        <div class="help-block" *ngIf="body.errors && body.errors.required">
+                            Body field is required.
+                        </div>
+                        <div class="help-block" *ngIf="body.errors && body.errors.maxlength">
+                            Body cannot be more than 1000 characters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-9">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <a href="" routerLink="/messages/list" routerLinkActive="active" class="btn btn-default">Back to inbox</a>
+                </div>
+            </div>
+            </form>
+    </div>
+</div>

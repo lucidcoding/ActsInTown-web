@@ -11,6 +11,10 @@ import { HomeModule } from './components/home/homeModule';
 
 import { ListConversationsModule } from './components/conversation/list/listConversationsModule';
 import { ViewConversationModule } from './components/conversation/view/viewConversationModule';
+import { ComposeMessageModule } from './components/message/compose/composeMessageModule';
+import { ListSentMessagesModule } from './components/message/listSent/listSentMessagesModule';
+import { ListReceivedMessagesModule } from './components/message/listReceived/listReceivedMessagesModule';
+import { ReadMessageModule } from './components/message/read/readMessageModule';
 import { AddSpotModule } from './components/spot/add/addSpotModule';
 import { ListSpotsModule } from './components/spot/list/listSpotsModule';
 import { ChangePasswordModule } from './components/user/changePassword/changePasswordModule';
@@ -48,6 +52,10 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
   imports: [
     BrowserModule,
     HttpModule,
+    ComposeMessageModule,
+    ListSentMessagesModule,
+    ListReceivedMessagesModule,
+    ReadMessageModule,
     AboutModule,
     HomeModule,
     ListConversationsModule,
