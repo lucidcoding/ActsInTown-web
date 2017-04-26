@@ -16,6 +16,8 @@ export class LoggedInGuard implements CanActivate {
         }
 
         if (this.authenticationService.isExpired()) {
+            this.authenticationService.clearToken();
+            
             this.authenticationService.refresh().subscribe(
                 response => {
                     let body = JSON.parse((<any> response)._body);

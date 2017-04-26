@@ -31,7 +31,7 @@
                                 </h2>
                                 <h3 class="subtitle">
                                     <i class="fa fa-clock-o"></i>
-                                    {{row.sentOn}}
+                                    {{row.sentOnString}}
                                 </h3>
                                 <p>
                                     {{row.title}}
@@ -40,6 +40,11 @@
                             </div>
                         </div>
                     </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <sd-pager [(records)]="viewModel.records"></sd-pager>
                 </div>
             </div>
         </ng-container>

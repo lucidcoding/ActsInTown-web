@@ -27,8 +27,9 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
         this.viewModel = {
             messageId: null,
             senderFullName: null,
+            senderImageUrl: null,
             title: null,
-            sentOn: null,
+            sentOnString: null,
             body: null,
             elementState: ElementState.Loading
         };
@@ -40,9 +41,14 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
 
             this.messageService.get(this.viewModel.messageId).subscribe(
                 (response: Message) => {
+                    //Angular2 date bug again?
+                    let sentOnAny = <any>response.sentOn;
+                    let sentOn = new Date(sentOnAny);
+
                     this.viewModel.senderFullName = response.sender.fullName;
                     this.viewModel.title = response.title;
-                    this.viewModel.sentOn = response.sentOn;
+                    this.viewModel.sentOnString = sentOn.getFormattedString();
+                    this.viewModel.senderImageUrl = response.sender.imageUrl;
                     this.viewModel.body = response.body;
                     this.viewModel.elementState = ElementState.Ready;
                 },

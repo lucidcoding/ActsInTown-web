@@ -15,18 +15,21 @@
             </div>
         </div>
         <div class="row" *ngIf="viewModel.elementState === 3">
-            <div class="col-sm-12">
-                {{viewModel.senderFullName}}
-            </div>
-        </div>
-        <div class="row" *ngIf="viewModel.elementState === 3">
-            <div class="col-sm-12">
-                {{viewModel.title}}
-            </div>
-        </div>
-        <div class="row" *ngIf="viewModel.elementState === 3">
-            <div class="col-sm-12">
-                {{viewModel.sentOn}}
+            <div class="col-sm-12 single-record-header">
+                <a class="avatar" href="#">
+                    <img src="{{viewModel.senderImageUrl}}" />
+                </a>
+                <div class="details">
+                    <h2>
+                        <i class="fa fa-user"></i> {{viewModel.senderFullName}}
+                    </h2>
+                    <h3 class="subtitle">
+                        <i class="fa fa-clock-o"></i> {{viewModel.sentOnString}}
+                    </h3>
+                    <p>
+                        {{viewModel.title}}
+                    </p>
+                </div>
             </div>
         </div>
         <div class="row" *ngIf="viewModel.elementState === 3">

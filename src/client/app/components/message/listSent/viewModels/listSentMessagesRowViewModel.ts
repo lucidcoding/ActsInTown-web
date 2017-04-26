@@ -3,5 +3,5 @@ export class ListSentMessagesRowViewModel {
     recipientFullName: string;
     recipientImageUrl: string;
     title: string;
-    sentOn: Date;
+    sentOnString: string;
 }

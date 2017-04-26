@@ -28,7 +28,8 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
         this.viewModel = {
             rows: [],
             elementState: ElementState.Loading,
-            page: 1
+            page: 1,
+            records: 0,
         };
     }
 
@@ -39,12 +40,16 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
             this.messageService.getInbox(this.viewModel.page, 10).subscribe(
                 (response: Message[]) => {
                     this.viewModel.rows = response.map((message: Message) => {
+                        //Angular2 date bug again?
+                        let sentOnAny = <any>message.sentOn;
+                        let sentOn = new Date(sentOnAny);
+
                         return {
                             id: message.id,
                             senderFullName: message.recipient.fullName,
                             senderImageUrl: message.recipient.imageUrl,
                             title: message.title,
-                            sentOn: message.sentOn,
+                            sentOnString: sentOn.getFormattedString(),
                             read: message.read
                         };
                     });
@@ -54,6 +59,14 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
                     } else {
                         this.viewModel.elementState = ElementState.NoData;
                     }
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.LoadingError;
+                });
+            
+            this.messageService.getInboxCount().subscribe(
+                (response: number) => {
+                    this.viewModel.records = response;
                 },
                 error => {
                     this.viewModel.elementState = ElementState.LoadingError;

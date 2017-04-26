@@ -59,7 +59,8 @@ sd-app {
                     padding-right: $standard-spacing;
                 }
                 
-                .list-record {
+                .list-record,
+                .single-record-header {
                     .avatar {
                         float: left;
                         

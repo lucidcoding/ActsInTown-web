@@ -37,14 +37,18 @@ export class ListSentMessagesComponent implements OnInit, OnDestroy {
             this.viewModel.page = params['page'];
 
             this.messageService.getSentItems(this.viewModel.page, 10).subscribe(
-                (response: Message[]) => {
-                    this.viewModel.rows = response.map((message: Message) => {
+                (response: Message[]) => {    
+                    this.viewModel.rows = response.map((message: Message) => {    
+                        //Angular2 date bug again?
+                        let sentOnAny = <any>message.sentOn;
+                        let sentOn = new Date(sentOnAny);
+
                         return {
                             id: message.id,
                             recipientFullName: message.recipient.fullName,
                             recipientImageUrl: message.recipient.imageUrl,
                             title: message.title,
-                            sentOn: message.sentOn
+                            sentOnString: sentOn.getFormattedString()
                         };
                     });
 

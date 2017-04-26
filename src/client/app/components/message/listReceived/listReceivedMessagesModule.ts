@@ -7,9 +7,10 @@ import { MessageService } from '../../../services/message/messageService';
 import { UserService } from '../../../services/user/user.service';
 import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
+import { PagerModule } from '../../shared/pager/pagerModule';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, LoadingSpinnerOverlayModule, RouterModule ],
+    imports: [CommonModule, FormsModule, LoadingSpinnerOverlayModule, PagerModule, RouterModule ],
     declarations: [ListReceivedMessagesComponent],
     exports: [ListReceivedMessagesComponent],
     providers: [

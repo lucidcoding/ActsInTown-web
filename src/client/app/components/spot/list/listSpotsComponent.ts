@@ -58,13 +58,6 @@ export class ListSpotsComponent implements OnInit {
                     //Seems to be some sort of bug in Angular2 which means I have to do this?
                     let scheduledForAny = <any>spot.scheduledFor;
                     let scheduledFor = new Date(scheduledForAny);
-
-                    /*viewModelRow.dateTimeHeading =
-                        padLeft(scheduledFor.getDate()) + ' ' +
-                        scheduledFor.getShortMonthString() + ' ' +
-                        scheduledFor.getFullYear() + ' ' +
-                        padLeft(scheduledFor.getHours()) + ':' +
-                        padLeft(scheduledFor.getMinutes());*/
                         
                     viewModelRow.dateTimeHeading = scheduledFor.getFormattedString();
 

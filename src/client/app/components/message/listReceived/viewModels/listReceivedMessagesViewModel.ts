@@ -5,4 +5,5 @@ export class ListReceivedMessagesViewModel {
     rows: ListReceivedMessagesRowViewModel[];
     elementState: ElementState;
     page: number;
+    records: number;
 }

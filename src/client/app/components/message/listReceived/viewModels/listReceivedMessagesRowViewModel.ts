@@ -3,6 +3,6 @@ export class ListReceivedMessagesRowViewModel {
     senderFullName: string;
     senderImageUrl: string;
     title: string;
-    sentOn: Date;
+    sentOnString: string;
     read: boolean;
 }
