@@ -1,0 +1,16 @@
+@import "../../../../css/globals/_colors";
+
+.pagination {
+    .active {
+        a {
+            background-color: $theme-primary;
+            border-color: $theme-primary;
+            color: white;
+        }
+    }
+
+    a {
+        border-color: $theme-primary;
+        color: black;
+    }
+}

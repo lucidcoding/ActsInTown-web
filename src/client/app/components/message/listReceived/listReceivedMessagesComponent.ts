@@ -22,8 +22,8 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
     private sub: any;
 
     constructor(private route: ActivatedRoute,
-                private messageService: MessageService,
-                private userService: UserService) {
+        private messageService: MessageService,
+        private userService: UserService) {
 
         this.viewModel = {
             rows: [],
@@ -35,42 +35,40 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.viewModel.page = params['page'];
+            this.viewModel.page = parseInt(params['page']);
 
-            this.messageService.getInbox(this.viewModel.page, 10).subscribe(
-                (response: Message[]) => {
-                    this.viewModel.rows = response.map((message: Message) => {
-                        //Angular2 date bug again?
-                        let sentOnAny = <any>message.sentOn;
-                        let sentOn = new Date(sentOnAny);
+            Observable.forkJoin([
+                this.messageService.getInbox(this.viewModel.page, 10),
+                this.messageService.getInboxCount()
+            ]).subscribe((response: any[]) => { //Return proper types here and hereon.
+                var inboxResponse = response[0];
+                var inboxCountResponse = response[1];
 
-                        return {
-                            id: message.id,
-                            senderFullName: message.recipient.fullName,
-                            senderImageUrl: message.recipient.imageUrl,
-                            title: message.title,
-                            sentOnString: sentOn.getFormattedString(),
-                            read: message.read
-                        };
-                    });
+                this.viewModel.rows = inboxResponse.map((message: Message) => {
+                    //Angular2 date bug again?
+                    let sentOnAny = <any>message.sentOn;
+                    let sentOn = new Date(sentOnAny);
 
-                    if (this.viewModel.rows.length > 0) {
-                        this.viewModel.elementState = ElementState.Ready;
-                    } else {
-                        this.viewModel.elementState = ElementState.NoData;
-                    }
-                },
-                error => {
-                    this.viewModel.elementState = ElementState.LoadingError;
+                    return {
+                        id: message.id,
+                        senderFullName: message.sender.fullName,
+                        senderImageUrl: message.recipient.imageUrl,
+                        title: message.title,
+                        sentOnString: sentOn.getFormattedString(),
+                        read: message.read
+                    };
                 });
-            
-            this.messageService.getInboxCount().subscribe(
-                (response: number) => {
-                    this.viewModel.records = response;
-                },
-                error => {
-                    this.viewModel.elementState = ElementState.LoadingError;
-                });
+
+
+                this.viewModel.records = inboxCountResponse;
+
+
+                if (this.viewModel.rows.length > 0) {
+                    this.viewModel.elementState = ElementState.Ready;
+                } else {
+                    this.viewModel.elementState = ElementState.NoData;
+                }
+            });
         });
     }
 

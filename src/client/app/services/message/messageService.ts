@@ -38,6 +38,21 @@ export class MessageService {
         	.map(response => response.json());
     }
 
+    getForConversation(conversationId: string, before: Date, page: number, pageSize: number): Observable<Message[]> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'message/for-conversation/' + conversationId + 
+            '/' + encodeURIComponent(before.toISOString()) + 
+            '/' + page +
+            '/' + pageSize)
+        	.map(response => response.json());
+    }
+
+    getForConversationCount(conversationId: string, before: Date): Observable<number> {
+        return this.http.get(this.configService.getApiBaseUrl() + 'message/for-conversation/' + conversationId + 
+            '/' + encodeURIComponent(before.toISOString()) +
+            'count')
+        	.map(response => response.json());
+    }
+
     sendMessage(sendMessageRequest: SendMessageRequest): Observable<Response> {
 		return this.http.post(this.configService.getApiBaseUrl() + 'message', sendMessageRequest, null);
     }

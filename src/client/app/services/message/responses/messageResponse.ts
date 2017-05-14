@@ -3,7 +3,7 @@ import { User } from '../../user/responses/user';
 
 export class Message {
     id: string;
-    //conversation: string;
+    conversation: Conversation;
     sender: User;
     recipient: User;
     sentOn: Date;

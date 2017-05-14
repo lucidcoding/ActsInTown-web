@@ -1,17 +1,19 @@
-<ul>
-    <li>
-        <a href="#">
-            First
-        </a>
-    </li>
-    <li *ngFor="let pageNumber of viewModel.pageNumbers">
-        <a href="#">
-            {{pageNumber}}
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            Last
-        </a>
-    </li>
-</ul>
+<nav>
+    <ul *ngIf="viewModel.show" class="pagination">
+        <li class="page-item">
+            <a href="#" routerLink="{{rootUrl}}/1" class="page-link">
+                First
+            </a>
+        </li>
+        <li *ngFor="let pageNumber of viewModel.pageNumbers" class="page-item" [class.active]="pageNumber === currentPage">
+            <a href="#" routerLink="{{rootUrl}}/{{pageNumber}}" class="page-link">
+                {{pageNumber}}
+            </a>
+        </li>
+        <li class="page-item">
+            <a href="#" routerLink="{{rootUrl}}/{{viewModel.lastPage}}" class="page-link">
+                Last
+            </a>
+        </li>
+    </ul>
+</nav>

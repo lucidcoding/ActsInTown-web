@@ -14,24 +14,30 @@
                 <p>There was an error loading the message.</p>
             </div>
         </div>
-        <div class="row" *ngIf="viewModel.elementState === 3">
-            <div class="col-sm-12 single-record-header">
-                <a class="avatar" href="#">
-                    <img src="{{viewModel.senderImageUrl}}" />
-                </a>
-                <div class="details">
-                    <h2>
-                        <i class="fa fa-user"></i> {{viewModel.senderFullName}}
-                    </h2>
-                    <h3 class="subtitle">
-                        <i class="fa fa-clock-o"></i> {{viewModel.sentOnString}}
-                    </h3>
-                    <p>
-                        {{viewModel.title}}
-                    </p>
+        <ng-container *ngIf="viewModel.elementState === 3">
+            <div class="row">
+                <div class="col-sm-12 single-record-header">
+                    <a class="avatar" href="#">
+                        <img src="{{viewModel.senderImageUrl}}" />
+                    </a>
+                    <div class="details">
+                        <h2>
+                            <i class="fa fa-user"></i> {{viewModel.senderFullName}}
+                        </h2>
+                        <h3 class="subtitle">
+                            <i class="fa fa-clock-o"></i> {{viewModel.sentOnString}}
+                        </h3>
+                        <p>
+                            {{viewModel.title}}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row" *ngFor="let previousMessage of viewModel.previousMessages" >
+                {{previousMessage.senderFullName}},{{previousMessage.sentOnString}}
+                {{previousMessage.body}}
+            </div>
+        </ng-container>
         <div class="row" *ngIf="viewModel.elementState === 3">
             <div class="col-sm-12">
                 {{viewModel.body}}

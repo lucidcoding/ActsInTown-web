@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ReadMessageViewModel } from './readMessageViewModel';
+import { ReadMessageViewModel } from './viewModels/readMessageViewModel';
 import { MessageService } from '../../../services/message/messageService';
 import { UserService } from '../../../services/user/user.service';
 import { Message } from '../../../services/message/responses/messageResponse';
@@ -31,7 +31,8 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
             title: null,
             sentOnString: null,
             body: null,
-            elementState: ElementState.Loading
+            elementState: ElementState.Loading,
+            previousMessages: []
         };
     }
 
@@ -39,20 +40,37 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             this.viewModel.messageId = params['messageId'];
 
-            this.messageService.get(this.viewModel.messageId).subscribe(
-                (response: Message) => {
+            this.messageService
+                .get(this.viewModel.messageId)
+                .flatMap((getMessageResponse: Message) => {
                     //Angular2 date bug again?
-                    let sentOnAny = <any>response.sentOn;
+                    let sentOnAny = <any>getMessageResponse.sentOn;
                     let sentOn = new Date(sentOnAny);
 
-                    this.viewModel.senderFullName = response.sender.fullName;
-                    this.viewModel.title = response.title;
+                    this.viewModel.senderFullName = getMessageResponse.sender.fullName;
+                    this.viewModel.title = getMessageResponse.title;
                     this.viewModel.sentOnString = sentOn.getFormattedString();
-                    this.viewModel.senderImageUrl = response.sender.imageUrl;
-                    this.viewModel.body = response.body;
+                    this.viewModel.senderImageUrl = getMessageResponse.sender.imageUrl;
+                    this.viewModel.body = getMessageResponse.body;
                     this.viewModel.elementState = ElementState.Ready;
-                },
-                error => {
+                    
+                    return this.messageService.getForConversation(getMessageResponse.conversation.id, sentOn, 1, 10);
+                })
+                .subscribe((getForConversationResponse: Message[]) => {
+                    this.viewModel.previousMessages = getForConversationResponse.map((message: Message) => {
+                        //Angular2 date bug again?
+                        let sentOnAny = <any>message.sentOn;
+                        let sentOn = new Date(sentOnAny);
+
+                        return {
+                            messageId: message.id,
+                            senderFullName: message.sender.fullName,
+                            title: message.title,
+                            sentOnString: sentOn.getFormattedString(),
+                            body: message.body
+                        };
+                    });
+                }, error => {
                     this.viewModel.elementState = ElementState.LoadingError;
                 });
         });

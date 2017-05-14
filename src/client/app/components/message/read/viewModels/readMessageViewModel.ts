@@ -1,4 +1,5 @@
 import { ElementState } from '../../../common/elementState';
+import { ReadMessagePreviousMessageViewModel } from './ReadMessagePreviousMessageViewModel';
 
 export class ReadMessageViewModel {
     messageId: string;
@@ -8,4 +9,5 @@ export class ReadMessageViewModel {
     sentOnString: string;
     body: string;
     elementState: ElementState;
+    previousMessages: ReadMessagePreviousMessageViewModel[];
 }

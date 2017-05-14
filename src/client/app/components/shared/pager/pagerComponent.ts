@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PagerViewModel } from './pagerViewModel';
 import { Option } from '../../../common/option.common';
+import * as Constants from '../../../common/constants';
 
 @Component({
     moduleId: module.id,
@@ -11,10 +12,11 @@ import { Option } from '../../../common/option.common';
 export class PagerComponent {
     @Input() records: number;
     @Input() currentPage: number;
+    @Input() rootUrl: string;
     public viewModel: PagerViewModel;
 
     ngOnInit() {
-        let pages = this.records;
+        let pages = 8;//Math.ceil(this.records / Constants.recordsPerPage);
         let pageNumbers: number[] = [];
 
         for (let i = 1; i <= pages; i++) {
@@ -22,7 +24,9 @@ export class PagerComponent {
         }
 
         this.viewModel = {
-            pageNumbers: pageNumbers
+            show: pages > 1,
+            pageNumbers: pageNumbers,
+            lastPage: pages
         };
     }
 }
