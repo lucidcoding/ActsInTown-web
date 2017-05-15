@@ -1,17 +1,17 @@
 <nav>
     <ul *ngIf="viewModel.show" class="pagination">
         <li class="page-item">
-            <a href="#" routerLink="{{rootUrl}}/1" class="page-link">
+            <a href="#" (click)="selectPage($event, 1)" class="page-link">
                 First
             </a>
         </li>
         <li *ngFor="let pageNumber of viewModel.pageNumbers" class="page-item" [class.active]="pageNumber === currentPage">
-            <a href="#" routerLink="{{rootUrl}}/{{pageNumber}}" class="page-link">
+            <a href="" (click)="selectPage($event, pageNumber)" class="page-link">
                 {{pageNumber}}
             </a>
         </li>
         <li class="page-item">
-            <a href="#" routerLink="{{rootUrl}}/{{viewModel.lastPage}}" class="page-link">
+            <a href="#" (click)="selectPage($event, lastPage)" class="page-link">
                 Last
             </a>
         </li>

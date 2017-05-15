@@ -32,7 +32,9 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
             sentOnString: null,
             body: null,
             elementState: ElementState.Loading,
-            previousMessages: []
+            previousMessages: [],
+            previousMessagePage: 1,
+            previousMessageCount: 0,
         };
     }
 
@@ -65,6 +67,7 @@ export class ReadMessageComponent implements OnInit, OnDestroy {
                         return {
                             messageId: message.id,
                             senderFullName: message.sender.fullName,
+                            senderImageUrl: message.sender.imageUrl,
                             title: message.title,
                             sentOnString: sentOn.getFormattedString(),
                             body: message.body

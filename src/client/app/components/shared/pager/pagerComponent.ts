@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PagerViewModel } from './pagerViewModel';
 import { Option } from '../../../common/option.common';
 import * as Constants from '../../../common/constants';
@@ -12,7 +12,7 @@ import * as Constants from '../../../common/constants';
 export class PagerComponent {
     @Input() records: number;
     @Input() currentPage: number;
-    @Input() rootUrl: string;
+    @Output() pageSelected: EventEmitter<number> = new EventEmitter<number>();
     public viewModel: PagerViewModel;
 
     ngOnInit() {
@@ -28,5 +28,10 @@ export class PagerComponent {
             pageNumbers: pageNumbers,
             lastPage: pages
         };
+    }
+    
+    selectPage($event: any, page: number) {
+        event.preventDefault();
+        this.pageSelected.emit(page);
     }
 }

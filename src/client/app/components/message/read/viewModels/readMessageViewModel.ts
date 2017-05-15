@@ -10,4 +10,6 @@ export class ReadMessageViewModel {
     body: string;
     elementState: ElementState;
     previousMessages: ReadMessagePreviousMessageViewModel[];
+    previousMessagePage: number;
+    previousMessageCount: number;
 }

@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <sd-pager records="{{viewModel.records}}" rootUrl="/message/list-received" [currentPage]="viewModel.page"></sd-pager>
+                    <sd-pager records="{{viewModel.records}}" (pageSelected)="pageSelected($event)" [currentPage]="viewModel.page"></sd-pager>
                 </div>
             </div>
         </ng-container>

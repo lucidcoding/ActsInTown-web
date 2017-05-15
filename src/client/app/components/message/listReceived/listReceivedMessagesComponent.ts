@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ListReceivedMessagesViewModel } from './viewModels/listReceivedMessagesViewModel';
 import { ListReceivedMessagesRowViewModel } from './viewModels/listReceivedMessagesRowViewModel';
@@ -22,6 +22,7 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
     private sub: any;
 
     constructor(private route: ActivatedRoute,
+        private router: Router,
         private messageService: MessageService,
         private userService: UserService) {
 
@@ -74,5 +75,9 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    pageSelected($event: any) {
+        this.router.navigate(['/message/list-received/' + $event]);
     }
 }

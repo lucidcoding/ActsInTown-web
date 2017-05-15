@@ -27,21 +27,48 @@
                         <h3 class="subtitle">
                             <i class="fa fa-clock-o"></i> {{viewModel.sentOnString}}
                         </h3>
-                        <p>
+                        <h4>
                             {{viewModel.title}}
+                        </h4>
+                        <p>
+                            {{viewModel.body}}
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngFor="let previousMessage of viewModel.previousMessages" >
-                {{previousMessage.senderFullName}},{{previousMessage.sentOnString}}
-                {{previousMessage.body}}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Mesage History</h2>
+                </div>
+            </div>
+            <div class="row" *ngFor="let previousMessage of viewModel.previousMessages">
+                <div class="col-sm-12 single-record-header">
+                    <div>
+                        <a class="avatar" href="#">
+                            <img src="{{previousMessage.senderImageUrl}}" />
+                        </a>
+                        <div class="details">
+                            <h2>
+                                <i class="fa fa-user"></i> {{previousMessage.senderFullName}}
+                            </h2>
+                            <h3 class="subtitle">
+                                <i class="fa fa-clock-o"></i> {{previousMessage.sentOnString}}
+                            </h3>
+                            <h4>
+                                {{previousMessage.title}}
+                            </h4>
+                            <p>
+                                {{previousMessage.body}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <sd-pager records="{{viewModel.previousMessageCount}}" rootUrl="/message/list-received" [currentPage]="viewModel.previousMessagePage"></sd-pager>
+                </div>
             </div>
         </ng-container>
-        <div class="row" *ngIf="viewModel.elementState === 3">
-            <div class="col-sm-12">
-                {{viewModel.body}}
-            </div>
-        </div>
     </div>
 </div>
