@@ -16,7 +16,7 @@ export class PagerComponent {
     public viewModel: PagerViewModel;
 
     ngOnInit() {
-        let pages = 8;//Math.ceil(this.records / Constants.recordsPerPage);
+        let pages = Math.ceil(this.records / Constants.recordsPerPage);
         let pageNumbers: number[] = [];
 
         for (let i = 1; i <= pages; i++) {

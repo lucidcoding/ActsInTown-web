@@ -4,6 +4,7 @@ import { ComposeMessageViewModel } from './composeMessageViewModel';
 import { MessageService } from '../../../services/message/messageService';
 import { UserService } from '../../../services/user/user.service';
 import { SendMessageRequest } from '../../../services/message/requests/sendMessageRequest';
+import { ReplyToMessageRequest } from '../../../services/message/requests/replyToMessageRequest';
 import { Message } from '../../../services/message/responses/messageResponse';
 import { User } from '../../../services/user/responses/user';
 import { Option } from '../../../common/option.common';
@@ -85,22 +86,38 @@ export class ComposeMessageComponent implements OnInit, OnDestroy {
 
         this.viewModel.elementState = ElementState.Loading;
 
-        var request: SendMessageRequest = {
-            recipientId: this.viewModel.recipientId,
-            title: this.viewModel.title,
-            body: this.viewModel.body
-        };
 
-        this.messageService.sendMessage(request).subscribe(
-            response => {
-                this.viewModel.elementState = ElementState.Ready;
-                this.router.navigate(['message/list']);
-            },
-            error => {
-                this.viewModel.elementState = ElementState.SubmissionError;
-            },
-            () => {
-                //
-            });
+        if(this.viewModel.replyToMessageId !== null) {
+            var replyToMessageRequest: ReplyToMessageRequest = {
+                originalMessageId: this.viewModel.replyToMessageId,
+                body: this.viewModel.body
+            };
+
+            this.messageService.replyToMessage(replyToMessageRequest).subscribe(
+                response => {
+                    this.viewModel.elementState = ElementState.Ready;
+                    this.router.navigate(['message/list-received/1']);
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.SubmissionError;
+                }
+            );
+        } else {
+            var sendMessageRequest: SendMessageRequest = {
+                recipientId: this.viewModel.recipientId,
+                title: this.viewModel.title,
+                body: this.viewModel.body
+            };
+
+            this.messageService.sendMessage(sendMessageRequest).subscribe(
+                response => {
+                    this.viewModel.elementState = ElementState.Ready;
+                    this.router.navigate(['message/list-received/1']);
+                },
+                error => {
+                    this.viewModel.elementState = ElementState.SubmissionError;
+                }
+            );
+        }
     }
 }

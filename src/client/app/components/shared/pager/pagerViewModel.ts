@@ -1,5 +1,5 @@
 export class PagerViewModel {
-    show: boolean,
+    show: boolean;
     pageNumbers: number[];
     lastPage: number;
 }

@@ -5,7 +5,7 @@
             <div class="col-sm-12">
                 <div class="clearfix">
                     <h1 class="has-buttons">Message</h1>
-                    <a href="" routerLink="/message/reply/{{viewModel.messageId}}" routerLinkActive="active" class="btn btn-default pull-right">Add</a>
+                    <a href="" routerLink="/message/reply/{{viewModel.messageId}}" routerLinkActive="active" class="btn btn-default pull-right">Reply</a>
                 </div>
             </div>
         </div>
@@ -38,28 +38,34 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Mesage History</h2>
+                    <h1>Mesage History</h1>
                 </div>
             </div>
-            <div class="row" *ngFor="let previousMessage of viewModel.previousMessages">
+            <div class="row">
                 <div class="col-sm-12 single-record-header">
-                    <div>
-                        <a class="avatar" href="#">
-                            <img src="{{previousMessage.senderImageUrl}}" />
-                        </a>
-                        <div class="details">
-                            <h2>
-                                <i class="fa fa-user"></i> {{previousMessage.senderFullName}}
-                            </h2>
-                            <h3 class="subtitle">
-                                <i class="fa fa-clock-o"></i> {{previousMessage.sentOnString}}
-                            </h3>
-                            <h4>
-                                {{previousMessage.title}}
-                            </h4>
-                            <p>
-                                {{previousMessage.body}}
-                            </p>
+                    <div class="scroller">
+                        <div class="row" *ngFor="let previousMessage of viewModel.previousMessages">
+                            <div class="col-sm-12 single-record-header">
+                                <div>
+                                    <a class="avatar" href="#">
+                                        <img src="{{previousMessage.senderImageUrl}}" />
+                                    </a>
+                                    <div class="details">
+                                        <h2>
+                                            <i class="fa fa-user"></i> {{previousMessage.senderFullName}}
+                                        </h2>
+                                        <h3 class="subtitle">
+                                            <i class="fa fa-clock-o"></i> {{previousMessage.sentOnString}}
+                                        </h3>
+                                        <h4>
+                                            {{previousMessage.title}}
+                                        </h4>
+                                        <p>
+                                            {{previousMessage.body}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -104,6 +104,11 @@ sd-app {
                             font-size: $font-size-base;
                             color: $gray;
                         }
+
+                        & > h4 {
+                            font-size: $font-size-base;
+                            color: $theme-primary;
+                        }
                     }
                 }
             }

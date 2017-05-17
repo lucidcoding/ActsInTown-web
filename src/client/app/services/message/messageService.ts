@@ -5,6 +5,7 @@ import { CustomHttpService } from '../customHttp/customHttp.service';
 import { ConfigService } from '../config/config.service';
 import { Message } from './responses/messageResponse';
 import { SendMessageRequest } from './requests/sendMessageRequest';
+import { ReplyToMessageRequest } from './requests/replyToMessageRequest';
 
 @Injectable()
 export class MessageService {
@@ -55,5 +56,9 @@ export class MessageService {
 
     sendMessage(sendMessageRequest: SendMessageRequest): Observable<Response> {
 		return this.http.post(this.configService.getApiBaseUrl() + 'message', sendMessageRequest, null);
+    }
+
+    replyToMessage(replyToMessageRequest: ReplyToMessageRequest): Observable<Response> {
+		return this.http.put(this.configService.getApiBaseUrl() + 'message/reply-to', replyToMessageRequest, null);
     }
 }

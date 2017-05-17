@@ -1,0 +1,12 @@
+@import "../../../../css/globals/_colors";
+@import "../../../../css/globals/_vars";
+
+.scroller {
+    max-height: 300px;
+    overflow-y: scroll;
+    /* overflow-x: hidden; */
+    border: 1px solid $theme-primary;
+    padding-left: $standard-spacing;
+    padding-right: $standard-spacing;
+    position: relative;
+}
