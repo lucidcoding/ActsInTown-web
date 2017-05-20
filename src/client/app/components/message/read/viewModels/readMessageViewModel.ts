@@ -1,4 +1,4 @@
-import { ElementState } from '../../../common/elementState';
+import { ElementState } from '../../../../common/elementState';
 import { ReadMessagePreviousMessageViewModel } from './ReadMessagePreviousMessageViewModel';
 
 export class ReadMessageViewModel {

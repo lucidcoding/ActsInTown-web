@@ -9,8 +9,6 @@ import { routes } from './app.routes';
 
 import { HomeModule } from './components/home/homeModule';
 
-import { ListConversationsModule } from './components/conversation/list/listConversationsModule';
-import { ViewConversationModule } from './components/conversation/view/viewConversationModule';
 import { ComposeMessageModule } from './components/message/compose/composeMessageModule';
 import { ListSentMessagesModule } from './components/message/listSent/listSentMessagesModule';
 import { ListReceivedMessagesModule } from './components/message/listReceived/listReceivedMessagesModule';
@@ -58,8 +56,6 @@ import { NavbarModule } from './components/shared/navbar/navbarModule';
     ReadMessageModule,
     AboutModule,
     HomeModule,
-    ListConversationsModule,
-    ViewConversationModule,
     AddSpotModule,
     ListSpotsModule,
     ChangePasswordModule,

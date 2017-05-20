@@ -39,7 +39,7 @@ export class ComposeMessageComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            if (this.router.url.startsWith("/messages/compose/")) {
+            if (this.router.url.startsWith("/message/compose/")) {
                 this.viewModel.recipientId = params['recipientId'];
 
                 this.userService.getByIds([

@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 import { LoggedInGuard } from './loggedInGuard';
 
 import { HomeComponent } from './components/home/homeComponent';
-import { ListConversationsComponent } from './components/conversation/list/listConversationsComponent';
-import { ViewConversationComponent } from './components/conversation/view/viewConversationComponent';
 import { ComposeMessageComponent } from './components/message/compose/composeMessageComponent';
 import { ListSentMessagesComponent } from './components/message/listSent/listSentMessagesComponent';
 import { ListReceivedMessagesComponent } from './components/message/listReceived/listReceivedMessagesComponent';
@@ -26,8 +24,6 @@ import { AboutRoutes } from './+about/index';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'conversation/list', component: ListConversationsComponent, canActivate: [LoggedInGuard] },
-  { path: 'conversation/view/:conversationId', component: ViewConversationComponent, canActivate: [LoggedInGuard] },
   { path: 'message/compose/:recipientId', component: ComposeMessageComponent, canActivate: [LoggedInGuard] },
   { path: 'message/reply/:messageId', component: ComposeMessageComponent, canActivate: [LoggedInGuard] },
   { path: 'message/list-sent/:page', component: ListSentMessagesComponent, canActivate: [LoggedInGuard] },

@@ -21,7 +21,8 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
     public viewModel: ListReceivedMessagesViewModel;
     private sub: any;
 
-    constructor(private route: ActivatedRoute,
+    constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private messageService: MessageService,
         private userService: UserService) {
@@ -42,8 +43,8 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
                 this.messageService.getInbox(this.viewModel.page, 10),
                 this.messageService.getInboxCount()
             ]).subscribe((response: any[]) => { //Return proper types here and hereon.
-                var inboxResponse = response[0];
-                var inboxCountResponse = response[1];
+                var inboxResponse: Message[] = response[0];
+                var inboxCountResponse: number = response[1];
 
                 this.viewModel.rows = inboxResponse.map((message: Message) => {
                     //Angular2 date bug again?
@@ -60,9 +61,7 @@ export class ListReceivedMessagesComponent implements OnInit, OnDestroy {
                     };
                 });
 
-
                 this.viewModel.records = inboxCountResponse;
-
 
                 if (this.viewModel.rows.length > 0) {
                     this.viewModel.elementState = ElementState.Ready;

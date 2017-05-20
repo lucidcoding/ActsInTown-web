@@ -5,4 +5,5 @@ export class ListSentMessagesViewModel {
     rows: ListSentMessagesRowViewModel[];
     elementState: ElementState;
     page: number;
+    records: number;
 }
