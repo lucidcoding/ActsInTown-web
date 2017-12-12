@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Config } from './shared/index'
+import { Config } from './shared/index';
 
 //import { FutureDateValidator } from './directives/futureDate.directive';
 /**

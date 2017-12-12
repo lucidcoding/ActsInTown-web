@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReadMessageComponent } from './readMessageComponent';
 import { MessageService } from '../../../services/message/messageService';
-import { CustomHttpService } from '../../../services/customHttp/customHttp.service';
 import { LoadingSpinnerOverlayModule } from '../../shared/loadingSpinnerOverlay/loadingSpinnerOverlayModule';
 import { PagerModule } from '../../shared/pager/pagerModule';
 

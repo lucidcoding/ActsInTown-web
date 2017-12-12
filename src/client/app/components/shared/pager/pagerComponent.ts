@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { PagerViewModel } from './pagerViewModel';
-import { Option } from '../../../common/option.common';
 import * as Constants from '../../../common/constants';
 
 @Component({
@@ -9,7 +8,7 @@ import * as Constants from '../../../common/constants';
     templateUrl: 'pagerComponent.html',
     styleUrls: ['pagerComponent.css']
 })
-export class PagerComponent {
+export class PagerComponent implements OnInit {
     @Input() records: number;
     @Input() currentPage: number;
     @Output() pageSelected: EventEmitter<number> = new EventEmitter<number>();

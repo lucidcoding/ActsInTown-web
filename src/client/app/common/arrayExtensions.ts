@@ -53,7 +53,6 @@ Array.prototype.max = function (expression: Function) {
 
 	for (var index: number = 1; index < this.length; index++) {
 		var element = this[index];
-		var currentValue = expression(element);
 
 		if (expression(element) > expression(currentMaxElement)) {
 			currentMaxElement = element;

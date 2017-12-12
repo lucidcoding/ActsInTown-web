@@ -1,12 +1,10 @@
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ListSentMessagesViewModel } from './viewModels/listSentMessagesViewModel';
-import { ListSentMessagesRowViewModel } from './viewModels/listSentMessagesRowViewModel';
 import { MessageService } from '../../../services/message/messageService';
 import { UserService } from '../../../services/user/user.service';
 import { Message } from '../../../services/message/responses/messageResponse';
-import { User } from '../../../services/user/responses/user';
 import { ElementState } from '../../../common/elementState';
 import '../../../common/arrayExtensions';
 import '../../../common/dateExtensions';

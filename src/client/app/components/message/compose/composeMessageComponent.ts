@@ -7,7 +7,6 @@ import { SendMessageRequest } from '../../../services/message/requests/sendMessa
 import { ReplyToMessageRequest } from '../../../services/message/requests/replyToMessageRequest';
 import { Message } from '../../../services/message/responses/messageResponse';
 import { User } from '../../../services/user/responses/user';
-import { Option } from '../../../common/option.common';
 import { ElementState } from '../../../common/elementState';
 import '../../../common/dateExtensions';
 
@@ -39,7 +38,7 @@ export class ComposeMessageComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            if (this.router.url.startsWith("/message/compose/")) {
+            if (this.router.url.startsWith('/message/compose/')) {
                 this.viewModel.recipientId = params['recipientId'];
 
                 this.userService.getByIds([

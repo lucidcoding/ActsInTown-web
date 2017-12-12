@@ -54,4 +54,4 @@ Date.prototype.getFormattedString = function(): string {
         padLeft(date.getHours()) + ':' +
         padLeft(date.getMinutes());
         
-}
+};

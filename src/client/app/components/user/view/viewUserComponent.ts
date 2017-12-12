@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewUserViewModel } from './viewUserViewModel';
 import { ConversationService } from '../../../services/conversation/conversationService';
@@ -12,8 +12,8 @@ import { ElementState } from '../../../common/elementState';
     styleUrls: ['viewUserComponent.css']
 })
 export class ViewUserComponent implements OnInit, OnDestroy {
-    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     public viewModel: ViewUserViewModel;
+    // @ViewChild('scrollMe') private myScrollContainer: ElementRef;
     private sub: any;
 
     constructor(
