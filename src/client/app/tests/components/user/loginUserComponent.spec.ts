@@ -5,41 +5,48 @@ import { Observable } from 'rxjs/Rx';
 import { LoginUserComponent } from '../../../components/user/login/loginUserComponent';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 import { UserService } from '../../../services/user/user.service';
-import { LoginUserRequest } from '../../../services/user/requests/login.user.request';
+import { LoginRequest } from '../../../services/authentication/requests/loginRequest';
 
 export function main() {
     var mockAuthenticationService: any;
     var mockRouter: any;
     var mockUserService: any;
-    var loginUserRequest: LoginUserRequest;
-    let sampleToken = 'sampleToken';
+    var loginRequest: LoginRequest;
+
+    let loginResponseBody = {
+        access_token: 'access-token-1', 
+        refresh_token: 'refresh_token-2',
+        expires_in: '2020-12-01T09:00:00.000'
+    };
+
+    let loginResponse: any = {
+        _body: JSON.stringify(loginResponseBody)
+    };
 
     describe('For loginUserComponent', () => {
         beforeEach(() => {
+
             mockAuthenticationService = {
-                setToken: jasmine.createSpy('setToken')
+                login: jasmine.createSpy('login').and.callFake((args: LoginRequest) => {
+                    loginRequest = args;
+                    return Observable.from([loginResponse]);
+                }),
+                setToken: jasmine.createSpy('setToken').and.returnValue(Observable.from([loginResponse]))
             };
 
             mockRouter = {
                 navigate: jasmine.createSpy('navigate')
             };
 
-            mockUserService = {
-                login: jasmine.createSpy('login').and.callFake((args: LoginUserRequest) => {
-                    loginUserRequest = args;
-                    return Observable.from([{
-                        _body: sampleToken
-                    }]);
-                })
-            };
+            mockUserService = {};
 
             TestBed.configureTestingModule({
                 imports: [FormsModule],
                 declarations: [LoginUserComponent],
                 providers: [
                     { provide: AuthenticationService, useValue: mockAuthenticationService },
+                    { provide: UserService, useValue: mockUserService },
                     { provide: Router, useValue: mockRouter },
-                    { provide: UserService, useValue: mockUserService }
                 ]
             });
         });
@@ -52,7 +59,7 @@ export function main() {
                         let fixture = TestBed.createComponent(LoginUserComponent);
                         let component = fixture.debugElement.componentInstance;
 
-                        loginUserRequest = null;
+                        loginRequest = null;
 
                         component.viewModel = {
                             email: 'richard.red@redcompany.com',
@@ -65,11 +72,22 @@ export function main() {
                         };
 
                         component.onSubmit(loginUserForm);
-                        expect(mockUserService.login).toHaveBeenCalled();
-                        expect(loginUserRequest).not.toBeNull();
-                        expect(loginUserRequest.username).toEqual('richard.red@redcompany.com');
-                        expect(loginUserRequest.password).toEqual('Red12345!');
-                        expect(mockAuthenticationService.setToken).toHaveBeenCalledWith(sampleToken);
+
+                        expect(mockAuthenticationService.login).toHaveBeenCalledWith({
+                            username: 'richard.red@redcompany.com',
+                            password: 'Red12345!',
+                            rememberMe: false
+                        });
+
+                        expect(loginRequest).not.toBeNull();
+                        expect(loginRequest.username).toEqual('richard.red@redcompany.com');
+                        expect(loginRequest.password).toEqual('Red12345!');
+
+                        expect(mockAuthenticationService.setToken).toHaveBeenCalledWith(
+                            loginResponseBody.access_token,
+                            loginResponseBody.refresh_token,
+                            loginResponseBody.expires_in);
+
                         expect(mockRouter.navigate).toHaveBeenCalledWith(['spot/list']);
                     });
             }));
@@ -84,7 +102,7 @@ export function main() {
                         let component = fixture.debugElement.componentInstance;
                         component.onSubmit({ valid: false });
                         expect(mockAuthenticationService.setToken).not.toHaveBeenCalled();
-                        expect(mockUserService.login).not.toHaveBeenCalled();
+                        expect(mockAuthenticationService.login).not.toHaveBeenCalled();
                         expect(mockRouter.navigate).not.toHaveBeenCalled();
                     });
             }));

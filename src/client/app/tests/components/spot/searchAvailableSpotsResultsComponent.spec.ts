@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { async, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
-import { SearchAvailableSpotsResultsComponent } from '../../../components/spot/searchAvailableResults/searchAvailableSpotsResultsComponent';
+import { SearchSpotsResultsComponent } from '../../../components/spot/searchResults/searchSpotsResultsComponent';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 
@@ -10,7 +10,7 @@ export function main() {
     var mockTownService: any;
     var mockActivatedRoute: any;
 
-    describe('For searchAvailableSpotsResultsComponent', () => {
+    describe('For SearchSpotsComponent', () => {
         beforeEach(() => {
             let spots = [
                 {
@@ -53,7 +53,7 @@ export function main() {
             
             TestBed.configureTestingModule({
                 //imports: [],
-                declarations: [SearchAvailableSpotsResultsComponent],
+                declarations: [SearchSpotsResultsComponent],
                 providers: [
                     { provide: SpotService, useValue: mockSpotService },
                     { provide: TownService, useValue: mockTownService },
