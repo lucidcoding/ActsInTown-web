@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { AddSpotComponent } from '../../../components/spot/add/addSpotComponent';
 import { DateTimeSelectorModule } from '../../../components/shared/dateTimeSelector/dateTimeSelectorModule';
+import { CountyService } from '../../../services/county/countyService';
 import { SpotService } from '../../../services/spot/spot.service';
 import { TownService } from '../../../services/town/town.service';
 import { AddSpotRequest } from '../../../services/spot/requests/add.spot.request';
 
 export function main() {
+    var mockCountyService: any;
     var mockSpotService: any;
     var mockTownService: any;
     var mockRouter: any;
@@ -16,6 +18,15 @@ export function main() {
 
     describe('For addSpotComponent', () => {
         beforeEach(() => {
+            let counties = [
+                { id: 'C_001', name: 'County 01' },
+                { id: 'C_002', name: 'County 02' }
+            ];
+
+            mockCountyService = {
+                get: jasmine.createSpy('get').and.returnValue(Observable.from([counties]))
+            };
+
             mockSpotService = {
                 add: jasmine.createSpy('add').and.callFake((args: AddSpotRequest) => {
                     addSpotRequest = args;
@@ -40,6 +51,7 @@ export function main() {
                 imports: [DateTimeSelectorModule, FormsModule],
                 declarations: [AddSpotComponent],
                 providers: [
+                    { provide: CountyService, useValue: mockCountyService },
                     { provide: SpotService, useValue: mockSpotService },
                     { provide: TownService, useValue: mockTownService },
                     { provide: Router, useValue: mockRouter }
@@ -78,7 +90,8 @@ export function main() {
                             townId: 'T_001',
                             townOptions: [],
                             townOptionsLoaded: true,
-                            venueName: 'Test Venue 01'
+                            venueName: 'Test Venue 01',
+                            bookedState: 'AVAILABLE'
                         };
 
                         let addSpotForm = {

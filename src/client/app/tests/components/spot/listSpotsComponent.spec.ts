@@ -16,7 +16,10 @@ export function main() {
                     town: {
                         name: 'TOWN_001'
                     },
-                    venueName: 'Venue 01'
+                    venueName: 'Venue 01',
+                    user: {
+                        imageUrl: 'ImageUrl001'
+                    }
                 },
                 {
                     id: 'SPOT_002',
@@ -25,7 +28,10 @@ export function main() {
                     town: {
                         name: 'TOWN_002'
                     },
-                    venueName: 'Venue 02'
+                    venueName: 'Venue 02',
+                    user: {
+                        imageUrl: 'ImageUrl002'
+                    }
                 }
             ];
 
@@ -53,15 +59,11 @@ export function main() {
                         expect(mockSpotService.getForCurrentUser).toHaveBeenCalled();
                         expect(component.viewModel.spots.length).toEqual(2);
                         expect(component.viewModel.spots[0].id).toEqual('SPOT_001');
-                        expect(component.viewModel.spots[0].scheduledFor).toEqual(new Date(2010, 10, 4, 20, 10, 0));
-                        expect(component.viewModel.spots[0].durationMinutes).toEqual(10);
-                        expect(component.viewModel.spots[0].townName).toEqual('TOWN_001');
-                        expect(component.viewModel.spots[0].venueName).toEqual('Venue 01');
+                        expect(component.viewModel.spots[0].dateTimeHeading).toEqual('04 Nov 2010 20:10, 10 mins');
+                        expect(component.viewModel.spots[0].locationHeader).toEqual('Venue 01, TOWN_001');
                         expect(component.viewModel.spots[1].id).toEqual('SPOT_002');
-                        expect(component.viewModel.spots[1].scheduledFor).toEqual(new Date(2010, 10, 5, 21, 0, 0));
-                        expect(component.viewModel.spots[1].durationMinutes).toEqual(20);
-                        expect(component.viewModel.spots[1].townName).toEqual('TOWN_002');
-                        expect(component.viewModel.spots[1].venueName).toEqual('Venue 02');
+                        expect(component.viewModel.spots[1].dateTimeHeading).toEqual('05 Nov 2010 21:00, 20 mins');
+                        expect(component.viewModel.spots[1].locationHeader).toEqual('Venue 02, TOWN_002');
                     });
             }));
         });
